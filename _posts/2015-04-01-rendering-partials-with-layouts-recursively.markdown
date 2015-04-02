@@ -12,11 +12,14 @@ So, gather around and I will tell you a story of a terrible curse. Or not:
 Add this to your application helper and use it instead of `render` whenever there's a chance you will call a partial and try to wrap it in a layout.
 
 {% highlight ruby %}
-module ApplicationHelper
-  def inside(*params)
-    # to be continued...
+  def inside(options)
+    parent_view_flow = view_flow
+    self.view_flow = ActionView::OutputFlow.new
+    yield
+    output = render options
+    self.view_flow = parent_view_flow
+    output
   end
-end
 {% endhighlight %}
 
 ###Layouts and Partials
