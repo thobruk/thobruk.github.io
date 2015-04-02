@@ -21,6 +21,7 @@ Add this to your application helper and use it instead of `render` whenever ther
     output
   end
 {% endhighlight %}
+> Takes the current view_flow, stores it, starts a new one, renders your partial, then puts everything back the way it was
 
 ###Layouts and Partials
 
