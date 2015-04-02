@@ -136,7 +136,7 @@ This little fella takes a copy of the `view_flow` and makes a fresh one for your
 
 `view_flow` feels horribly like a global variable, doesn't it ? Perhaps there's a way to make it local-er.
 
-*Thanks to André Arko for the inspiration for this solution. His solution doesn't work for multiple `content_for` sections, but rather has a single yield. This didn't work for my needs. [His explanation][1] helped me work out a refinement of his solution. So, thanks again.*
+*Thanks to André Arko for the inspiration for this solution. His solution doesn't work for multiple `content_for` sections, but rather has a single yield. This didn't work for my needs. [His explanation][1] helped me work out a refinement of his solution. Also, the format of his article inspired the structure of this one. So, many thanks.*
 
 [1]:http://andre.arko.net/2013/02/02/nested-layouts-on-rails--31/
 
