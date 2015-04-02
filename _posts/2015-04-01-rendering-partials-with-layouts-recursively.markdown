@@ -74,7 +74,12 @@ Item.create(name: 'bottom_item', item: Item.create(name: 'middle_item', item: It
 {%endhighlight%}
 * Probably need to work on making these names a bit less 'itemy' *
 
-Rails is smart enough to work out what to do at `render folder.contents`. It's going to render a collection, calling the `folders/_folder` partial for each Folder in contents. There is another way to do this. I could call `render partial: 'folder/_folder', layout: 'shared/filesystem_object'` instead. The results would be the same - bitterly disappointing.
+Rails is smart enough to work out what to do at `render folder.contents`. It's going to render a collection, calling the `folders/_folder` partial for each Folder in contents. There is another way to do this. I could call 
+```
+render partial: 'folder/_folder', layout: 'shared/filesystem_object'
+``` 
+
+instead. The results would be the same - bitterly disappointing.
 
 Let's take a look at some screenshots.
 
@@ -86,3 +91,38 @@ Well, that's what we were HOPING for. But actually this is what you end up with:
 
 ### WTF ?
 
+Let me tell you WTF. It's pretty simple. Rails has a thing called view_flow which is an instance of `ActionView::OutputFlow`. When you do `content_for` it puts the result of that block into the view_flow.content hash. If `content_for` gets called multiple times it concatenates the results. Are you feeling me ? So what happens in our example. Well, the following happens:
+
+1. content_for first item's :name is called.
+2. content_for first item's content is called BUT it has to do this first:
+  2.1. content_for second item's :name is called (uh oh. what's in the view_flow **now** ?)
+  2.2. content_for second_item's :content is called BUT it has to do this first: (oh dear lord)
+  2.3. etc...
+
+You get the picture...
+
+### So get on with it already.
+
+{%highlight ruby%}
+  def inside(options)
+    parent_view_flow = view_flow
+    self.view_flow = ActionView::OutputFlow.new
+    yield
+    output = render options
+    self.view_flow = parent_view_flow
+    output
+  end
+{%endhighlight%}
+
+This little fella takes a copy of the view_flow and makes a fresh one for your recursive call, and puts it back once the result is computed and output. That stops stuff falling all over itself. How do we use it ? Easy. Let's refer back to this partial:
+
+`item/_item.html.haml`
+{%highlight haml%}
+= inside(partial: 'layouts/data_card') do
+  -content_for :name do
+    = item.name
+  -content_for :contents do
+    = render item.items # this is where it's all going to go swimmingly.
+{%endhighlight%}
+
+view_flow feels horribly like a global variable, doesn't it ? Perhaps there's a way to make it local-er.
