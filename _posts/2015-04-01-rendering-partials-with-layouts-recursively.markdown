@@ -46,13 +46,13 @@ Normally, it's not so hard to apply a layout to a partial. Why would I apply a l
 And a partial for rendering a folder
 `folder/_folder.html.haml`
 {%highlight haml%}
-content_for: type do
+-content_for: type do
   = folder.type
-content_for :name do
+-content_for :name do
   = folder.name
-content_for :contents do
+-content_for :contents do
   = render folder.contents # this is where it's all going to go horribly wrong
-render partial: 'shared/filesystem_object'
+=render partial: 'shared/filesystem_object'
 {%endhighlight%}
 
 Rails is smart enough to work out what to do at `render folder.contents`. It's going to render a collection, calling the `folders/_folder` partial for each Folder in contents. There is another way to do this. I could call `render partial: 'folder/_folder', layout: 'shared/filesystem_object'` instead. The results would be the same - bitterly disappointing.
