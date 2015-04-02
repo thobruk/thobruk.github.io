@@ -23,7 +23,7 @@ Add this to your application helper and use it instead of `render` whenever ther
 {% endhighlight %}
 *Takes the current view_flow, stores it, starts a new one, renders your partial, then puts everything back the way it was*
 
-![We have to go deeper](http://s2.quickmeme.com/img/e7/e7633bedf897bb24ce668ac9c5df6bf88a58ff7e114d27606a756f4c4888a3f1.jpg)
+-> ![We have to go deeper](http://s2.quickmeme.com/img/e7/e7633bedf897bb24ce668ac9c5df6bf88a58ff7e114d27606a756f4c4888a3f1.jpg) <-
 
 ###Layouts and Partials
 
