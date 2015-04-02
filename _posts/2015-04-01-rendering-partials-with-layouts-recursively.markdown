@@ -77,3 +77,5 @@ Item.create(name: 'bottom_item', item: Item.create(name: 'middle_item', item: It
 Rails is smart enough to work out what to do at `render folder.contents`. It's going to render a collection, calling the `folders/_folder` partial for each Folder in contents. There is another way to do this. I could call `render partial: 'folder/_folder', layout: 'shared/filesystem_object'` instead. The results would be the same - bitterly disappointing.
 
 Let's take a look at some screenshots.
+
+![My helpful screenshot]({{ site.url }}/images/04022015shot1.png)
