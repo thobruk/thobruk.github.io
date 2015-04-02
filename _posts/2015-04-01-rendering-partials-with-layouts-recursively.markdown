@@ -79,3 +79,10 @@ Rails is smart enough to work out what to do at `render folder.contents`. It's g
 Let's take a look at some screenshots.
 
 ![My helpful screenshot]({{ site.url }}/images/04022015shot1.png)
+
+Well, that's what we were HOPING for. But actually this is what you end up with:
+
+![My helpful screenshot]({{ site.url }}/images/04022015shot2.png)
+
+### WTF ?
+
