@@ -11,7 +11,7 @@ So, gather around and I will tell you a story of a terrible curse. Or not:
 
 Add this to your application helper and use it instead of `render` whenever there's a chance you will call a partial and try to wrap it in a layout.
 
-```
+{highlight ruby}
   def inside(options)
     parent_view_flow = view_flow
     self.view_flow = ActionView::OutputFlow.new
@@ -20,7 +20,7 @@ Add this to your application helper and use it instead of `render` whenever ther
     self.view_flow = parent_view_flow
     output
   end
-```
+{end highlight}
 
 *Takes the current view_flow, stores it, starts a new one, renders your partial, then puts everything back the way it was*
 
