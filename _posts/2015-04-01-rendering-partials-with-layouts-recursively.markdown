@@ -9,7 +9,7 @@ So, gather around and I will tell you a story of a terrible curse. Or not:
 
 ###TL;DR
 
-Add this to your application helper and use it instead of render whenever there's a chance you will call a partial and try to wrap it in a layout.
+Add this to your application helper and use it instead of `render` whenever there's a chance you will call a partial and try to wrap it in a layout.
 
 {% highlight ruby %}
 module ApplicationHelper
