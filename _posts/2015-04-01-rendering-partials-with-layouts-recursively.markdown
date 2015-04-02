@@ -34,7 +34,7 @@ Normally, it's not so hard to apply a layout to a partial. Why would I apply a l
 rails g scaffold Item name item:references
 ```
 
-Now, I warn you, I like haml with a bit o Bootstrap. So that's how this is going to go down. Let's say I have a template thus, for rendering a filesytem thingy and it's contents.
+Now, I warn you, I like haml with a bit o Bootstrap. So that's how this is going to go down. Let's say I have a template thus, for rendering one of these thingies and it's children.
 
 `shared/_data_card.html.haml`
 {%highlight haml%}
