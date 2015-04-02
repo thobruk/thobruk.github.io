@@ -100,11 +100,13 @@ Well, that's what we were HOPING for. But actually this is what you end up with:
 
 Let me tell you WTF. It's pretty simple. Rails has a thing called `view_flow` which is an instance of `ActionView::OutputFlow`. When you do `content_for` it puts the result of that block into the `view_flow.content hash`. If `content_for` gets called multiple times it concatenates the results. Are you feeling me ? So what happens in our example. Well, the following happens:
 
-* content_for first item's :name is called.
-* content_for first item's content is called BUT it has to do this first:
-  * content_for second item's :name is called (uh oh. what's in the view_flow **now** ?)
-  * content_for second_item's :content is called BUT it has to do this first: (oh dear lord)
+* `content_for` first item's :name is called.
+* `content_for` first item's content is called BUT it has to do this first:
+  * `content_for` second item's :name is called (uh oh. what's in the `view_flow` **now** ?)
+  * `content_for` second_item's :content is called BUT it has to do this first: (oh dear lord)
   * etc...
+  * render all the crap above that's been mashed together 
+* render all the crap AGAIN
 
 You get the picture...
 
