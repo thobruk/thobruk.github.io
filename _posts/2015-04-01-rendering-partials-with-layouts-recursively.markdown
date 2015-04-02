@@ -29,9 +29,11 @@ Add this to your application helper and use it instead of `render` whenever ther
 ###Layouts and Partials
 
 Normally, it's not so hard to apply a layout to a partial. Why would I apply a layout to a partial ? Am I nuts ? Possibly. Let me explain. Let's say I have a bunch of things I would like to have similarly formatted = Use case for a layout. Say, you were trying to display something that was self-referencing. Like an Item that has_many items. Yes, that sounds reasonable. The Item object has a 'name' property. 
+
 ```
 rails g scaffold Item name item:references
 ```
+
 Now, I warn you, I like haml with a bit o Bootstrap. So that's how this is going to go down. Let's say I have a template thus, for rendering a filesytem thingy and it's contents.
 
 `shared/_data_card.html.haml`
@@ -45,6 +47,7 @@ Now, I warn you, I like haml with a bit o Bootstrap. So that's how this is going
 {%endhighlight%}
 
 And a partial for rendering an Item
+
 `item/_item.html.haml`
 {%highlight haml%}
 -content_for :name do
@@ -54,8 +57,9 @@ And a partial for rendering an Item
 =render partial: 'shared/data_card'
 {%endhighlight%}
 
-A model
-`models/item.rb'
+A model.
+
+`models/item.rb`
 {%highlight ruby%}
 class Item < ActiveRecord::Base
   belongs_to :item
@@ -63,7 +67,9 @@ class Item < ActiveRecord::Base
 end
 {%endhighlight%}
 
-A bit of a tweak to `views/items/show.rb`
+A bit of a tweak to 
+
+`views/items/show.rb`
 {%highlight haml%}
 =render @item
 {%endhighlight%}
@@ -72,9 +78,10 @@ A little prep in rails console or migrations, whatevs.
 {%highlight ruby%}
 Item.create(name: 'bottom_item', item: Item.create(name: 'middle_item', item: Item.create(name: 'top_item')))
 {%endhighlight%}
-* Probably need to work on making these names a bit less 'itemy' *
+*Probably need to work on making these names a bit less 'itemy'*
 
 Rails is smart enough to work out what to do at `render folder.contents`. It's going to render a collection, calling the `folders/_folder` partial for each Folder in contents. There is another way to do this. I could call 
+
 ```
 render partial: 'folder/_folder', layout: 'shared/filesystem_object'
 ``` 
@@ -91,13 +98,13 @@ Well, that's what we were HOPING for. But actually this is what you end up with:
 
 ### WTF ?
 
-Let me tell you WTF. It's pretty simple. Rails has a thing called view_flow which is an instance of `ActionView::OutputFlow`. When you do `content_for` it puts the result of that block into the view_flow.content hash. If `content_for` gets called multiple times it concatenates the results. Are you feeling me ? So what happens in our example. Well, the following happens:
+Let me tell you WTF. It's pretty simple. Rails has a thing called `view_flow` which is an instance of `ActionView::OutputFlow`. When you do `content_for` it puts the result of that block into the `view_flow.content hash`. If `content_for` gets called multiple times it concatenates the results. Are you feeling me ? So what happens in our example. Well, the following happens:
 
-1. content_for first item's :name is called.
-2. content_for first item's content is called BUT it has to do this first:
-  2.1. content_for second item's :name is called (uh oh. what's in the view_flow **now** ?)
-  2.2. content_for second_item's :content is called BUT it has to do this first: (oh dear lord)
-  2.3. etc...
+* content_for first item's :name is called.
+* content_for first item's content is called BUT it has to do this first:
+  * content_for second item's :name is called (uh oh. what's in the view_flow **now** ?)
+  * content_for second_item's :content is called BUT it has to do this first: (oh dear lord)
+  * etc...
 
 You get the picture...
 
@@ -114,7 +121,7 @@ You get the picture...
   end
 {%endhighlight%}
 
-This little fella takes a copy of the view_flow and makes a fresh one for your recursive call, and puts it back once the result is computed and output. That stops stuff falling all over itself. How do we use it ? Easy. Let's refer back to this partial:
+This little fella takes a copy of the `view_flow` and makes a fresh one for your recursive call, and puts it back once the result is computed and output. That stops stuff falling all over itself. How do we use it ? Easy. Let's refer back to this partial:
 
 `item/_item.html.haml`
 {%highlight haml%}
@@ -125,4 +132,4 @@ This little fella takes a copy of the view_flow and makes a fresh one for your r
     = render item.items # this is where it's all going to go swimmingly.
 {%endhighlight%}
 
-view_flow feels horribly like a global variable, doesn't it ? Perhaps there's a way to make it local-er.
+`view_flow` feels horribly like a global variable, doesn't it ? Perhaps there's a way to make it local-er.
