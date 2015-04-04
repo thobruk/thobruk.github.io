@@ -150,7 +150,7 @@ end
 {%endhighlight%}
 
 Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop. In the interest of DRYness we should probably
-take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. An `retry_once_on` can be used in all my other
+take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. And `retry_once_on` can be used in all my other
 `create` and `update` actions.
 
 {%highlight ruby%}
@@ -175,6 +175,29 @@ rescue
 
 end
 {%endhighlight%}
+
+
+I'm still not loving this. Another developer might well look at this and wonder why the hell I would bother retrying a failed `save`. The code doesn't change
+anything, it just retries.
+
+<blockquote>
+  <p>
+    The definition of insanity is doing the same thing over and over and expecting different results
+  </p>
+  <footer><cite title="No Einstein">Not Albert Einstein</cite></footer>
+</blockquote>
+
+In fact, when you think about it, Einstein is the [least likely person](http://www.salon.com/2013/08/06/the_definition_of_insanity_is_the_most_overused_cliche_of_all_time/)
+to say that given his preoccupation with space and time. Let me change that quote:
+
+<blockquote>
+  <p>
+    The definition of polling is doing the same thing over and over and expecting different results
+  </p>
+  <footer><cite title="Rube Boy">Rube Boy</cite></footer>
+</blockquote>
+
+The old saw discounts the possibility of external change. Not all change comes from within.
 
 
 ### Further reading
