@@ -123,7 +123,7 @@ mean, seriously ? Are you nuts ?
 
 {%highlight ruby%}
 class ApplicationController < ActionController::Base
-  rescue_from User::NotAuthorized, with: :deny_access
+  rescue_from ActiveRecord::RecordNotUnique, with: :spaghetti_code
 
 {%endhighlight%}
 
