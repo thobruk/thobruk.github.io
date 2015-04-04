@@ -180,5 +180,7 @@ end
 ### Further reading
 
 [https://robots.thoughtbot.com/the-perils-of-uniqueness-validations](https://robots.thoughtbot.com/the-perils-of-uniqueness-validations)
+
 [https://robots.thoughtbot.com/save-bang-your-head-active-record-will-drive-you-mad](https://robots.thoughtbot.com/save-bang-your-head-active-record-will-drive-you-mad)
+
 [http://blog.mirthlab.com/2012/05/25/cleanly-retrying-blocks-of-code-after-an-exception-in-ruby/](http://blog.mirthlab.com/2012/05/25/cleanly-retrying-blocks-of-code-after-an-exception-in-ruby/)
