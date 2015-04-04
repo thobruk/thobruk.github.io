@@ -145,11 +145,13 @@ def create
     end
 rescue ActiveRecord::RecordNotUnique
     retry unless (retries-=1).zero?
+    raise
 end
 {%endhighlight%}
 
 Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop. In the interest of DRYness we should probably
-take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny.
+take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. An `retry_once_on` can be used in all my other
+`create` and `update` actions.
 
 {%highlight ruby%}
 def retry_once_on(exception)
