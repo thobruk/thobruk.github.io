@@ -176,6 +176,7 @@ rescue
 end
 {%endhighlight%}
 
+### Insane in the membrane
 
 I'm still not loving this. Another developer might well look at this and wonder why the hell I would bother retrying a failed `save`. The code doesn't change
 anything, it just retries.
@@ -197,7 +198,8 @@ to say that given his preoccupation with space and time. Let me change that quot
   <footer><cite title="Rube Boy">Rube Boy</cite></footer>
 </blockquote>
 
-The old saw discounts the possibility of external change. Not all change comes from within.
+The old saw discounts the possibility of external change. Not all change comes from within. I guess my coworker might **think** I was insane because the
+change that might happen is not apparent. The `retry` code is not *as* self-documenting as the simple `rescue` version.
 
 
 ### Further reading
