@@ -4,7 +4,15 @@ title:      "RecordNotUnique - Expect the unexpected."
 date:       2015-04-03 21:19:00
 summary:    Exceptions should not be expected. Except when they are.
 categories: rails
+published:  false
 ---
+
+### TL;DR
+
+Not all validations are created equal. Some hit the database and others don't. You need to know which is which.
+
+### Beer
+
 I have heard and even said to other developers that 'exceptions should not be expected'. Some languages rely on exceptions
 for message passing. I can just see the little buggers bubbling up like the bubbles in a pint of Guinness. Mmmm...
 
@@ -33,7 +41,7 @@ end
 
 This looks all fine and dandy on the face of it. Look! I even put a uniqueness validation on `Item.name`. What could possibly go wrong ? This is *textbook*. I
 bet even the scaffold generator would make something that looked a lot like that (it does). Well, there's a reasonable
-chance that mysql will throw ActiveRecord::RecordNotUnique in your face. The problem arises because *time elapses* between the validation and the save.
+chance that mysql will throw ActiveRecord::RecordNotUnique (or many others - how woudja like an InvalidForeignKey ?) in your face. The problem arises because *time elapses* between the validation and the save.
 Someone could squeak a record in there that has the same 'name' as your record and then you try to save and **BOOM**. Now, old-school developers like me
 hate the idea of CHECKING and then SAVING. We just used to setup the database with constraints to handle these sort of validations and wait for it to throw an
 exception. It was atomic and efficient. But I guess that just ain't cool anymore.
@@ -64,7 +72,7 @@ Either way this definitely violates 'exceptions should not be expected'.
 
 ### Transactions, dude.
 
-Let's try whacking a transaction on this sucker. Then the whole darned database will be halted/locked - whatever -  while you CHECK and SAVE.
+Let's try whacking a transaction on this sucker. Then the whole darned table/database will be locked while you CHECK and SAVE.
 That's fine I suppose. Feels like overkill to me. It has it's own set of problems, but from a logic standpoint it's pretty good. I don't need
 to catch the exception anymore because it can't happen.
 
@@ -83,9 +91,11 @@ end
 {%endhighlight%}
 
 Wait - what? The [ActiveRecord](http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of)
-docs point out that even this might not work depending on your transaction settings. I don't know about you, but I'm thoroughly depressed. I mean this
+docs point out that even this might not work depending on your transaction settings and/or database driver.
+I don't know about you, but I'm thoroughly depressed. I mean this
 is core to the job of Rails and yet there's no a super-slick solution. There must be a lot of OCD developers out there with an uneasy feeling
-as they go home at night.
+as they go home at night. The bottom line is that you just can't trust Validations that hit the database and if you want to be truly portable
+you can't trust Transactions or the database.
 
 ### Setting Expectations
 
@@ -119,7 +129,7 @@ a serious performance issue in our example. When it takes our user whole seconds
 ### No hope of rescue
 
 There's always `rescue_from`, I suppose. But that seems even worse. Flow would jump out of your function and off into some global error handler. I
-mean, seriously ? Are you nuts ?
+mean, seriously ? Are you nuts ? Besides this smacks of defeatism. "This won't happen very often. The customer's convenience is less important than mine."
 
 {%highlight ruby%}
 class ApplicationController < ActionController::Base
@@ -201,6 +211,30 @@ to say that given his preoccupation with space and time. Let me change that quot
 The old saw discounts the possibility of external change. Not all change comes from within. I guess my coworker might **think** I was insane because the
 change that might happen is not apparent. The `retry` code is not *as* self-documenting as the simple `rescue` version.
 
+
+### Back to Transactions
+
+In terms of expression of intent and user experience, I think it's hard to beat the transactional solution. Let's take another look at it:
+
+{%highlight ruby%}
+def create
+    @item = Item.new(item_params)
+
+    Item.transaction do
+        if @item.save
+            redirect_to @item, notice: 'Item was successfully created/updated.'
+        else
+            render :new
+        end
+    end
+end
+{%endhighlight%}
+
+If there's a problem with the validation here, the user will be nicely informed of which field is to blame and the transaction clearly expresses that we
+are trying to enforce atomicity of the check and save. The code looks nice and a true exception would be handled in an global way (I still have issues with that).
+I still feel like the enforcement of uniqueness is the responsibility of the model here and not the controller, however. Another action could forget to
+stick a transaction on it. Also, why can't we trust the transaction ? Isn't that the whole point of a transaction ? Why would the AR documentation say
+such a thing ? It feels like everything I knew about databases is wrong !
 
 ### Further reading
 
