@@ -3,13 +3,14 @@ layout:     post
 title:      "RecordNotUnique - Expect the unexpected."
 date:       2015-04-03 21:19:00
 summary:    Exceptions should not be expected. Except when they are.
-categories: rails
-published:  false
+categories: rails activerecord
 ---
 
 ### TL;DR
 
-Not all validations are created equal. Some hit the database and others don't. You need to know which is which.
+Not all validations are created equal. Some hit the database and others don't. You need to know which is which. Add this to the idea that "exceptions should
+not be expected" and you are talking about some serious cognitive dissonance. Consider using a distributed [Mutex managed by your database server][1] to really
+do a good job. Otherwise a simple `retry` will suffice.
 
 ### Beer
 
@@ -73,8 +74,7 @@ Either way this definitely violates 'exceptions should not be expected'.
 ### Transactions, dude.
 
 Let's try whacking a transaction on this sucker. Then the whole darned table/database will be locked while you CHECK and SAVE.
-That's fine I suppose. Feels like overkill to me. It has it's own set of problems, but from a logic standpoint it's pretty good. I don't need
-to catch the exception anymore because it can't happen.
+Feels like it might work. I don't need to catch the exception anymore because it can't happen...right?
 
 {%highlight ruby%}
 def create
@@ -90,17 +90,14 @@ def create
 end
 {%endhighlight%}
 
-Wait - what? The [ActiveRecord](http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of)
-docs point out that even this might not work depending on your transaction settings and/or database driver.
-I don't know about you, but I'm thoroughly depressed. I mean this
-is core to the job of Rails and yet there's no a super-slick solution. There must be a lot of OCD developers out there with an uneasy feeling
-as they go home at night. The bottom line is that you just can't trust Validations that hit the database and if you want to be truly portable
-you can't trust Transactions or the database.
+Wait - what? The [ActiveRecord][2]
+docs point out that this won't work. A transaction is not your tool here. Since the validation doesn't fail in any sense at a database level, the transaction
+proceeds unimpeded. You can also try `with_lock` but that won't cut it either as it only seems to lock the local copy of the model.
 
 ### Setting Expectations
 
 So who said "exceptions should not be expected" ? Who is responsible for this heart-rending rubric ?
-[Great Answer Here](http://programmers.stackexchange.com/a/184714) from [Mike Partridge](http://programmers.stackexchange.com/users/34183/mike-partridge)
+[Great Answer Here][3] from [Mike Partridge][4]
 
 <blockquote>
   <p>
@@ -122,7 +119,7 @@ And here comes the science...
 
 ### Slow, slow, quick, quick, slow
 
-[Exceptions are slow, too.](http://simonecarletti.com/blog/2010/01/how-slow-are-ruby-exceptions/)
+[Exceptions are slow, too.][5]
 Although this isn't really a problem in our case. We are doing something at human-scale speeds. This exception-raising probably won't ever become
 a serious performance issue in our example. When it takes our user whole seconds to complete their form, who is going to miss a few microseconds ?
 
@@ -159,9 +156,9 @@ rescue ActiveRecord::RecordNotUnique
 end
 {%endhighlight%}
 
-Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop. In the interest of DRYness we should probably
+Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop if it isn't. In the interest of DRYness we should probably
 take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. And `retry_once_on` can be used in all my other
-`create` and `update` actions.
+`create` and `update` actions. 
 
 {%highlight ruby%}
 def retry_once_on(exception)
@@ -198,7 +195,7 @@ anything, it just retries.
   <footer><cite title="No Einstein">Not Albert Einstein</cite></footer>
 </blockquote>
 
-In fact, when you think about it, Einstein is the [least likely person](http://www.salon.com/2013/08/06/the_definition_of_insanity_is_the_most_overused_cliche_of_all_time/)
+In fact, when you think about it, Einstein is the [least likely person][6]
 to say that given his preoccupation with space and time. Let me change that quote:
 
 <blockquote>
@@ -211,32 +208,48 @@ to say that given his preoccupation with space and time. Let me change that quot
 The old saw discounts the possibility of external change. Not all change comes from within. I guess my coworker might **think** I was insane because the
 change that might happen is not apparent. The `retry` code is not *as* self-documenting as the simple `rescue` version.
 
+### Mutual Exclusion
 
-### Back to Transactions
-
-In terms of expression of intent and user experience, I think it's hard to beat the transactional solution. Let's take another look at it:
+What's really needed here is a Mutex or Mutual Exclusion. This can be achieved in a couple of ways. There's a neat gem called [`with advisory lock`][1]
+that lets you create a named lock either in mySQL or Postgres (and even sqlite with the aid of file-based locks). And I'm sure a solution for MongoDB is
+an option. Alternatively you can manage Mutex using
+a table that records who has a lock on what as suggested [here][7].
+There's no point using a Ruby Mutex because there may be multiple servers running your code and Ruby Mutexes aren't distributed.
 
 {%highlight ruby%}
+
 def create
     @item = Item.new(item_params)
 
-    Item.transaction do
+    Item.with_advisory_lock(:creating) do
         if @item.save
             redirect_to @item, notice: 'Item was successfully created/updated.'
         else
             render :new
         end
     end
+rescue
+
 end
 {%endhighlight%}
 
-If there's a problem with the validation here, the user will be nicely informed of which field is to blame and the transaction clearly expresses that we
-are trying to enforce atomicity of the check and save. The code looks nice and a true exception would be handled in an global way (I still have issues with that).
-I still feel like the enforcement of uniqueness is the responsibility of the model here and not the controller, however. Another action could forget to
-stick a transaction on it. Also, why can't we trust the transaction ? Isn't that the whole point of a transaction ? Why would the AR documentation say
-such a thing ? It feels like everything I knew about databases is wrong !
+So, in the end, our `retry` solution is simple and effective and maybe uses more SQL queries than you might want. On the other hand `with_advisory_lock`
+would do it with slightly less SQL queries, more expressive syntax and might even satisfy the Exception-phobic. It's surprising what a can of worms
+database-querying validations makes and I'm even more surprised that we are all casually ignoring this issue. Dealing with this problem should be
+a core feature of Rails. The advisory lock solution should probably wrap all ActiveRecord transactions that perform datebase
+validations before a database operation.
 
 ### Further reading
+
+[1]: https://github.com/mceachen/with_advisory_lock
+[2]: http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of
+[3]: http://programmers.stackexchange.com/a/184714
+[4]: http://programmers.stackexchange.com/users/34183/mike-partridge
+[5]: http://simonecarletti.com/blog/2010/01/how-slow-are-ruby-exceptions/
+[6]: http://www.salon.com/2013/08/06/the_definition_of_insanity_is_the_most_overused_cliche_of_all_time/
+[7]: http://makandracards.com/makandra/1026-simple-database-mutex-mysql-lock
+
+[https://github.com/rails/rails/commit/392eeecc11a291e406db927a18b75f41b2658253](https://github.com/rails/rails/commit/392eeecc11a291e406db927a18b75f41b2658253)
 
 [https://robots.thoughtbot.com/the-perils-of-uniqueness-validations](https://robots.thoughtbot.com/the-perils-of-uniqueness-validations)
 
