@@ -16,19 +16,27 @@ I have heard and even said to other developers that 'exceptions should not be ex
 
 Where were we ? Right. Exceptions (in Ruby) should not be expected. What does that mean exactly ? Let me give you an example. I have been trying to DRY up my basic controller world. I keep using the usual new, create, edit etc. actions and I wanted to make those as tight and readable as possible. And then there was this one:
 
-{%highlight ruby%} class Item < ActiveRecord::Base validates_uniqueness_of :name end {%endhighlight%}
+{%highlight ruby%} 
 
-{%highlight ruby%} def create @item = Item.new(item_params)
+class Item < ActiveRecord::Base 
+    validates_uniqueness_of :name 
+end 
 
-```
-if @item.save
-    redirect_to @item, notice: 'Item was successfully created/updated.'
-else
-    render :new
-end
-```
+{%endhighlight%}
 
-end {%endhighlight%}
+{%highlight ruby%} 
+
+def create @item = Item.new(item_params)
+
+    if @item.save
+        redirect_to @item, notice: 'Item was successfully created/updated.'
+    else
+        render :new
+    end
+
+end 
+
+{%endhighlight%}
 
 This looks all fine and dandy on the face of it. Look! I even put a uniqueness validation on `Item.name`. What could possibly go wrong ? This is *textbook*. I bet even the scaffold generator would make something that looked a lot like that (it does). Well, there's a reasonable chance that mysql will throw ActiveRecord::RecordNotUnique (or many others - how woudja like an InvalidForeignKey ?) in your face. The problem arises because *time elapses* between the validation and the save. Someone could squeak a record in there that has the same 'name' as your record and then you try to save and **BOOM**. Now, old-school developers like me hate the idea of CHECKING and then SAVING. We just used to setup the database with constraints to handle these sort of validations and wait for it to throw an exception. It was atomic and efficient. But I guess that just ain't cool anymore.
 
