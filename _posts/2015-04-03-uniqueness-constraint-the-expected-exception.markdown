@@ -9,7 +9,7 @@ categories: rails activerecord
 ### TL;DR
 
 Not all validations are created equal. Some hit the database and others don't. You need to know which is which. Add this to the idea that "exceptions should not be expected" and you are talking about some serious cognitive dissonance. Consider using a distributed [Mutex managed by your database server](https://github.com/mceachen/with_advisory_lock) to really do a good job. Otherwise a simple `retry` will suffice.
-* UPDATE * Due to rails weirdness, retry can actually cause an infinite loop scenario. Be careful.
+*UPDATE* Due to rails weirdness, retry can actually cause an infinite loop scenario. Be careful.
 
 ### Beer
 
@@ -71,13 +71,13 @@ Let's try whacking a transaction on this sucker. Then the whole darned table/dat
 
 def create @item = Item.new(item_params)
 
-Item.transaction do
-    if @item.save
-        redirect_to @item, notice: 'Item was successfully created/updated.'
-    else
-        render :new
+    Item.transaction do
+        if @item.save
+            redirect_to @item, notice: 'Item was successfully created/updated.'
+        else
+            render :new
+        end
     end
-end
 
 end 
 {%endhighlight%}
@@ -108,7 +108,11 @@ And here comes the science...
 
 There's always `rescue_from`, I suppose. But that seems even worse. Flow would jump out of your function and off into some global error handler. I mean, seriously ? Are you nuts ? Besides this smacks of defeatism. "This won't happen very often. The customer's convenience is less important than mine."
 
-{%highlight ruby%} class ApplicationController < ActionController::Base rescue_from ActiveRecord::RecordNotUnique, with: :spaghetti_code
+{%highlight ruby%} 
+
+class ApplicationController < ActionController::Base 
+
+    rescue_from ActiveRecord::RecordNotUnique, with: :spaghetti_code
 
 {%endhighlight%}
 
@@ -116,36 +120,51 @@ There's always `rescue_from`, I suppose. But that seems even worse. Flow would j
 
 Some have suggested using 'retry' to solve the issue. The validation will pass the first time, raise the error, retry, then fail the second time resulting in the requisite error messages that are useful to the user. That's 2n SQL queries, on the rare occasion that someone beats us to it and n queries (where n depends on the number of validations you do against the database) normally but it does result in a much improved user experience. And that's a trade-off I can live with. I don't mind doing more work if it benefits the user.
 
-{%highlight ruby%} def create retries ||= 2 @item = Item.new(item_params)
+{%highlight ruby%} 
 
-```
-if @item.save
-    redirect_to @item, notice: 'Item was successfully created/updated.'
-else
-    render :new
-end
-```
+def create 
 
-rescue ActiveRecord::RecordNotUnique retry unless (retries-=1).zero? raise end {%endhighlight%}
+    retries ||= 2 
+    @item = Item.new(item_params)
 
-Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop if it isn't. In the interest of DRYness we should probably take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. And `retry_once_on` can be used in all my other `create` and `update` actions.
-
-{%highlight ruby%} def retry_once_on(exception) retries ||= 2 yield rescue exception retry unless (retries-=1).zero? end
-
-def create retry_once_on(ActiveRecord::RecordNotUnique) do @item = Item.new(item_params)
-
-```
-if @item.save
+    if @item.save
         redirect_to @item, notice: 'Item was successfully created/updated.'
     else
         render :new
     end
+
+rescue ActiveRecord::RecordNotUnique 
+    retry unless (retries-=1).zero? 
+    raise 
+end 
+
+{%endhighlight%}
+
+Be careful ! Make sure you have unique constraint defined ! At least it will only try once and then stop if it isn't. In the interest of DRYness we should probably take the re-try wrapper and make it a helper or something. That `create` action is looking pretty skinny. And `retry_once_on` can be used in all my other `create` and `update` actions.
+
+{%highlight ruby%} 
+
+def retry_once_on(exception) 
+    retries ||= 2 
+    yield 
+rescue exception 
+    retry unless (retries-=1).zero? 
 end
-```
 
-rescue
+def create 
+    retry_once_on(ActiveRecord::RecordNotUnique) do 
+        @item = Item.new(item_params)
 
-end {%endhighlight%}
+        if @item.save
+                redirect_to @item, notice: 'Item was successfully created/updated.'
+            else
+                render :new
+            end
+        end
+
+    end
+end 
+{%endhighlight%}
 
 ### Insane in the membrane
 
@@ -171,23 +190,22 @@ What's really needed here is a Mutex or Mutual Exclusion. This can be achieved i
 
 def create @item = Item.new(item_params)
 
-```
-Item.with_advisory_lock(:creating) do
-    if @item.save
-        redirect_to @item, notice: 'Item was successfully created/updated.'
-    else
-        render :new
+    Item.with_advisory_lock(:creating) do
+        if @item.save
+            redirect_to @item, notice: 'Item was successfully created/updated.'
+        else
+            render :new
+        end
     end
-end
-```
 
-rescue
+    rescue
 
-end {%endhighlight%}
+end 
+{%endhighlight%}
 
 So, in the end, our `retry` solution is simple and effective and maybe uses more SQL queries than you might want. On the other hand `with_advisory_lock` would do it with slightly less SQL queries, more expressive syntax and might even satisfy the Exception-phobic. It's surprising what a can of worms database-querying validations makes and I'm even more surprised that we are all casually ignoring this issue. Dealing with this problem should be a core feature of Rails. The advisory lock solution should probably wrap all ActiveRecord transactions that perform datebase validations before a database operation.
 
-**Footnote: **A further wrinkle occurs when the validation passes and the insert fails permanently. Rails' validates_uniqueness_of constraint uses BINARY comparison which is different to the comparison mode the index uses. Sometimes (especially with trailing spaces) the BINARY comparison passes and the insert fails. Retry. Same thing happens = infinite loop. Why is nothing ever simple ? I had some ideas about this in another post.
+**Footnote:** A further wrinkle occurs when the validation passes and the insert fails permanently. Rails' validates_uniqueness_of constraint uses BINARY comparison which is different to the comparison mode the index uses. Sometimes (especially with trailing spaces) the BINARY comparison passes and the insert fails. Retry. Same thing happens = infinite loop. Why is nothing ever simple ? I had some ideas about this in another post.
 
 ### Further reading
 
