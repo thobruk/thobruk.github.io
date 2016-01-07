@@ -1,15 +1,15 @@
 ---
 layout: default
 ---
+{% assign posts_count = (paginator.posts | size) %}
 
 <div class="home">
-
-  <div class="posts">
-    {% for post in paginator.posts %}
-      <div class="post">
-        <a href="{{ post.url }}" class="post-link">
-          <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
-          <h3 class="h2 post-title">{{ post.title }}</h3>
+  {% if posts_count > 0 %}
+    <div class="posts">
+      {% for post in paginator.posts %}
+        <div class="post py3">
+          <p class="post-meta">{{ post.date | date: site.date_format }}</p>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
           <p class="post-summary">
             {% if post.summary %}
               {{ post.summary }}
@@ -17,10 +17,12 @@ layout: default
               {{ post.excerpt }}
             {% endif %}
           </p>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
+        </div>
+      {% endfor %}
+    </div>
 
-  {% include pagination.html %}
+    {% include pagination.html %}
+  {% else %}
+    <h1 class='center'>{{ site.text.index.coming_soon }}</h3>
+  {% endif %}
 </div>
