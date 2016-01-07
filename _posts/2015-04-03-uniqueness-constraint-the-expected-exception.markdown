@@ -9,6 +9,7 @@ categories: rails activerecord
 ### TL;DR
 
 Not all validations are created equal. Some hit the database and others don't. You need to know which is which. Add this to the idea that "exceptions should not be expected" and you are talking about some serious cognitive dissonance. Consider using a distributed [Mutex managed by your database server](https://github.com/mceachen/with_advisory_lock) to really do a good job. Otherwise a simple `retry` will suffice.
+* UPDATE * Due to rails weirdness, retry can actually cause an infinite loop scenario. Be careful.
 
 ### Beer
 
@@ -42,17 +43,23 @@ This looks all fine and dandy on the face of it. Look! I even put a uniqueness v
 
 So, there's a non-zero chance of your exception getting thrown and the user is then plunged in to an error page. No nice form with error messages on the input fields so you can work out what happened. Well, Mr Smarty Pants, where did your zen-like lack of exception handling get you ?? Let's tweak up our action a bit:
 
-{%highlight ruby%} def create @item = Item.new(item_params)
+{%highlight ruby%} 
 
-```
-if @item.save
-    redirect_to @item, notice: 'Item was successfully created/updated.'
-else
-    render :new
-end
-```
+def create @item = Item.new(item_params)
 
-rescue ActiveRecord::RecordNotUnique flash[:notice] = 'Unable to create Item' render :new end {%endhighlight%}
+    if @item.save
+        redirect_to @item, notice: 'Item was successfully created/updated.'
+    else
+        render :new
+    end
+
+    rescue ActiveRecord::RecordNotUnique 
+        flash[:notice] = 'Unable to create Item' 
+        render :new 
+
+end 
+
+{%endhighlight%}
 
 Well, this is a bit better. At least they get a flash message, but it's not neatly sitting on the form field. I suppose I could hack around with the object's error collection and try to stick something in the right spot. I want the best user experience possible. I could even parse the error message and try to work out which field was affected by the error. That would be a pain in the arse, because all database servers will throw a different message. Not very portable. Either way this definitely violates 'exceptions should not be expected'.
 
@@ -60,9 +67,10 @@ Well, this is a bit better. At least they get a flash message, but it's not neat
 
 Let's try whacking a transaction on this sucker. Then the whole darned table/database will be locked while you CHECK and SAVE. Feels like it might work. I don't need to catch the exception anymore because it can't happen...right?
 
-{%highlight ruby%} def create @item = Item.new(item_params)
+{%highlight ruby%} 
 
-```
+def create @item = Item.new(item_params)
+
 Item.transaction do
     if @item.save
         redirect_to @item, notice: 'Item was successfully created/updated.'
@@ -70,9 +78,9 @@ Item.transaction do
         render :new
     end
 end
-```
 
-end {%endhighlight%}
+end 
+{%endhighlight%}
 
 Wait - what? The [ActiveRecord](http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of) docs point out that this won't work. A transaction is not your tool here. Since the validation doesn't fail in any sense at a database level, the transaction proceeds unimpeded. You can also try `with_lock` but that won't cut it either as it only seems to lock the local copy of the model.
 
