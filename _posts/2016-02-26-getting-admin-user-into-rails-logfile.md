@@ -13,7 +13,7 @@ issued any particular request. I'm using ActiveAdmin for this project, which is 
 be available at 'log-time'. But, with a bit of digging in the cookie jar we can pull the current admin_user.id out without too much hassle. Some posited solutions were a little
 bit over-designed for my liking. I hate running around in half a dozen files to find things, so I feel like this is the easiest to understand solution. Stick this in `config/initializers/logging.rb`
 
-```
+{%highlight ruby%}
 Rails.configuration.log_tags = [
     lambda { |req|
       session_key = Rails.application.config.session_options[:key]
@@ -23,7 +23,7 @@ Rails.configuration.log_tags = [
       "u: #{admin_user || 0}"
     }
 ]
-```
+{%endhighlight%}
 
 #### Thanks to...
 
