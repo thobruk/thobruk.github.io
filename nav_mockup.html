@@ -1,0 +1,107 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.mock-browser{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);overflow:hidden}
+.browser-bar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.browser-dots{display:flex;gap:6px}
+.browser-dots span{width:12px;height:12px;border-radius:50%;background:var(--color-border-secondary)}
+.browser-url{flex:1;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 12px;font-size:12px;color:var(--color-text-tertiary)}
+.nav{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 28px;display:flex;align-items:center;gap:4px;height:56px;position:relative}
+.nav-logo{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-right:16px;white-space:nowrap}
+.nav-items{display:flex;align-items:stretch;gap:0;flex:1}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:4px;padding:0 14px;height:56px;font-size:14px;color:var(--color-text-secondary);cursor:pointer;border:none;background:none;white-space:nowrap;transition:color .15s}
+.nav-trigger:hover,.nav-trigger.open{color:var(--color-text-primary)}
+.nav-trigger i{font-size:14px;transition:transform .2s}
+.nav-trigger.open i{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 1px);left:0;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:8px;min-width:210px;z-index:10}
+.dropdown.open{display:block}
+.dropdown a{display:block;padding:9px 12px;font-size:13px;color:var(--color-text-secondary);text-decoration:none;border-radius:var(--border-radius-md);transition:background .12s,color .12s}
+.dropdown a:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.dropdown-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);padding:8px 12px 4px;text-transform:uppercase;letter-spacing:.06em}
+.nav-cta{margin-left:auto;background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.nav-plain{display:flex;align-items:center;padding:0 14px;height:56px;font-size:14px;color:var(--color-text-secondary);cursor:pointer;white-space:nowrap}
+.nav-plain:hover{color:var(--color-text-primary)}
+.hero{padding:64px 28px 48px;background:var(--color-background-primary)}
+.hero h1{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.hero p{font-size:14px;color:var(--color-text-secondary);line-height:1.6;max-width:480px}
+</style>
+
+<div class="mock-browser">
+  <div class="browser-bar">
+    <div class="browser-dots"><span></span><span></span><span></span></div>
+    <div class="browser-url">acme.com</div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-logo">Acme</div>
+    <div class="nav-items">
+
+      <div class="nav-item">
+        <button class="nav-trigger" onclick="toggle('platform')">Platform <i class="ti ti-chevron-down"></i></button>
+        <div class="dropdown" id="platform">
+          <div class="dropdown-label">Platform</div>
+          <a href="#">Overview</a>
+          <a href="#">MID generator</a>
+          <a href="#">Skill verification</a>
+          <a href="#">Workforce capability insight</a>
+          <a href="#">Performance definition</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-trigger" onclick="toggle('howitworks')">How it works</button>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-trigger" onclick="toggle('solutions')">Solutions <i class="ti ti-chevron-down"></i></button>
+        <div class="dropdown" id="solutions">
+          <div class="dropdown-label">Solutions</div>
+          <a href="#">Learning leaders</a>
+          <a href="#">Instructional design teams</a>
+          <a href="#">Business leaders</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-trigger" onclick="toggle('resources')">Resources <i class="ti ti-chevron-down"></i></button>
+        <div class="dropdown" id="resources">
+          <div class="dropdown-label">Resources</div>
+          <a href="#"><i class="ti ti-article" style="font-size:15px;vertical-align:-2px;margin-right:8px" aria-hidden="true"></i>Articles</a>
+          <a href="#"><i class="ti ti-presentation" style="font-size:15px;vertical-align:-2px;margin-right:8px" aria-hidden="true"></i>Case studies</a>
+          <a href="#"><i class="ti ti-video" style="font-size:15px;vertical-align:-2px;margin-right:8px" aria-hidden="true"></i>Videos</a>
+          <a href="#"><i class="ti ti-book" style="font-size:15px;vertical-align:-2px;margin-right:8px" aria-hidden="true"></i>Guides</a>
+        </div>
+      </div>
+
+      <div class="nav-plain">About</div>
+    </div>
+
+    <button class="nav-cta">Start with one program</button>
+  </nav>
+
+  <div class="hero">
+    <h1>Build workforce capability at scale</h1>
+    <p>Define the skills that matter, verify them quickly, and give every team the insight they need to grow.</p>
+  </div>
+</div>
+
+<script>
+function toggle(id) {
+  const all = document.querySelectorAll('.dropdown, .nav-trigger');
+  const target = document.getElementById(id);
+  const btn = target ? target.previousElementSibling : null;
+  const isOpen = target && target.classList.contains('open');
+  document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.nav-trigger').forEach(b => b.classList.remove('open'));
+  if (!isOpen && target) {
+    target.classList.add('open');
+    if (btn) btn.classList.add('open');
+  }
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-item')) {
+    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.nav-trigger').forEach(b => b.classList.remove('open'));
+  }
+});
+</script>
