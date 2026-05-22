@@ -22,18 +22,69 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
 .dropdown a{display:flex;align-items:center;gap:8px;padding:9px 10px;font-size:13px;color:#3d3d3a;text-decoration:none;border-radius:8px;transition:background .12s}
 .dropdown a:hover{background:#f5f5f3}
 .dropdown a svg{color:#888780;flex-shrink:0}
-.cta{margin-left:auto;background:#1a1a18;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
-.cta:hover{background:#2c2c2a}
-.hero{padding:60px 28px 52px;background:#fff}
-.hero-tag{font-size:11px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px}
-.hero h1{font-size:28px;font-weight:500;color:#1a1a18;margin-bottom:10px;line-height:1.25}
-.hero p{font-size:15px;color:#5f5e5a;line-height:1.65;max-width:480px}
-.content{padding:36px 28px 44px;background:#f5f5f3}
-.section-label{font-size:11px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
-.items{display:flex;flex-direction:column;gap:10px}
-.item{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:18px 20px}
-.item h3{font-size:14px;font-weight:500;color:#1a1a18;margin-bottom:5px}
-.item p{font-size:13px;color:#5f5e5a;line-height:1.55}
+.nav-cta{margin-left:auto;background:#1a1a18;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.nav-cta:hover{background:#2c2c2a}
+
+/* Shared */
+.section{padding:48px 40px}
+.section-eyebrow{font-size:11px;font-weight:500;color:#888780;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.section h2{font-size:21px;font-weight:500;color:#1a1a18;line-height:1.25;margin-bottom:14px;letter-spacing:-0.01em}
+.section-body{font-size:13.5px;color:#5f5e5a;line-height:1.72;max-width:560px;margin-bottom:14px}
+.section-closing{font-size:13px;color:#888780;line-height:1.6;max-width:520px;font-style:italic}
+.section-support{font-size:13px;color:#888780;line-height:1.65;max-width:500px;font-style:italic;margin-top:4px}
+.dash-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0 0 14px;padding-left:2px;max-width:520px}
+.dash-list li{display:flex;align-items:baseline;gap:10px;font-size:13.5px;color:#3d3d3a;line-height:1.5}
+.dash-list li::before{content:"\2014";color:#c8c6bf;flex-shrink:0}
+.btn-primary{background:#1a1a18;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer}
+.btn-primary:hover{background:#2c2c2a}
+.btn-ghost{background:none;color:#5f5e5a;border:1px solid #dddbd2;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer}
+.btn-ghost:hover{color:#1a1a18;border-color:#a8a5a0}
+
+/* 1. Hero */
+.hero{padding:60px 40px 52px;background:#fff;border-bottom:1px solid #e8e6df}
+.hero-eyebrow{font-size:11px;font-weight:500;color:#888780;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:30px;font-weight:500;color:#1a1a18;line-height:1.22;max-width:480px;margin-bottom:16px;letter-spacing:-0.02em}
+.hero-sub{font-size:14.5px;color:#5f5e5a;line-height:1.68;max-width:480px;margin-bottom:10px}
+.hero-support{font-size:13px;color:#888780;line-height:1.6;max-width:440px;margin-bottom:28px}
+.hero-actions{display:flex;gap:10px;align-items:center}
+
+/* 2. The Challenge - questions as styled list */
+.s2{background:#faf9f7;border-bottom:1px solid #e8e6df}
+.question-list{list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid #dddbd2;border-radius:12px;overflow:hidden;margin:20px 0 20px;background:#fff}
+.question-list li{padding:14px 20px;font-size:13.5px;color:#3d3d3a;line-height:1.5;border-bottom:1px solid #e8e6df;display:flex;align-items:baseline;gap:10px}
+.question-list li:last-child{border-bottom:none}
+.q-mark{font-size:13px;color:#c8c6bf;flex-shrink:0;font-weight:500}
+
+/* 3. A More Measurable Approach */
+.s3{background:#fff;border-bottom:1px solid #e8e6df}
+
+/* 4. Actionable Workforce Insight - 6 benefit blocks */
+.s4{background:#f5f5f3;border-bottom:1px solid #e8e6df}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.benefit-card{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:20px 22px}
+.benefit-card h3{font-size:13.5px;font-weight:500;color:#1a1a18;margin-bottom:7px;line-height:1.3}
+.benefit-card p{font-size:12.5px;color:#5f5e5a;line-height:1.6}
+
+/* 5. Why It Matters */
+.s5{background:#fff;border-bottom:1px solid #e8e6df}
+
+/* 6. A Practical Starting Point */
+.s6{background:#f5f5f3;border-bottom:1px solid #e8e6df}
+
+/* 7. Guided Implementation */
+.s7{background:#faf9f7;border-bottom:1px solid #e8e6df}
+.support-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:32px 36px}
+.support-card h2{margin-bottom:12px}
+
+/* 8. Final CTA */
+.s8{background:#1a1a18;padding:52px 40px;text-align:center}
+.s8 h2{color:#fff;font-size:21px;font-weight:500;margin-bottom:12px;letter-spacing:-0.01em}
+.s8 p{color:#888780;font-size:13.5px;line-height:1.65;max-width:420px;margin:0 auto 28px}
+.s8-actions{display:flex;gap:10px;justify-content:center}
+.btn-white{background:#fff;color:#1a1a18;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer}
+.btn-white:hover{background:#f0efeb}
+.btn-ghost-dark{background:none;color:#a8a5a0;border:1px solid #3d3d3a;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer}
+.btn-ghost-dark:hover{color:#fff;border-color:#5f5e5a}
 </style>
 
 <div class="mock-browser">
@@ -60,7 +111,7 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
         <button class="nav-btn" onclick="location='how-it-works.html'">How it works</button>
       </div>
       <div class="nav-item">
-        <button class="nav-btn" onclick="toggle('solutions')">Solutions
+        <button class="nav-btn open" onclick="toggle('solutions')">Solutions
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="dropdown" id="solutions">
@@ -96,32 +147,130 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
       </div>
       <div class="nav-plain" onclick="location='about.html'">About</div>
     </div>
-    <button class="cta">Start with one program</button>
+    <button class="nav-cta">Start with one program</button>
   </nav>
 
+  <!-- 1. Hero -->
   <div class="hero">
-    <div class="hero-tag">Solutions</div>
-    <h1>For business leaders</h1>
-    <p>Know exactly where your team's capabilities stand — and where to invest to close the gaps that matter most.</p>
+    <div class="hero-eyebrow">Solutions &mdash; Business Leaders</div>
+    <h1>Gain Visibility Into Workforce Capability</h1>
+    <p class="hero-sub">eParamus helps organizations define, build, and verify measurable workforce capability&mdash;so leaders can better understand readiness, skill development, and organizational performance over time.</p>
+    <p class="hero-support">Move beyond training activity and gain actionable insight into workforce capability and organizational readiness.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Start with One Program</button>
+      <button class="btn-ghost">See How It Works</button>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="section-label">What eParamus gives you</div>
-    <div class="items">
-      <div class="item">
-        <h3>Clarity on what your workforce can do</h3>
-        <p>Move beyond headcount and credentials. See verified capability data mapped to the roles and outcomes your business depends on.</p>
+  <!-- 2. The Challenge -->
+  <div class="section s2">
+    <div class="section-eyebrow">The challenge</div>
+    <h2>Workforce Capability Often Remains Invisible</h2>
+    <p class="section-body">Organizations invest heavily in learning and workforce development, yet many leaders still struggle to answer important questions:</p>
+    <ul class="question-list">
+      <li><span class="q-mark">?</span>Do employees have the skills needed to perform successfully?</li>
+      <li><span class="q-mark">?</span>Where do workforce capability gaps exist?</li>
+      <li><span class="q-mark">?</span>Which learning programs are actually improving performance?</li>
+      <li><span class="q-mark">?</span>How prepared is the organization for future workforce demands?</li>
+    </ul>
+    <p class="section-body">Traditional learning metrics provide activity visibility&mdash;but rarely provide capability visibility.</p>
+    <p class="section-closing">Without measurable workforce capability data, organizational readiness is often difficult to assess clearly.</p>
+  </div>
+
+  <!-- 3. A More Measurable Approach -->
+  <div class="section s3">
+    <div class="section-eyebrow">A more measurable approach</div>
+    <h2>Build Workforce Capability Around Measurable Skills</h2>
+    <p class="section-body">eParamus helps organizations define measurable job-relevant skills and verify capability development over time through a structured measurable learning system.</p>
+    <p class="section-body">Using the IMPACT platform, organizations can:</p>
+    <ul class="dash-list">
+      <li>align learning to organizational needs</li>
+      <li>verify workforce capability development</li>
+      <li>measure skill application on the job</li>
+      <li>and gain visibility into workforce strengths and gaps</li>
+    </ul>
+    <p class="section-support">When workforce capability becomes measurable, leaders gain clearer insight into organizational readiness and development priorities.</p>
+  </div>
+
+  <!-- 4. Actionable Workforce Insight -->
+  <div class="section s4">
+    <div class="section-eyebrow">Actionable workforce insight</div>
+    <h2>Insight That Supports Better Organizational Decisions</h2>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <h3>Workforce Readiness</h3>
+        <p>Gain visibility into whether employees possess the skills required to support operational and strategic priorities.</p>
       </div>
-      <div class="item">
-        <h3>Targeted investment decisions</h3>
-        <p>Instead of blanket training budgets, direct resources toward the specific skills with the biggest gap relative to your strategy.</p>
+      <div class="benefit-card">
+        <h3>Capability Gap Identification</h3>
+        <p>Identify workforce strengths, gaps, and development opportunities across teams and departments.</p>
       </div>
-      <div class="item">
-        <h3>Accountability without micromanagement</h3>
-        <p>Set clear capability expectations for every role and let teams take ownership — with the data to show progress over time.</p>
+      <div class="benefit-card">
+        <h3>Succession &amp; Talent Readiness</h3>
+        <p>Support succession planning and workforce development initiatives with measurable capability insight.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Learning Effectiveness</h3>
+        <p>Verify whether workforce development initiatives are producing measurable capability improvements.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Organizational Alignment</h3>
+        <p>Align workforce development efforts to operational expectations and organizational priorities.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Continuous Workforce Development</h3>
+        <p>Use measurable capability insight to continuously strengthen workforce readiness over time.</p>
       </div>
     </div>
   </div>
+
+  <!-- 5. Why It Matters -->
+  <div class="section s5">
+    <div class="section-eyebrow">Why it matters</div>
+    <h2>Workforce Capability Visibility Strengthens Organizational Agility</h2>
+    <p class="section-body">Organizations operate in environments where workforce capability requirements continue to evolve rapidly.</p>
+    <p class="section-body">When leaders can clearly see workforce strengths, gaps, and development progress, they are better equipped to:</p>
+    <ul class="dash-list">
+      <li>support organizational growth</li>
+      <li>improve operational readiness</li>
+      <li>develop future leaders</li>
+      <li>and respond to changing business demands</li>
+    </ul>
+    <p class="section-closing">Capability visibility helps organizations make more informed workforce development decisions.</p>
+  </div>
+
+  <!-- 6. A Practical Starting Point -->
+  <div class="section s6">
+    <div class="section-eyebrow">A practical starting point</div>
+    <h2>Start Small. Build Organizational Visibility Over Time.</h2>
+    <p class="section-body">Organizations do not need enterprise-wide transformation to begin building measurable workforce capability visibility. Many begin by measuring a single workforce development program to:</p>
+    <ul class="dash-list">
+      <li>establish measurable skill outcomes</li>
+      <li>verify capability development</li>
+      <li>and demonstrate workforce insight before scaling further</li>
+    </ul>
+    <button class="btn-primary">Start with One Program</button>
+  </div>
+
+  <!-- 7. Guided Implementation -->
+  <div class="section s7">
+    <div class="support-card">
+      <div class="section-eyebrow">Guided implementation</div>
+      <h2>A Structured System Supported by Guided Implementation</h2>
+      <p class="section-body" style="margin-bottom:0">eParamus provides organizations with both the platform and implementation support needed to successfully adopt measurable workforce capability practices. From onboarding and stakeholder alignment to education and ongoing support, the process is designed to be practical, achievable, and scalable over time.</p>
+    </div>
+  </div>
+
+  <!-- 8. Final CTA -->
+  <div class="s8">
+    <h2>Ready to Make Workforce Capability More Visible?</h2>
+    <p>Discover how organizations are using measurable workforce capability practices to strengthen readiness, support workforce development, and improve organizational insight.</p>
+    <div class="s8-actions">
+      <button class="btn-white">Schedule a Conversation</button>
+      <button class="btn-ghost-dark">Start with One Program</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
