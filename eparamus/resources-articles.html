@@ -7,7 +7,7 @@ body{background:#f5f5f3}
 .browser-dots span{width:12px;height:12px;border-radius:50%;background:#dddbd2}
 .browser-url{flex:1;background:#f5f5f3;border:1px solid #e0ded7;border-radius:8px;padding:5px 12px;font-size:12px;color:#888780}
 nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;align-items:center;height:56px;gap:4px}
-.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px}
+.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px;cursor:pointer}
 .nav-items{display:flex;align-items:stretch;flex:1}
 .nav-item{position:relative}
 .nav-btn{display:flex;align-items:center;gap:4px;padding:0 13px;height:56px;font-size:13.5px;color:#5f5e5a;background:none;border:none;cursor:pointer;white-space:nowrap;transition:color .15s}
@@ -24,21 +24,29 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
 .dropdown a svg{color:#888780;flex-shrink:0}
 .cta{margin-left:auto;background:#1a1a18;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
 .cta:hover{background:#2c2c2a}
-.hero{padding:60px 28px 52px;background:#fff}
+.hero{padding:60px 28px 40px;background:#fff}
 .hero h1{font-size:28px;font-weight:500;color:#1a1a18;margin-bottom:10px;line-height:1.25}
 .hero p{font-size:15px;color:#5f5e5a;line-height:1.65;max-width:480px}
+.content{padding:28px 28px 44px;background:#fff;border-top:1px solid #f0efeb}
+.articles{display:flex;flex-direction:column;gap:0}
+.article{padding:20px 0;border-bottom:1px solid #f0efeb}
+.article:last-child{border-bottom:none}
+.article-meta{display:flex;gap:10px;align-items:center;margin-bottom:7px}
+.article-tag{font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.05em;background:#f5f5f3;padding:3px 8px;border-radius:4px}
+.article-date{font-size:11px;color:#aaa9a4}
+.article h3{font-size:15px;font-weight:500;color:#1a1a18;margin-bottom:5px;line-height:1.3}
+.article p{font-size:13px;color:#5f5e5a;line-height:1.55;max-width:520px}
 </style>
 
 <div class="mock-browser">
   <div class="browser-bar">
     <div class="browser-dots"><span></span><span></span><span></span></div>
-    <div class="browser-url">eparamus.com</div>
+    <div class="browser-url">eparamus.com/resources/articles</div>
   </div>
 
   <nav>
-    <div class="logo">eParamus</div>
+    <div class="logo" onclick="location='nav_mockup_standalone.html'">eParamus</div>
     <div class="nav-items">
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('platform')">Platform
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -50,11 +58,9 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="platform-workforce-capability-insight.html">Workforce capability insight</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="location='how-it-works.html'">How it works</button>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('solutions')">Solutions
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -66,7 +72,6 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="solutions-business-leaders.html">Business leaders</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('resources')">Resources
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -91,16 +96,43 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           </a>
         </div>
       </div>
-
       <div class="nav-plain" onclick="location='about.html'">About</div>
     </div>
-
     <button class="cta">Start with one program</button>
   </nav>
 
   <div class="hero">
-    <h1>Build workforce capability<br>at scale</h1>
-    <p>Define the skills that matter, verify them quickly, and give every team the insight they need to grow.</p>
+    <h1>Articles</h1>
+    <p>Thinking on workforce capability, skill definition, and the future of learning.</p>
+  </div>
+
+  <div class="content">
+    <div class="articles">
+      <div class="article">
+        <div class="article-meta">
+          <span class="article-tag">Strategy</span>
+          <span class="article-date">May 2026</span>
+        </div>
+        <h3>Why "training hours" is the wrong metric</h3>
+        <p>Completion data tells you how much time people spent, not whether anything changed. Here's what to measure instead.</p>
+      </div>
+      <div class="article">
+        <div class="article-meta">
+          <span class="article-tag">Design</span>
+          <span class="article-date">Apr 2026</span>
+        </div>
+        <h3>The skill definition problem that's slowing every L&D team down</h3>
+        <p>Most instructional designers spend the first 30% of a project just trying to agree on what the learner needs to be able to do. It doesn't have to be that way.</p>
+      </div>
+      <div class="article">
+        <div class="article-meta">
+          <span class="article-tag">Leadership</span>
+          <span class="article-date">Mar 2026</span>
+        </div>
+        <h3>How to make the case for capability investment</h3>
+        <p>Getting budget approved for L&D requires a different kind of argument than it did five years ago. Here's what resonates with business leaders now.</p>
+      </div>
+    </div>
   </div>
 </div>
 

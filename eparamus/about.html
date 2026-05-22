@@ -7,7 +7,7 @@ body{background:#f5f5f3}
 .browser-dots span{width:12px;height:12px;border-radius:50%;background:#dddbd2}
 .browser-url{flex:1;background:#f5f5f3;border:1px solid #e0ded7;border-radius:8px;padding:5px 12px;font-size:12px;color:#888780}
 nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;align-items:center;height:56px;gap:4px}
-.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px}
+.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px;cursor:pointer}
 .nav-items{display:flex;align-items:stretch;flex:1}
 .nav-item{position:relative}
 .nav-btn{display:flex;align-items:center;gap:4px;padding:0 13px;height:56px;font-size:13.5px;color:#5f5e5a;background:none;border:none;cursor:pointer;white-space:nowrap;transition:color .15s}
@@ -15,7 +15,7 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
 .nav-btn svg{transition:transform .2s;flex-shrink:0}
 .nav-btn.open svg{transform:rotate(180deg)}
 .nav-plain{display:flex;align-items:center;padding:0 13px;height:56px;font-size:13.5px;color:#5f5e5a;cursor:pointer;white-space:nowrap}
-.nav-plain:hover{color:#1a1a18}
+.nav-plain:hover,.nav-plain.active{color:#1a1a18}
 .dropdown{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid #dddbd2;border-radius:12px;padding:6px;min-width:220px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.08)}
 .dropdown.open{display:block}
 .dropdown-label{font-size:11px;font-weight:500;color:#888780;padding:8px 10px 4px;letter-spacing:.05em;text-transform:uppercase}
@@ -26,19 +26,29 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
 .cta:hover{background:#2c2c2a}
 .hero{padding:60px 28px 52px;background:#fff}
 .hero h1{font-size:28px;font-weight:500;color:#1a1a18;margin-bottom:10px;line-height:1.25}
-.hero p{font-size:15px;color:#5f5e5a;line-height:1.65;max-width:480px}
+.hero p{font-size:15px;color:#5f5e5a;line-height:1.65;max-width:520px}
+.content{padding:36px 28px 44px;background:#f5f5f3}
+.section-label{font-size:11px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.values{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.value{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:18px 20px}
+.value h3{font-size:14px;font-weight:500;color:#1a1a18;margin-bottom:5px}
+.value p{font-size:13px;color:#5f5e5a;line-height:1.55}
+.team-label{font-size:11px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+.team{display:flex;gap:10px;flex-wrap:wrap}
+.member{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:14px 16px;min-width:150px}
+.member-name{font-size:13.5px;font-weight:500;color:#1a1a18;margin-bottom:2px}
+.member-role{font-size:12px;color:#888780}
 </style>
 
 <div class="mock-browser">
   <div class="browser-bar">
     <div class="browser-dots"><span></span><span></span><span></span></div>
-    <div class="browser-url">eparamus.com</div>
+    <div class="browser-url">eparamus.com/about</div>
   </div>
 
   <nav>
-    <div class="logo">eParamus</div>
+    <div class="logo" onclick="location='nav_mockup_standalone.html'">eParamus</div>
     <div class="nav-items">
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('platform')">Platform
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -50,11 +60,9 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="platform-workforce-capability-insight.html">Workforce capability insight</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="location='how-it-works.html'">How it works</button>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('solutions')">Solutions
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -66,7 +74,6 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="solutions-business-leaders.html">Business leaders</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('resources')">Resources
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -91,16 +98,52 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           </a>
         </div>
       </div>
-
-      <div class="nav-plain" onclick="location='about.html'">About</div>
+      <div class="nav-plain active" onclick="location='about.html'">About</div>
     </div>
-
     <button class="cta">Start with one program</button>
   </nav>
 
   <div class="hero">
-    <h1>Build workforce capability<br>at scale</h1>
-    <p>Define the skills that matter, verify them quickly, and give every team the insight they need to grow.</p>
+    <h1>About eParamus</h1>
+    <p>We help organizations define what great looks like — and build the workforce to match. Founded by practitioners who spent years watching well-intentioned L&D work fail to move the needle, eParamus exists to close the gap between learning activity and actual capability.</p>
+  </div>
+
+  <div class="content">
+    <div class="section-label">What we believe</div>
+    <div class="values">
+      <div class="value">
+        <h3>Precision beats volume</h3>
+        <p>A single well-defined skill target is worth more than a hundred training hours without one.</p>
+      </div>
+      <div class="value">
+        <h3>Verified, not assumed</h3>
+        <p>Capability should be demonstrated and measured — not inferred from attendance or test scores alone.</p>
+      </div>
+      <div class="value">
+        <h3>Insight enables action</h3>
+        <p>Data is only valuable if it helps someone make a better decision. We design for clarity, not reporting.</p>
+      </div>
+    </div>
+
+    <div class="team-label">Team</div>
+    <div class="team">
+      <div class="member">
+        <div class="member-name">Placeholder Name</div>
+        <div class="member-role">Co-founder & CEO</div>
+      </div>
+      <div class="member">
+        <div class="member-name">Placeholder Name</div>
+        <div class="member-role">Co-founder & CPO</div>
+      </div>
+      <div class="member">
+        <div class="member-name">Placeholder Name</div>
+        <div class="member-role">Head of Engineering</div>
+      </div>
+      <div class="member">
+        <div class="member-name">Placeholder Name</div>
+        <div class="member-role">Head of Customer Success</div>
+      </div>
+    </div>
   </div>
 </div>
 

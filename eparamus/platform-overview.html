@@ -7,7 +7,7 @@ body{background:#f5f5f3}
 .browser-dots span{width:12px;height:12px;border-radius:50%;background:#dddbd2}
 .browser-url{flex:1;background:#f5f5f3;border:1px solid #e0ded7;border-radius:8px;padding:5px 12px;font-size:12px;color:#888780}
 nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;align-items:center;height:56px;gap:4px}
-.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px}
+.logo{font-size:15px;font-weight:500;color:#1a1a18;margin-right:16px;cursor:pointer}
 .nav-items{display:flex;align-items:stretch;flex:1}
 .nav-item{position:relative}
 .nav-btn{display:flex;align-items:center;gap:4px;padding:0 13px;height:56px;font-size:13.5px;color:#5f5e5a;background:none;border:none;cursor:pointer;white-space:nowrap;transition:color .15s}
@@ -27,20 +27,27 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
 .hero{padding:60px 28px 52px;background:#fff}
 .hero h1{font-size:28px;font-weight:500;color:#1a1a18;margin-bottom:10px;line-height:1.25}
 .hero p{font-size:15px;color:#5f5e5a;line-height:1.65;max-width:480px}
+.content{padding:36px 28px 44px;background:#f5f5f3}
+.section-label{font-size:11px;font-weight:500;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:20px}
+.card h3{font-size:14px;font-weight:500;color:#1a1a18;margin-bottom:6px}
+.card p{font-size:13px;color:#5f5e5a;line-height:1.55}
+.card-link{display:inline-block;margin-top:12px;font-size:12.5px;color:#1a1a18;font-weight:500;text-decoration:none}
+.card-link:hover{text-decoration:underline}
 </style>
 
 <div class="mock-browser">
   <div class="browser-bar">
     <div class="browser-dots"><span></span><span></span><span></span></div>
-    <div class="browser-url">eparamus.com</div>
+    <div class="browser-url">eparamus.com/platform</div>
   </div>
 
   <nav>
-    <div class="logo">eParamus</div>
+    <div class="logo" onclick="location='nav_mockup_standalone.html'">eParamus</div>
     <div class="nav-items">
-
       <div class="nav-item">
-        <button class="nav-btn" onclick="toggle('platform')">Platform
+        <button class="nav-btn open" onclick="toggle('platform')">Platform
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="dropdown" id="platform">
@@ -50,11 +57,9 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="platform-workforce-capability-insight.html">Workforce capability insight</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="location='how-it-works.html'">How it works</button>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('solutions')">Solutions
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -66,7 +71,6 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           <a href="solutions-business-leaders.html">Business leaders</a>
         </div>
       </div>
-
       <div class="nav-item">
         <button class="nav-btn" onclick="toggle('resources')">Resources
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -91,16 +95,34 @@ nav{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;display:flex;
           </a>
         </div>
       </div>
-
       <div class="nav-plain" onclick="location='about.html'">About</div>
     </div>
-
     <button class="cta">Start with one program</button>
   </nav>
 
   <div class="hero">
-    <h1>Build workforce capability<br>at scale</h1>
-    <p>Define the skills that matter, verify them quickly, and give every team the insight they need to grow.</p>
+    <h1>The eParamus platform</h1>
+    <p>One integrated system to define, verify, and develop the skills your workforce needs to perform.</p>
+  </div>
+
+  <div class="content">
+    <div class="section-label">Platform capabilities</div>
+    <div class="cards">
+      <div class="card">
+        <h3>MID generator</h3>
+        <p>Turn role descriptions and business goals into precise, instruction-ready skill definitions in minutes.</p>
+        <a class="card-link" href="platform-mid-generator.html">Learn more →</a>
+      </div>
+      <div class="card">
+        <h3>Workforce capability insight</h3>
+        <p>Real-time dashboards that show where skills exist, where gaps are, and where to invest next.</p>
+        <a class="card-link" href="platform-workforce-capability-insight.html">Learn more →</a>
+      </div>
+      <div class="card">
+        <h3>Program alignment</h3>
+        <p>Connect every learning program directly to a verified skill definition so impact is measurable from the start.</p>
+      </div>
+    </div>
   </div>
 </div>
 
