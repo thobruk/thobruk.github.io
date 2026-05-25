@@ -2,11 +2,12 @@
 
 ## Overview
 
-Build the eParamus marketing site in `saasflow/` as plain HTML/CSS/JS.
+Build the eParamus marketing site as a **WordPress block theme** with Gutenberg block patterns, seeded via WP-CLI.
 
-- **Visual reference:** [SaasFlow Webflow template](https://saasflow-webflow-html-website-template.webflow.io/) — adapt its design system and layout patterns to eParamus
+- **Visual reference:** [SaasFlow Webflow template](https://saasflow-webflow-html-website-template.webflow.io/) — adapt its design system and layout patterns
 - **Content reference:** `spec/` files and `spec/original-docs/output.md` — all copy comes from here
 - **Mockups:** `mockup/` — content/structure reference only, not visual
+- **Prototype:** `saasflow/index.html` + `saasflow/styles.css` — working plain HTML prototype of the homepage; use as the visual and structural reference when building the theme
 
 ---
 
@@ -32,163 +33,189 @@ Build the eParamus marketing site in `saasflow/` as plain HTML/CSS/JS.
 
 ### Typography
 ```
-Display:  700, 72px, 105% line-height, -1.6px letter-spacing
+Display:  800, 72px, 105% line-height, -1.6px letter-spacing
 H1:       700, 60px, 106% line-height, -1.2px letter-spacing
 H2:       700, 48px, 108% line-height, -0.8px letter-spacing
 H3:       700, 36px, 112% line-height, -0.4px letter-spacing
 H4:       700, 24px, 125% line-height
-H5:       700, 18px, 155% line-height
-H6:       700, 16px, 150% line-height,  2px letter-spacing
+H5:       600, 18px, 155% line-height
 Body:     400, 18px, 155% line-height
-Font:     -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif (no CDN)
+Font:     Plus Jakarta Sans (Google Fonts)
 ```
 
-### Layout patterns (from template)
-- **Nav:** logo left, nav items center, CTA button right; transparent-over-white background
-- **Hero:** full-width, large H1/Display headline, subtext, one or two CTA buttons
-- **3-column feature card grid:** icon + headline + description per card
-- **4-column grid:** tighter benefit/feature tiles
-- **Alternating 2-column sections:** text block + image/visual, alternating left/right
-- **Contrast block:** two-column side-by-side comparison (e.g. Traditional vs IMPACT)
-- **Stats row:** large numbers with labels (for case studies / social proof)
-- **CTA section:** centered, dark or colored background, headline + button(s)
-- **Footer:** multi-column links + social icons + copyright
+### Section types
+- **Hero** — full-width, display headline, subtext, two CTAs, microcopy, dot-grid background
+- **4-card grid** — icon + heading + body + optional link
+- **Contrast block** — two-column side-by-side (muted left / active right)
+- **4-step process** — numbered steps with connecting line, dark background variant
+- **2-column section** — text + stacked cards, or text + text
+- **CTA section** — colored background (blue or dark), headline + buttons + optional 3-step panel
+- **Footer** — multi-column links + copyright
 
 ---
 
-## File Structure
+## WordPress Project Structure
 
 ```
-saasflow/
-  styles.css                               — shared design system
-  index.html                               — homepage
+theme/                        — WordPress block theme (install in wp-content/themes/)
+  style.css                   — theme header + custom component CSS
+  theme.json                  — design tokens: colors, typography, spacing
+  functions.php               — enqueue styles, register pattern categories
+  index.php                   — fallback template
+  templates/
+    front-page.php            — homepage template
+    page.php                  — default page template
+  parts/
+    header.html               — nav block template part
+    footer.html               — footer block template part
+  patterns/                   — reusable block patterns (available in editor)
+    hero.html
+    section-4-cards.html
+    section-contrast-block.html
+    section-steps.html
+    section-2col.html
+    section-cta.html
+
+content/                      — full page block markup (source of truth for seeding)
+  home.html
   how-it-works.html
+  platform-overview.html
+  platform-mid-generator.html
+  platform-workforce-capability-insight.html
+  solutions-learning-leaders.html
+  solutions-instructional-design-teams.html
+  solutions-business-leaders.html
+  resources-articles.html
+  resources-case-studies.html
+  resources-videos.html
+  resources-guides.html
   about.html
-  platform/
-    index.html                             — platform overview
-    mid-generator.html
-    workforce-capability-insight.html
-  solutions/
-    learning-leaders.html
-    instructional-design-teams.html
-    business-leaders.html
-  resources/
-    articles.html
-    case-studies.html
-    videos.html
-    guides.html
+
+bin/
+  seed.sh                     — WP-CLI script: creates all pages, sets front page, sets menus
 ```
 
-**CSS path:** All pages reference `styles.css` using a root-relative path (`/styles.css`) so subdirectory pages don't need `../`.
+### How patterns and content relate
 
-**Nav approach:** Since there's no build step, the nav HTML block is copy-pasted into each page. When the nav changes, update all files. (Accept the tradeoff; it's 14 files.)
+`patterns/` files are reusable templates editors can insert in Gutenberg.
+`content/` files are the full page sequences — each is the assembled block markup for one page, seeded into the database via WP-CLI. Editors own the content after seeding; re-running `seed.sh` with `wp post update` resets it to the source file.
 
 ---
 
 ## Steps
 
-### Step 1 — `styles.css`
-Create the shared stylesheet with:
-- CSS custom properties (all colors, type scale, spacing)
-- Reset/base
-- Nav + dropdown styles
-- Hero layout
-- Section/container layout (max-width, padding)
-- Card component (3-col grid, 4-col grid)
-- Alternating 2-column section
-- Contrast block (left/right comparison)
-- CTA section (centered, dark background variant)
-- Button styles (primary `#145aff`, secondary/outline)
-- Footer
-- Responsive (mobile-first, breakpoint at 768px)
+### Step 1 — `theme/theme.json`
+Define all design tokens as WordPress block theme settings:
+- Color palette (all swatches named and slugged)
+- Typography: font family (Plus Jakarta Sans via Google Fonts), font sizes
+- Spacing scale
+- Border radius presets
+- Disable unwanted core block features (padding controls, color pickers outside palette, etc.)
 
-### Step 2 — Nav + Footer templates
-Write the shared nav HTML (with dropdown JS) and footer HTML that will be copy-pasted into every page. Nav matches eParamus structure:
-- Logo | Platform (dropdown) · How it works · Solutions (dropdown) · Resources (dropdown) · About | **Start with one program** (CTA button)
+### Step 2 — `theme/style.css` + custom component CSS
+Theme header declaration + CSS for components that core blocks can't express cleanly:
+- Contrast block layout and muted/active item styles
+- Step connector line overlay
+- Nav dropdown behavior
+- Dot-grid hero background
+- Scroll entrance animations (`.fade-up`)
+- Button variants beyond core block defaults
 
-### Step 3 — Homepage (`index.html`)
-Seven sections per `spec/original-docs/output.md`:
-1. **Hero** — Display headline, subheadline, supporting line, two CTAs, microcopy
-2. **The Problem** — 4 tension-point cards + left/right contrast visual (Traditional Metrics vs Capability Questions)
-3. **The Shift** — "The Problem Isn't Measurement. It's Design" — 2-column or centered copy section
-4. **How It Works** — 4-step horizontal flow (Define → Build → Verify → See)
-5. **The IMPACT Platform** — 4 capability cards (MID Generator, Skill Verification, Performance Definition, Workforce Capability Insight)
-6. **Support / Implementation** — 4 support element cards (Guided Onboarding, Designer Education, Stakeholder Alignment, Ongoing Partnership)
-7. **Start Small** — 3-step visual + final CTA block
+Reference `saasflow/styles.css` for all values — this is a direct port.
 
-### Step 4 — How It Works (`how-it-works.html`)
-Per `spec/how-it-works.md` and additions in `output.md`:
-1. **Intro** — "Why Measurable Design Changes Everything" + copy
-2. **Visual example flow** — simple vertical diagram: Skill → Learning → Verification → Insight (using safety inspection example)
-3. **4-step process** — Define / Build / Verify / Act with full spec copy
+### Step 3 — `theme/parts/header.html`
+Nav as a block template part:
+- Site title block (logo)
+- Navigation block with dropdowns: Platform, How it works, Solutions, Resources, About
+- Button block: "Start with one program" (primary style)
+- Sticky header via `theme.json` or CSS
 
-### Step 5 — Platform: Overview (`platform-overview.html`)
-Per `output.md`:
+### Step 4 — `theme/parts/footer.html`
+Footer as a block template part:
+- Logo + tagline column
+- Three nav column groups (Platform, Solutions, Company)
+- Copyright paragraph
+- Dark background via Group block background color
+
+### Step 5 — `theme/patterns/` — block pattern library
+One pattern file per reusable section type. Each is a self-contained block sequence editors can insert from the pattern library:
+
+| Pattern file | Section type | Used on |
+|---|---|---|
+| `hero.html` | Hero section | All page heroes |
+| `section-4-cards.html` | 4-column card grid | Platform, Solutions |
+| `section-contrast-block.html` | Traditional vs IMPACT split | Homepage, Platform overview |
+| `section-steps.html` | Numbered 4-step flow | Homepage, How it works |
+| `section-2col.html` | 2-column text/cards | Implementation, Shift |
+| `section-cta.html` | Full-width CTA band | All pages (final section) |
+
+### Step 6 — `content/home.html`
+Full homepage block sequence assembled from patterns, per `spec/original-docs/output.md`:
+1. Hero — "Define. Build. Verify Workforce Capability."
+2. The Problem — 4 tension cards + contrast block
+3. The Shift — 2-column copy
+4. How It Works — 4-step dark section
+5. The IMPACT Platform — 4 capability cards
+6. Support / Implementation — 2-column + stacked cards
+7. Start Small — blue CTA section with 3-step panel
+
+### Step 7 — `content/how-it-works.html`
 1. Hero
-2. One Connected System. Four Core Capabilities. — 4 linked capability cards
-3. Why It's Different — left/right contrast block (Traditional Systems vs IMPACT)
-4. Designed for Real-World Adoption — centered copy + CTA
-5. Technology Supported by Guided Implementation
-6. Final CTA section
+2. Why Measurable Design Changes Everything (intro + visual flow)
+3. 4-step process (Define / Build / Verify / Act)
 
-### Step 6 — Platform: MID Generator (`platform-mid-generator.html`)
-Per `output.md`:
-1. Hero
-2. The Challenge
-3. What the MID Generator Does — 4-step process flow visual
-4. What Makes It Different — 2-column or alternating section
-5. Key Benefits — 4-card grid
-6. Organizational Impact
-7. Implementation Support + Final CTA
+### Step 8 — `content/platform-overview.html`
+6 sections per `output.md`.
 
-### Step 7 — Platform: Workforce Capability Insight (`platform-workforce-capability-insight.html`)
-Per `output.md`:
-1. Hero
-2. Most Learning Data Stops at Activity
-3. From Learning Data to Workforce Insight — visual flow (Define Skills → Verify Learning → Measure Application → See Workforce Capability)
-4. Insight for Every Stakeholder — 4 cards (Employees / Managers / Learning Leaders / Senior Leaders)
-5. Why It Matters
-6. Continuous Improvement — Closed-Loop System
-7. Start Small + Final CTA
+### Step 9 — `content/platform-mid-generator.html`
+7 sections per `output.md`.
 
-### Step 8 — Solutions: Learning Leaders (`solutions-learning-leaders.html`)
-Per `output.md`. Existing mockup "What eParamus gives you" copy goes **after** the benefit blocks but **before** implementation/support.
-1. Hero
-2. The Challenge
-3. A Different Approach
-4. What Learning Leaders Can Now See — 6 benefit blocks
-5. [Existing "What eParamus gives you" content from mockup]
-6. Strategic Value
-7. Practical Implementation + Supported Transformation + Final CTA
+### Step 10 — `content/platform-workforce-capability-insight.html`
+7 sections per `output.md`.
 
-### Step 9 — Solutions: Instructional Design Teams (`solutions-instructional-design-teams.html`)
-Same 7-section structure, ID Teams copy from `output.md`.
+### Step 11 — `content/solutions-*.html` (3 files)
+Each follows the same 7-section structure. "What eParamus gives you" content from mockup goes after benefit blocks, before implementation/support.
 
-### Step 10 — Solutions: Business Leaders (`solutions-business-leaders.html`)
-Same 7-section structure, Business Leaders copy from `output.md`.
+### Step 12 — `content/resources-*.html` (4 files)
+Placeholder content. Article cards, case study cards, video grid, guide cards.
 
-### Step 11 — Resources (4 pages)
-Placeholder content matching mockup structure. Layout follows SaasFlow blog/card style.
-- `resources-articles.html` — article cards with tags and dates
-- `resources-case-studies.html` — customer story cards with outcome stats
-- `resources-videos.html` — video grid with thumbnail placeholders and durations
-- `resources-guides.html` — downloadable guide cards with page counts
+### Step 13 — `content/about.html`
+Mission and values. No team section.
 
-### Step 12 — About (`about.html`)
-Mission and values copy. **Remove Team section** per `output.md` note.
+### Step 14 — `bin/seed.sh`
+WP-CLI script that:
+1. Creates a page for each `content/*.html` file (or updates if already exists)
+2. Sets the homepage as the static front page
+3. Creates the nav menu and assigns all items with correct parent/child hierarchy
+4. Activates the theme
 
-### Step 13 — Final pass
-- All nav links work across all pages
-- CTA link targets consistent
-- Visual QA: open each page in browser, check desktop and mobile
+```bash
+# Example structure
+wp post create \
+  --post_type=page \
+  --post_title="Home" \
+  --post_name="home" \
+  --post_status=publish \
+  --post_content="$(cat content/home.html)"
+
+HOME_ID=$(wp post list --post_type=page --name=home --field=ID --format=ids)
+wp option update show_on_front page
+wp option update page_on_front "$HOME_ID"
+```
+
+### Step 15 — Local dev setup + QA
+- Local WordPress via LocalWP (or DDEV/Lando)
+- Install theme, run `seed.sh`
+- QA every page in Gutenberg editor (confirm blocks are editable) and frontend
+- Check responsive at 375px, 768px, 1280px
 
 ---
 
 ## Open Questions
 
 - [ ] **CTA destinations** — "Start with One Program" and "Schedule a Conversation": contact form, Calendly, email, or `#` placeholder for now?
-- [ ] **Footer content** — what links and legal copy? (copyright, privacy policy, nav repeat?)
-- [ ] **Resources content** — use mockup placeholders as-is, or is there real content?
-- [ ] **About copy** — finalized mission/values copy, or use what's in the mockup?
-- [ ] **Logo/favicon** — text-only "eParamus" wordmark as in mockup, or is there a logo asset?
-- [ ] **Brand color** — use `#145aff` from the SaasFlow template, or does eParamus have its own primary color?
+- [ ] **Footer content** — privacy policy link? Any legal copy beyond copyright?
+- [ ] **Resources content** — placeholder as-is, or real content to drop in?
+- [ ] **About copy** — finalized mission/values, or use what's in the mockup?
+- [ ] **Logo/favicon** — text wordmark only, or is there a logo asset?
+- [ ] **Hosting** — where does the WordPress instance live? (affects whether we need a deploy step beyond local dev)
