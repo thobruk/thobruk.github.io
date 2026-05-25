@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eParamus — Define. Build. Verify Workforce Capability.</title>
+  <meta name="description" content="Transform learning into a measurable system for building job-relevant skills—and proving they are applied on the job.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Nav ───────────────────────────────────────────────── -->
+  <header class="site-nav">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="nav-logo">e<span>P</span>aramus</a>
+
+        <ul class="nav-menu" id="navMenu">
+
+          <li class="nav-item">
+            <button class="nav-link" onclick="toggleNav('navPlatform', this)">
+              Platform
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown" id="navPlatform">
+              <div class="nav-dropdown-label">Platform</div>
+              <a href="platform/index.html">Overview</a>
+              <a href="platform/mid-generator.html">MID Generator</a>
+              <a href="platform/workforce-capability-insight.html">Workforce Capability Insight</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a href="how-it-works.html" class="nav-link">How it works</a>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" onclick="toggleNav('navSolutions', this)">
+              Solutions
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown" id="navSolutions">
+              <div class="nav-dropdown-label">Solutions</div>
+              <a href="solutions/learning-leaders.html">Learning Leaders</a>
+              <a href="solutions/instructional-design-teams.html">Instructional Design Teams</a>
+              <a href="solutions/business-leaders.html">Business Leaders</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" onclick="toggleNav('navResources', this)">
+              Resources
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown" id="navResources">
+              <div class="nav-dropdown-label">Resources</div>
+              <a href="resources/articles.html">Articles</a>
+              <a href="resources/case-studies.html">Case Studies</a>
+              <a href="resources/videos.html">Videos</a>
+              <a href="resources/guides.html">Guides</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+
+          <li class="nav-mobile-cta">
+            <a href="#" class="btn btn--primary" style="width:100%;justify-content:center;">Start with one program</a>
+          </li>
+        </ul>
+
+        <a href="#" class="btn btn--primary nav-cta">Start with one program</a>
+
+        <button class="nav-mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Section 1: Hero ───────────────────────────────────── -->
+  <section style="padding-block: clamp(64px, 10vw, 120px) clamp(56px, 8vw, 96px); background: var(--color-white); position: relative; overflow: hidden;">
+    <!-- Dot grid background -->
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle, var(--color-gray-200) 1px, transparent 1px);background-size:28px 28px;opacity:0.6;pointer-events:none;"></div>
+    <!-- Gradient overlay -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20,90,255,0.04), transparent);pointer-events:none;"></div>
+
+    <div class="container" style="position:relative;">
+      <div style="max-width: 760px;">
+        <p class="section-label fade-up">The IMPACT Platform</p>
+        <h1 class="display fade-up fade-up--delay-1" style="margin-bottom: var(--space-8);">
+          Define. Build. Verify<br>Workforce Capability.
+        </h1>
+        <p class="lead fade-up fade-up--delay-2" style="max-width: 540px; margin-bottom: var(--space-16);">
+          Transform learning into a measurable system for building job-relevant skills—and proving they are applied on the job.
+        </p>
+        <div class="btn-group fade-up fade-up--delay-3">
+          <a href="#" class="btn btn--primary btn--lg">Start with One Program</a>
+          <a href="how-it-works.html" class="btn btn--secondary btn--lg">See How It Works</a>
+        </div>
+        <p class="fade-up fade-up--delay-4" style="margin-top: var(--space-8); font-size: 13px; color: var(--color-gray-300);">
+          No large-scale rollout required. Start small, measure impact, and scale from there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 2: The Problem ────────────────────────────── -->
+  <section class="section--gray">
+    <div class="container">
+      <div class="section-header--center fade-up">
+        <p class="section-label">The Challenge</p>
+        <h2>You're Delivering Learning—But Can You See What Changed?</h2>
+        <p class="lead mt-8">Most organizations can track training activity—but struggle to verify whether learning is actually building capability. Completion rates, surveys, and knowledge checks may show participation, but they rarely answer the questions leaders care about most.</p>
+      </div>
+
+      <div class="grid-4 mt-16">
+        <div class="card fade-up fade-up--delay-1">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,90,90,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-8);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="#ff5a5a" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h5>Are employees building job-relevant skills?</h5>
+        </div>
+        <div class="card fade-up fade-up--delay-2">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,90,90,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-8);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="#ff5a5a" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h5>Are those skills being applied on the job?</h5>
+        </div>
+        <div class="card fade-up fade-up--delay-3">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,90,90,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-8);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="#ff5a5a" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h5>Which programs are truly effective?</h5>
+        </div>
+        <div class="card fade-up fade-up--delay-4">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,90,90,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-8);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="#ff5a5a" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h5>Where are workforce capability gaps still present?</h5>
+        </div>
+      </div>
+
+      <div class="contrast-block mt-16 fade-up">
+        <div class="contrast-side contrast-side--left">
+          <h5>Traditional Metrics</h5>
+          <div class="contrast-item contrast-item--muted"><span class="contrast-dot"></span>Completions</div>
+          <div class="contrast-item contrast-item--muted"><span class="contrast-dot"></span>Attendance</div>
+          <div class="contrast-item contrast-item--muted"><span class="contrast-dot"></span>Smile sheets</div>
+          <div class="contrast-item contrast-item--muted"><span class="contrast-dot"></span>Activity reports</div>
+        </div>
+        <div class="contrast-side contrast-side--right">
+          <h5>Capability Questions</h5>
+          <div class="contrast-item contrast-item--active"><span class="contrast-dot"></span>Skills built</div>
+          <div class="contrast-item contrast-item--active"><span class="contrast-dot"></span>Application verified</div>
+          <div class="contrast-item contrast-item--active"><span class="contrast-dot"></span>Gaps visible</div>
+          <div class="contrast-item contrast-item--active"><span class="contrast-dot"></span>Learning effectiveness</div>
+        </div>
+      </div>
+
+      <p class="text-center mt-12 fade-up" style="font-size:15px;color:var(--color-dark-600);font-weight:500;">
+        If learning isn't designed around measurable skills, impact remains unclear.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Section 3: The Shift ──────────────────────────────── -->
+  <section>
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-32);align-items:center;" class="responsive-2col">
+        <div class="fade-up">
+          <p class="section-label">The Shift</p>
+          <h2>The Problem Isn't Measurement.<br>It's Design.</h2>
+        </div>
+        <div class="fade-up fade-up--delay-2">
+          <p style="margin-bottom:var(--space-8);">Most learning programs are built around content delivery—not clearly defined skill outcomes. Without a structured way to define what people should be able to do, under what conditions, and to what level of performance, organizations struggle to measure whether learning is truly effective.</p>
+          <p style="margin-bottom:var(--space-12);">When learning is designed around measurable, job-relevant skills, organizations can finally verify what was learned, what is being applied, and where capability gaps still exist.</p>
+          <p style="font-weight:600;color:var(--color-dark-800);">Clear skill definition is what makes meaningful measurement possible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 4: How It Works ───────────────────────────── -->
+  <section class="section--dark">
+    <div class="container">
+      <div class="section-header--center fade-up" style="color:var(--color-white);">
+        <p class="section-label">The System</p>
+        <h2 style="color:var(--color-white);">A System for Building Measurable Capability</h2>
+        <p class="lead mt-8" style="color:rgba(255,255,255,0.65);">IMPACT helps organizations define, build, and verify workforce capability through a structured, measurable learning process. By connecting learning design, skill verification, and workforce insight, organizations gain clear visibility into what learning is actually producing.</p>
+      </div>
+
+      <div class="steps mt-32 fade-up">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h5 style="color:var(--color-white);">Define Skills</h5>
+          <p style="color:rgba(255,255,255,0.6);">Clearly define job-relevant skills employees must perform—including conditions and performance expectations.</p>
+        </div>
+        <div class="step fade-up fade-up--delay-1">
+          <div class="step-number">2</div>
+          <h5 style="color:var(--color-white);">Build Learning</h5>
+          <p style="color:rgba(255,255,255,0.6);">Generate structured learning designs aligned to evaluations and instructional methods focused on measurable capability.</p>
+        </div>
+        <div class="step fade-up fade-up--delay-2">
+          <div class="step-number">3</div>
+          <h5 style="color:var(--color-white);">Verify Application</h5>
+          <p style="color:rgba(255,255,255,0.6);">Measure skill development before learning, after learning, and on the job to verify real-world application.</p>
+        </div>
+        <div class="step fade-up fade-up--delay-3">
+          <div class="step-number">4</div>
+          <h5 style="color:var(--color-white);">See Workforce Capability</h5>
+          <p style="color:rgba(255,255,255,0.6);">Transform learning data into actionable workforce insight that helps leaders identify strengths, gaps, and opportunities.</p>
+        </div>
+      </div>
+
+      <p class="text-center mt-20 fade-up" style="font-size:15px;color:rgba(255,255,255,0.5);max-width:600px;margin-inline:auto;">
+        Every step is connected—so learning, performance expectations, and workforce capability stay aligned over time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Section 5: The IMPACT Platform ───────────────────── -->
+  <section>
+    <div class="container">
+      <div class="section-header--center fade-up">
+        <p class="section-label">Platform</p>
+        <h2>Powered by the IMPACT Platform</h2>
+        <p class="lead mt-8">IMPACT is purpose-built to help organizations create measurable learning, verify workforce capability, and continuously improve performance over time.</p>
+      </div>
+
+      <div class="grid-4 mt-20">
+        <div class="card fade-up fade-up--delay-1">
+          <div class="card-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="14" rx="2"/><path d="M6 7h8M6 11h5"/></svg>
+          </div>
+          <h5>MID Generator</h5>
+          <p>Automatically generate structured learning designs focused on measurable, job-relevant skill outcomes.</p>
+          <a href="platform/mid-generator.html" class="card-link">Explore MID Generator <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="card fade-up fade-up--delay-2">
+          <div class="card-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l2.4 4.8 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.5.9-5.5L2 7.6l5.6-.8z"/></svg>
+          </div>
+          <h5>Skill Verification</h5>
+          <p>Capture skill data before, after, and on the job to verify real-world capability development.</p>
+          <a href="platform/index.html" class="card-link">Explore Skill Verification <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="card fade-up fade-up--delay-3">
+          <div class="card-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+          </div>
+          <h5>Performance Definition</h5>
+          <p>Generate clear, structured definitions of expected job performance directly from learning design.</p>
+          <a href="platform/index.html" class="card-link">Explore Performance Definition <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="card fade-up fade-up--delay-4">
+          <div class="card-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14l5-5 4 4 7-8"/><circle cx="18" cy="5" r="2"/></svg>
+          </div>
+          <h5>Workforce Capability Insight</h5>
+          <p>Transform learning data into actionable visibility into workforce strengths, gaps, and capability trends.</p>
+          <a href="platform/workforce-capability-insight.html" class="card-link">Explore Capability Insight <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 6: Support / Implementation ───────────────── -->
+  <section class="section--gray">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-32);align-items:start;" class="responsive-2col">
+        <div class="fade-up">
+          <p class="section-label">Implementation</p>
+          <h2>A System You Can Actually Implement</h2>
+          <p class="mt-8">Moving from activity-based learning to measurable workforce capability is a meaningful shift—but you don't have to do it alone. eParamus provides the structure, guidance, and support organizations need to successfully implement measurable learning practices and scale them over time.</p>
+          <p class="mt-8" style="font-size:15px;font-style:italic;color:var(--color-dark-600);">Whether organizations begin with one program or scale across the enterprise, the process is designed to be practical, structured, and achievable.</p>
+        </div>
+        <div>
+          <div class="card mt-0 fade-up fade-up--delay-1" style="margin-bottom:var(--space-4);">
+            <h5>Guided Onboarding</h5>
+            <p>Start with a structured implementation approach designed to help teams adopt measurable learning practices with confidence.</p>
+          </div>
+          <div class="card fade-up fade-up--delay-2" style="margin-bottom:var(--space-4);">
+            <h5>Designer Education &amp; Certification</h5>
+            <p>Equip learning teams with the skills needed to consistently design measurable, job-relevant learning.</p>
+          </div>
+          <div class="card fade-up fade-up--delay-3" style="margin-bottom:var(--space-4);">
+            <h5>Stakeholder Alignment</h5>
+            <p>Support leaders, managers, and learning teams with communication and implementation strategies that reinforce organizational alignment.</p>
+          </div>
+          <div class="card fade-up fade-up--delay-4">
+            <h5>Ongoing Partnership</h5>
+            <p>Receive continued guidance as your organization expands measurable learning and workforce capability visibility over time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 7: Start Small / CTA ─────────────────────── -->
+  <section class="section--blue" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%, rgba(71,193,254,0.2), transparent);pointer-events:none;"></div>
+    <div class="container" style="position:relative;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-32);align-items:center;" class="responsive-2col">
+        <div class="fade-up">
+          <p class="section-label" style="color:rgba(255,255,255,0.6);">Getting Started</p>
+          <h2 style="color:var(--color-white);">Start with One Program</h2>
+          <p class="lead mt-8" style="color:rgba(255,255,255,0.75);">You don't need to redesign your entire learning function to begin building measurable capability. Many organizations start with a single learning program.</p>
+          <div class="btn-group mt-16">
+            <a href="#" class="btn btn--white btn--lg">Start with One Program</a>
+            <a href="#" class="btn btn--ghost btn--lg">Schedule a Conversation</a>
+          </div>
+          <p style="margin-top:var(--space-8);font-size:13px;color:rgba(255,255,255,0.5);">Start small. Build confidence. Scale over time.</p>
+        </div>
+        <div>
+          <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-xl);padding:var(--space-12);" class="fade-up fade-up--delay-1">
+            <div style="display:flex;flex-direction:column;gap:var(--space-6);">
+              <div style="display:flex;gap:var(--space-8);align-items:flex-start;padding:var(--space-8);background:rgba(255,255,255,0.08);border-radius:var(--radius-md);">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:white;">1</div>
+                <div>
+                  <p style="font-weight:600;color:white;font-size:15px;">Select One Program</p>
+                  <p style="font-size:13px;color:rgba(255,255,255,0.65);">Choose a high-impact learning program where skill development matters most.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-8);align-items:flex-start;padding:var(--space-8);background:rgba(255,255,255,0.08);border-radius:var(--radius-md);">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:white;">2</div>
+                <div>
+                  <p style="font-weight:600;color:white;font-size:15px;">Make Learning Measurable</p>
+                  <p style="font-size:13px;color:rgba(255,255,255,0.65);">Use the IMPACT platform and structured design approach to define, build, and verify job-relevant skills.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-8);align-items:flex-start;padding:var(--space-8);background:rgba(255,255,255,0.08);border-radius:var(--radius-md);">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:white;">3</div>
+                <div>
+                  <p style="font-weight:600;color:white;font-size:15px;">Gain Capability Insight</p>
+                  <p style="font-size:13px;color:rgba(255,255,255,0.65);">See what employees already know, what they learned, and what they apply on the job.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">e<span>P</span>aramus</div>
+          <p class="footer-tagline">Define, build, and verify workforce capability through a structured, measurable learning system.</p>
+        </div>
+        <div class="footer-col">
+          <h6>Platform</h6>
+          <ul>
+            <li><a href="platform/index.html">Overview</a></li>
+            <li><a href="platform/mid-generator.html">MID Generator</a></li>
+            <li><a href="platform/workforce-capability-insight.html">Workforce Capability Insight</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h6>Solutions</h6>
+          <ul>
+            <li><a href="solutions/learning-leaders.html">Learning Leaders</a></li>
+            <li><a href="solutions/instructional-design-teams.html">Instructional Design Teams</a></li>
+            <li><a href="solutions/business-leaders.html">Business Leaders</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h6>Company</h6>
+          <ul>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="resources/articles.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 eParamus. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav dropdowns
+    function toggleNav(id, btn) {
+      const dropdown = document.getElementById(id);
+      const allDropdowns = document.querySelectorAll('.nav-dropdown');
+      const allBtns = document.querySelectorAll('.nav-link');
+      const isOpen = dropdown.classList.contains('is-open');
+
+      allDropdowns.forEach(d => d.classList.remove('is-open'));
+      allBtns.forEach(b => b.classList.remove('is-open'));
+
+      if (!isOpen) {
+        dropdown.classList.add('is-open');
+        btn.classList.add('is-open');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-item')) {
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('is-open'));
+        document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('is-open'));
+      }
+    });
+
+    // Mobile nav
+    function toggleMobileNav() {
+      document.getElementById('navMenu').classList.toggle('is-mobile-open');
+    }
+
+    // Responsive 2-col breakpoint
+    const style = document.createElement('style');
+    style.textContent = `@media (max-width: 768px) { .responsive-2col { grid-template-columns: 1fr !important; } }`;
+    document.head.appendChild(style);
+
+    // Scroll animations
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); }),
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
