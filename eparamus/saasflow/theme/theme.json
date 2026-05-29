@@ -176,7 +176,7 @@
 
       "h1": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h1)",
+          "fontSize": "clamp(36px, 5vw, 60px)",
           "lineHeight": "1.06",
           "letterSpacing": "-1.2px",
           "fontWeight": "700"
@@ -185,7 +185,7 @@
 
       "h2": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h2)",
+          "fontSize": "clamp(28px, 4vw, 48px)",
           "lineHeight": "1.08",
           "letterSpacing": "-0.8px",
           "fontWeight": "700"
@@ -194,7 +194,7 @@
 
       "h3": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h3)",
+          "fontSize": "clamp(22px, 3vw, 36px)",
           "lineHeight": "1.12",
           "letterSpacing": "-0.4px",
           "fontWeight": "700"
@@ -203,7 +203,7 @@
 
       "h4": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h4)",
+          "fontSize": "24px",
           "lineHeight": "1.25",
           "fontWeight": "700"
         }
@@ -211,7 +211,7 @@
 
       "h5": {
         "typography": {
-          "fontSize": "var(--wp--preset--font-size--h5)",
+          "fontSize": "18px",
           "lineHeight": "1.55",
           "fontWeight": "600"
         }
