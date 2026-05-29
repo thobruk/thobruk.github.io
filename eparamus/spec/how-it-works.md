@@ -102,3 +102,17 @@ Act on insight
 
 Leaders see where capability is growing, where gaps persist, and where
 to direct the next round of investment --- with data they can trust.
+
+:large_blue_square: Recommended Final CTA Section for “How It Works”
+
+Headline
+Ready to Make Learning Measurable?
+
+Copy
+Discover how organizations are using measurable learning practices to define, build, and verify workforce capability—starting with a single program.
+
+CTAs
+Primary CTA
+Start with One Program
+Secondary CTA
+See the IMPACT Platform

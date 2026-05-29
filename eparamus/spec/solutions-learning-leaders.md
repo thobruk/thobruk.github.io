@@ -66,6 +66,18 @@ and business outcomes.
 Activity metrics show what learning was delivered.\
 Capability visibility shows what learning actually produced.
 
+VIDEO BLOCK
+Headline
+Why Learning Leaders Need Better Visibility Into Workforce Capability
+
+Supporting Copy
+Learning leaders are increasingly expected to demonstrate how learning contributes to workforce capability and organizational performance.
+Watch how measurable learning practices help organizations move beyond activity metrics and gain clearer visibility into workforce capability development.
+
+Video Embed
+(Current eParamus homepage video)
+
+
 **🟨 SECTION 3 --- A DIFFERENT APPROACH**
 
 **Headline**

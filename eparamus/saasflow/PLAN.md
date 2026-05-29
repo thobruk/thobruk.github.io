@@ -54,168 +54,208 @@ Font:     Plus Jakarta Sans (Google Fonts)
 
 ---
 
-## WordPress Project Structure
+## Project Structure
 
 ```
-theme/                        — WordPress block theme (install in wp-content/themes/)
-  style.css                   — theme header + custom component CSS
-  theme.json                  — design tokens: colors, typography, spacing
-  functions.php               — enqueue styles, register pattern categories
-  index.php                   — fallback template
-  templates/
-    front-page.php            — homepage template
-    page.php                  — default page template
-  parts/
-    header.html               — nav block template part
-    footer.html               — footer block template part
-  patterns/                   — reusable block patterns (available in editor)
-    hero.html
-    section-4-cards.html
-    section-contrast-block.html
-    section-steps.html
-    section-2col.html
-    section-cta.html
+saasflow/
+  Dockerfile                    — wordpress:6.5-apache + wp-cli baked in
+  docker-compose.yml            — WordPress + MariaDB, theme bind-mounted
+  Makefile                      — shortcut commands (see Local Dev section)
 
-content/                      — full page block markup (source of truth for seeding)
-  home.html
-  how-it-works.html
-  platform-overview.html
-  platform-mid-generator.html
-  platform-workforce-capability-insight.html
-  solutions-learning-leaders.html
-  solutions-instructional-design-teams.html
-  solutions-business-leaders.html
-  resources-articles.html
-  resources-case-studies.html
-  resources-videos.html
-  resources-guides.html
-  about.html
+  theme/                        — WordPress block theme (bind-mounted into container)
+    style.css                   — theme header + custom component CSS (ep-* classes)
+    theme.json                  — design tokens: colors, typography, spacing
+    functions.php               — enqueue fonts, register pattern categories + button styles
+    index.php                   — required fallback (comment only)
+    templates/
+      index.html                — catch-all template: header + post-content + footer
+      page.html                 — same as index.html (used for all standard pages)
+      front-page.html           — same structure, applied to the static front page
+    parts/
+      header.html               — nav block template part (sticky, dropdowns)
+      footer.html               — footer block template part (dark bg, 4 columns)
+    patterns/                   — reusable block patterns (available in editor)
+      hero.php
+      section-4-cards.php
+      section-contrast-block.php
+      section-steps.php
+      section-2col.php
+      section-cta.php
 
-bin/
-  seed.sh                     — WP-CLI script: creates all pages, sets front page, sets menus
+  content/                      — full page block markup (source of truth for seeding)
+    home.html
+    how-it-works.html
+    about.html
+    platform-overview.html
+    platform-mid-generator.html
+    platform-workforce-capability-insight.html
+    solutions-overview.html
+    solutions-learning-leaders.html
+    solutions-instructional-design-teams.html
+    solutions-business-leaders.html
+    resources-overview.html
+    resources-articles.html
+    resources-case-studies.html
+    resources-videos.html
+    resources-guides.html
+
+  bin/
+    seed.sh                     — WP-CLI: upserts all pages, sets front page + permalinks
+    docker-init.sh              — bootstrap script: install WP core then run seed.sh
 ```
 
 ### How patterns and content relate
 
-`patterns/` files are reusable templates editors can insert in Gutenberg.
-`content/` files are the full page sequences — each is the assembled block markup for one page, seeded into the database via WP-CLI. Editors own the content after seeding; re-running `seed.sh` with `wp post update` resets it to the source file.
+`patterns/` files are reusable templates editors can insert in Gutenberg. Pattern files are `.php` (not `.html`) so WordPress registers them correctly as theme-bundled patterns.
+
+`content/` files are the full page sequences — each is the assembled block markup for one page, seeded into the database via WP-CLI. Editors own the content after seeding; re-running `seed.sh` resets it to the source file.
 
 ---
 
-## Steps
+## Local Dev Setup
+
+### First time
+
+```bash
+cd saasflow/
+make up      # build image + start containers (~30s on first run for image build)
+make init    # wait for db, install WP core, seed all pages
+make open    # http://localhost:8080
+make admin   # http://localhost:8080/wp-admin  (admin / admin)
+```
+
+### Iteration loop
+
+| What changed | Command |
+|---|---|
+| Theme CSS/PHP/patterns | Just reload — theme dir is bind-mounted, changes are immediate |
+| Page content (content/*.html) | `make seed` — upserts all pages |
+| Page slugs or parent hierarchy | `make reset` — deletes and recreates all pages |
+| Preview without touching DB | `make dry` |
+| Arbitrary wp-cli command | `make wp CMD="post list --post_type=page"` |
+| Shell into the container | `make shell` |
+| Wipe everything and start fresh | `make nuke && make up && make init` |
+
+### How the Docker stack works
+
+- **One container** (`wordpress`) runs Apache + PHP + wp-cli. wp-cli is baked into the image via `Dockerfile` (one `RUN curl` line on top of `wordpress:6.5-apache`).
+- **`theme/`** is bind-mounted into the container at `wp-content/themes/eparamus`. Edits on the host are reflected immediately.
+- **`content/` and `bin/`** are bind-mounted at `/saasflow/content` and `/saasflow/bin` so `seed.sh` and `docker-init.sh` can read them from inside the container.
+- **WordPress files** live in a named volume (`wp_data`) so they persist across `make down / make up` cycles.
+- **`docker-init.sh`** uses `/dev/tcp/db/3306` to wait for MariaDB — more reliable than `wp db check`, which requires wp-config.php to already exist.
+
+---
+
+## Build Steps
 
 ### Step 1 — `theme/theme.json`
 Define all design tokens as WordPress block theme settings:
 - Color palette (all swatches named and slugged)
 - Typography: font family (Plus Jakarta Sans via Google Fonts), font sizes
 - Spacing scale
-- Border radius presets
-- Disable unwanted core block features (padding controls, color pickers outside palette, etc.)
+- Disable unwanted core block features (color pickers outside palette, etc.)
 
 ### Step 2 — `theme/style.css` + custom component CSS
-Theme header declaration + CSS for components that core blocks can't express cleanly:
-- Contrast block layout and muted/active item styles
-- Step connector line overlay
-- Nav dropdown behavior
-- Dot-grid hero background
-- Scroll entrance animations (`.fade-up`)
-- Button variants beyond core block defaults
+Theme header declaration + CSS for components that core blocks can't express:
+- `ep-section` padding and background variants (`--gray`, `--dark`, `--blue`)
+- `ep-contrast` split panel layout
+- `ep-steps` numbered steps with connecting line
+- `ep-card` hover lift, grid layouts (`ep-grid-3`, `ep-grid-4`)
+- `ep-hero` dot-grid background + gradient overlay
+- Button variants: `is-style-secondary`, `is-style-ghost`, `is-style-white`
+- `.site-header` sticky + backdrop-filter
+- `.ep-fade-up` / `.is-visible` scroll entrance animations
 
 Reference `saasflow/styles.css` for all values — this is a direct port.
 
 ### Step 3 — `theme/parts/header.html`
 Nav as a block template part:
-- Site title block (logo)
+- Site title block (logo/wordmark)
 - Navigation block with dropdowns: Platform, How it works, Solutions, Resources, About
 - Button block: "Start with one program" (primary style)
-- Sticky header via `theme.json` or CSS
+- Sticky header via CSS (`.site-header`)
 
 ### Step 4 — `theme/parts/footer.html`
 Footer as a block template part:
 - Logo + tagline column
 - Three nav column groups (Platform, Solutions, Company)
 - Copyright paragraph
-- Dark background via Group block background color
+- Dark background via Group block background color (`dark-900`)
 
-### Step 5 — `theme/patterns/` — block pattern library
-One pattern file per reusable section type. Each is a self-contained block sequence editors can insert from the pattern library:
+### Step 5 — `theme/templates/` ⚠️ required for pages to render
+Block themes need HTML templates or nothing renders at all. Three templates, all identical in structure:
 
-| Pattern file | Section type | Used on |
-|---|---|---|
-| `hero.html` | Hero section | All page heroes |
-| `section-4-cards.html` | 4-column card grid | Platform, Solutions |
-| `section-contrast-block.html` | Traditional vs IMPACT split | Homepage, Platform overview |
-| `section-steps.html` | Numbered 4-step flow | Homepage, How it works |
-| `section-2col.html` | 2-column text/cards | Implementation, Shift |
-| `section-cta.html` | Full-width CTA band | All pages (final section) |
+```html
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-### Step 6 — `content/home.html`
-Full homepage block sequence assembled from patterns, per `spec/original-docs/output.md`:
-1. Hero — "Define. Build. Verify Workforce Capability."
-2. The Problem — 4 tension cards + contrast block
-3. The Shift — 2-column copy
-4. How It Works — 4-step dark section
-5. The IMPACT Platform — 4 capability cards
-6. Support / Implementation — 2-column + stacked cards
-7. Start Small — blue CTA section with 3-step panel
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
+<main class="wp-block-group" style="padding-top:0;padding-bottom:0;">
+  <!-- wp:post-content /-->
+</main>
+<!-- /wp:group -->
 
-### Step 7 — `content/how-it-works.html`
-1. Hero
-2. Why Measurable Design Changes Everything (intro + visual flow)
-3. 4-step process (Define / Build / Verify / Act)
-
-### Step 8 — `content/platform-overview.html`
-6 sections per `output.md`.
-
-### Step 9 — `content/platform-mid-generator.html`
-7 sections per `output.md`.
-
-### Step 10 — `content/platform-workforce-capability-insight.html`
-7 sections per `output.md`.
-
-### Step 11 — `content/solutions-*.html` (3 files)
-Each follows the same 7-section structure. "What eParamus gives you" content from mockup goes after benefit blocks, before implementation/support.
-
-### Step 12 — `content/resources-*.html` (4 files)
-Placeholder content. Article cards, case study cards, video grid, guide cards.
-
-### Step 13 — `content/about.html`
-Mission and values. No team section.
-
-### Step 14 — `bin/seed.sh`
-WP-CLI script that:
-1. Creates a page for each `content/*.html` file (or updates if already exists)
-2. Sets the homepage as the static front page
-3. Creates the nav menu and assigns all items with correct parent/child hierarchy
-4. Activates the theme
-
-```bash
-# Example structure
-wp post create \
-  --post_type=page \
-  --post_title="Home" \
-  --post_name="home" \
-  --post_status=publish \
-  --post_content="$(cat content/home.html)"
-
-HOME_ID=$(wp post list --post_type=page --name=home --field=ID --format=ids)
-wp option update show_on_front page
-wp option update page_on_front "$HOME_ID"
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
 ```
 
-### Step 15 — Local dev setup + QA
-- Local WordPress via LocalWP (or DDEV/Lando)
-- Install theme, run `seed.sh`
-- QA every page in Gutenberg editor (confirm blocks are editable) and frontend
-- Check responsive at 375px, 768px, 1280px
+**Critical:** use `"layout":{"type":"default"}` on the `<main>` wrapper — not `"type":"constrained"`. The `alignfull` sections in page content need to break out to full viewport width. Constrained layout caps them at the content width.
+
+Files: `templates/index.html`, `templates/page.html`, `templates/front-page.html`
+
+### Step 6 — `theme/patterns/` — block pattern library
+One `.php` file per reusable section type. Pattern files use a PHP docblock header for WordPress registration:
+```php
+<?php
+/**
+ * Title: Hero Section
+ * Slug: eparamus/hero
+ * Categories: eparamus-sections
+ */
+?>
+<!-- block markup here -->
+```
+
+| Pattern file | Section type |
+|---|---|
+| `hero.php` | Hero section |
+| `section-4-cards.php` | 4-column card grid |
+| `section-contrast-block.php` | Traditional vs IMPACT split |
+| `section-steps.php` | Numbered 4-step flow (dark bg) |
+| `section-2col.php` | 2-column text layout |
+| `section-cta.php` | Full-width CTA band with 3-step panel |
+
+### Step 7 — `bin/seed.sh`
+WP-CLI script that upserts all pages:
+- `upsert_page TITLE SLUG CONTENT_FILE [PARENT_ID]` — updates if slug exists, creates if not
+- `--reset` flag: delete + recreate (use when slugs or parent hierarchy change)
+- `--dry-run` flag: prints what would happen without touching the DB
+- Sets static front page, permalink structure `/%postname%/`, activates theme
+
+### Steps 8–15 — `content/*.html` files
+One file per page. Each file is pure block markup (no `<html>`, no `<body>` — just the `post_content`). Every section follows this wrapper pattern:
+
+```html
+<!-- wp:group {
+  "align":"full",
+  "className":"ep-section [variant]",
+  "style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},
+  "layout":{"type":"constrained"}
+} -->
+<div class="wp-block-group alignfull ep-section [variant]">
+  <!-- section content -->
+</div>
+<!-- /wp:group -->
+```
+
+Section variants: none (white), `ep-section--gray`, `ep-section--dark has-dark-800-background-color has-background`, `ep-section--blue has-primary-background-color has-background`.
+
+Use `<!-- wp:html -->` blocks for custom-classed markup that core blocks can't produce (`.ep-steps`, `.ep-grid-3`, `.ep-grid-4`, `.ep-contrast`).
 
 ---
 
 ## Open Questions
 
-- [ ] **CTA destinations** — "Start with One Program" and "Schedule a Conversation": contact form, Calendly, email, or `#` placeholder for now?
+- [ ] **CTA destinations** — "Start with One Program" and "Schedule a Conversation": contact form, Calendly, email, or `#` placeholder?
 - [ ] **Footer content** — privacy policy link? Any legal copy beyond copyright?
-- [ ] **Resources content** — placeholder as-is, or real content to drop in?
-- [ ] **About copy** — finalized mission/values, or use what's in the mockup?
+- [ ] **Resources content** — placeholder pages are live; real content to drop in later
 - [ ] **Logo/favicon** — text wordmark only, or is there a logo asset?
-- [ ] **Hosting** — where does the WordPress instance live? (affects whether we need a deploy step beyond local dev)
+- [ ] **Hosting** — where does the WordPress instance live? (affects deploy step)

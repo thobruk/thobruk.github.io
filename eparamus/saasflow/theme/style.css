@@ -1,0 +1,564 @@
+/*
+Theme Name:  eParamus
+Theme URI:   https://eparamus.com
+Description: eParamus marketing site — WordPress block theme
+Version:     1.0.0
+Requires at least: 6.3
+Tested up to: 6.7
+Requires PHP: 8.0
+Author:      eParamus
+License:     All rights reserved
+Text Domain: eparamus
+*/
+
+/* ============================================================
+   Custom component CSS — everything theme.json can't express.
+   Design tokens come from theme.json; reference them here via
+   var(--wp--preset--color--*), var(--wp--preset--font-size--*),
+   var(--wp--preset--spacing--*).
+   ============================================================ */
+
+/* ── Supplementary custom properties ─────────────────────── */
+:root {
+  /* Shorthand aliases for wp preset tokens */
+  --ep-blue:        var(--wp--preset--color--primary);
+  --ep-blue-dark:   var(--wp--preset--color--primary-dark);
+  --ep-blue-light:  var(--wp--preset--color--primary-light);
+  --ep-dark-900:    var(--wp--preset--color--dark-900);
+  --ep-dark-800:    var(--wp--preset--color--dark-800);
+  --ep-dark-600:    var(--wp--preset--color--dark-600);
+  --ep-gray-300:    var(--wp--preset--color--gray-300);
+  --ep-gray-200:    var(--wp--preset--color--gray-200);
+  --ep-gray-100:    var(--wp--preset--color--gray-100);
+  --ep-white:       var(--wp--preset--color--white);
+
+  /* Not in theme.json — structural/behavioral values */
+  --ep-radius-sm:   6px;
+  --ep-radius-md:   12px;
+  --ep-radius-lg:   20px;
+  --ep-radius-xl:   28px;
+  --ep-radius-full: 9999px;
+
+  --ep-shadow-sm:   0 1px 3px rgba(13,14,16,0.06), 0 1px 2px rgba(13,14,16,0.04);
+  --ep-shadow-md:   0 4px 16px rgba(13,14,16,0.08), 0 2px 6px rgba(13,14,16,0.04);
+  --ep-shadow-lg:   0 16px 48px rgba(13,14,16,0.10), 0 6px 20px rgba(13,14,16,0.06);
+  --ep-shadow-blue: 0 8px 32px rgba(20,90,255,0.25);
+
+  --ep-ease-fast:   0.15s ease;
+  --ep-ease-base:   0.25s ease;
+  --ep-ease-slow:   0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Section spacing and variants ────────────────────────── */
+
+/* Standard content sections */
+.ep-section {
+  padding-block: clamp(48px, 5vw, 72px);
+}
+
+/* Top-align column content so asymmetric 2-col sections (label+H2 left,
+   multiple paragraphs right) don't float the heading to mid-column.
+   WP sets align-self:center on each column; override it here. */
+.ep-section .wp-block-column.is-vertically-aligned-center {
+  align-self: flex-start;
+}
+
+/* Gray background section */
+.ep-section--gray,
+.has-gray-100-background-color.ep-section {
+  background-color: var(--ep-gray-100);
+}
+
+/* Dark (navy) background section */
+.ep-section--dark,
+.has-dark-800-background-color.ep-section {
+  background-color: var(--ep-dark-800);
+  color: rgba(255,255,255,0.72);
+}
+
+.ep-section--dark h1,
+.ep-section--dark h2,
+.ep-section--dark h3,
+.ep-section--dark h4,
+.ep-section--dark h5,
+.has-dark-800-background-color h1,
+.has-dark-800-background-color h2,
+.has-dark-800-background-color h3,
+.has-dark-800-background-color h4,
+.has-dark-800-background-color h5 {
+  color: #ffffff;
+}
+
+/* Blue CTA section */
+.ep-section--blue,
+.has-primary-background-color.ep-section {
+  background-color: var(--ep-blue);
+  color: rgba(255,255,255,0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.ep-section--blue::before,
+.has-primary-background-color.ep-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(71,193,254,0.2), transparent);
+  pointer-events: none;
+}
+
+.ep-section--blue h1,
+.ep-section--blue h2,
+.ep-section--blue h3,
+.ep-section--blue h4,
+.ep-section--blue h5,
+.has-primary-background-color h1,
+.has-primary-background-color h2,
+.has-primary-background-color h3,
+.has-primary-background-color h4,
+.has-primary-background-color h5 {
+  color: #ffffff;
+}
+
+/* ── Section label (eyebrow text) ────────────────────────── */
+.ep-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ep-blue);
+  margin-bottom: 4px;
+}
+
+.ep-section--dark .ep-label,
+.has-dark-800-background-color .ep-label {
+  color: var(--wp--preset--color--cyan);
+}
+
+.ep-section--blue .ep-label,
+.has-primary-background-color .ep-label {
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Hero dot-grid background ────────────────────────────── */
+.ep-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.ep-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--ep-gray-300) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ep-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20,90,255,0.04), transparent);
+  pointer-events: none;
+}
+
+.ep-hero > * { position: relative; }
+
+/* ── Contrast block ───────────────────────────────────────── */
+.ep-contrast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--ep-radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--ep-gray-200);
+}
+
+@media (max-width: 640px) {
+  .ep-contrast { grid-template-columns: 1fr; }
+}
+
+.ep-contrast__side {
+  padding: 32px 40px;
+}
+
+.ep-contrast__side--left {
+  background: var(--ep-gray-100);
+  border-right: 1px solid var(--ep-gray-200);
+}
+
+@media (max-width: 640px) {
+  .ep-contrast__side--left {
+    border-right: none;
+    border-bottom: 1px solid var(--ep-gray-200);
+  }
+}
+
+.ep-contrast__side--right {
+  background: #ffffff;
+}
+
+.ep-contrast__heading {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ep-gray-300) !important;
+  margin-bottom: 16px;
+}
+
+.ep-contrast__side--right .ep-contrast__heading {
+  color: var(--ep-blue) !important;
+}
+
+.ep-contrast__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ep-contrast__item--muted {
+  color: var(--ep-gray-300);
+}
+
+.ep-contrast__item--active {
+  color: var(--ep-dark-800);
+}
+
+.ep-contrast__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ep-radius-full);
+  flex-shrink: 0;
+  background: var(--ep-gray-200);
+}
+
+.ep-contrast__side--right .ep-contrast__dot {
+  background: var(--ep-blue);
+}
+
+/* ── Steps component ──────────────────────────────────────── */
+.ep-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+/* Connecting line between step numbers */
+.ep-steps::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: calc(12.5% + 22px);
+  right: calc(12.5% + 22px);
+  height: 2px;
+  background: var(--ep-gray-200);
+  z-index: 0;
+}
+
+.ep-section--dark .ep-steps::before,
+.has-dark-800-background-color .ep-steps::before {
+  background: rgba(255,255,255,0.15);
+}
+
+@media (max-width: 768px) {
+  .ep-steps {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .ep-steps::before { display: none; }
+}
+
+.ep-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .ep-step {
+    align-items: flex-start;
+    text-align: left;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.ep-step__number {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ep-radius-full);
+  background: var(--ep-blue);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.ep-section--dark .ep-step__number,
+.has-dark-800-background-color .ep-step__number {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.25);
+}
+
+@media (max-width: 768px) {
+  .ep-step__number { margin-bottom: 0; }
+}
+
+.ep-step__content h5 {
+  margin-bottom: 4px;
+}
+
+.ep-step__content p {
+  font-size: 14px;
+}
+
+/* ── Card component ───────────────────────────────────────── */
+.ep-card {
+  background: #ffffff;
+  border: 1px solid var(--ep-gray-200);
+  border-radius: var(--ep-radius-lg);
+  padding: 32px;
+  transition: box-shadow var(--ep-ease-base), transform var(--ep-ease-base);
+}
+
+.ep-card:hover {
+  box-shadow: var(--ep-shadow-md);
+  transform: translateY(-2px);
+}
+
+.ep-card--gray {
+  background: var(--ep-gray-100);
+  border-color: transparent;
+}
+
+.ep-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ep-radius-md);
+  background: var(--ep-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--ep-blue);
+}
+
+.ep-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ep-card h5 { margin-bottom: 8px; }
+.ep-card p  { font-size: 15px; line-height: 1.6; }
+
+.ep-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ep-blue);
+  margin-top: 16px;
+  transition: gap var(--ep-ease-fast);
+  text-decoration: none;
+}
+
+.ep-card__link:hover { gap: 8px; }
+
+/* ── Card grid layouts ────────────────────────────────────── */
+.ep-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ep-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 960px) {
+  .ep-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .ep-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .ep-grid-4,
+  .ep-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ── Button variants ──────────────────────────────────────── */
+
+/* Secondary (outlined, dark border) */
+.wp-block-button.is-style-secondary .wp-block-button__link {
+  background: transparent;
+  color: var(--ep-dark-800);
+  border: 2px solid var(--ep-gray-200);
+  box-shadow: none;
+}
+
+.wp-block-button.is-style-secondary .wp-block-button__link:hover {
+  border-color: var(--ep-dark-800);
+  background: var(--ep-gray-100);
+}
+
+/* Ghost (outlined, white border — for use on dark/blue backgrounds) */
+.wp-block-button.is-style-ghost .wp-block-button__link {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255,255,255,0.35);
+  box-shadow: none;
+}
+
+.wp-block-button.is-style-ghost .wp-block-button__link:hover {
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.1);
+}
+
+/* White (solid white — for use on blue backgrounds) */
+.wp-block-button.is-style-white .wp-block-button__link {
+  background: #ffffff !important;
+  color: #145aff !important;
+  border: 2px solid transparent !important;
+  box-shadow: none;
+}
+
+.wp-block-button.is-style-white .wp-block-button__link:hover {
+  background: #e8efff !important;
+  color: #145aff !important;
+}
+
+/* Large button modifier */
+.wp-block-button.is-style-large .wp-block-button__link {
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+/* Shared button base overrides */
+.wp-block-button__link {
+  transition: background var(--ep-ease-fast),
+              border-color var(--ep-ease-fast),
+              transform var(--ep-ease-fast),
+              box-shadow var(--ep-ease-fast);
+}
+
+.wp-block-button__link:hover {
+  transform: translateY(-1px);
+}
+
+/* Primary gets the blue shadow */
+.wp-block-button:not([class*="is-style-"]) .wp-block-button__link,
+.wp-block-button.is-style-fill .wp-block-button__link {
+  box-shadow: var(--ep-shadow-blue);
+}
+
+/* ── Navigation (header) ──────────────────────────────────── */
+.wp-block-template-part.site-header,
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ep-gray-200);
+}
+
+.wp-block-navigation a {
+  text-decoration: none;
+}
+
+.wp-block-navigation .wp-block-navigation-item__content {
+  padding: 0 12px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  color: var(--ep-dark-600);
+  transition: color var(--ep-ease-fast);
+}
+
+.wp-block-navigation .wp-block-navigation-item__content:hover {
+  color: var(--ep-dark-900);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.wp-block-template-part.site-footer,
+footer.site-footer {
+  background-color: var(--ep-dark-900);
+  color: rgba(255,255,255,0.55);
+}
+
+.site-footer a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--ep-ease-fast);
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.site-footer h6 {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ── Scroll entrance animations ───────────────────────────── */
+.ep-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ep-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ep-fade-up--d1 { transition-delay: 0.1s; }
+.ep-fade-up--d2 { transition-delay: 0.2s; }
+.ep-fade-up--d3 { transition-delay: 0.3s; }
+.ep-fade-up--d4 { transition-delay: 0.4s; }
+
+/* ── WordPress editor compatibility ─────────────────────── */
+
+/* Ensure wide-aligned blocks bleed to edges */
+.alignwide {
+  max-width: var(--wp--style--global--wide-size);
+}
+
+.alignfull {
+  max-width: 100%;
+}
+
+/* Block editor: match frontend spacing inside group blocks */
+.editor-styles-wrapper .wp-block-group {
+  padding-block: clamp(64px, 8vw, 96px);
+}

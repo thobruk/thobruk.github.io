@@ -80,7 +80,22 @@ and where capability gaps still exist.
 
 
 Closing Statement
-Clear skill definition is what makes meaningful measurement possible.[8:05 PM]The 4th section: :large_blue_square: SECTION 4 — HOW IT WORKS
+Clear skill definition is what makes meaningful measurement possible.
+
+
+:large_blue_square: VIDEO BLOCK PLACEMENT — “DO BETTER WITH PROOF”
+Headline
+Most Organizations Think They’re Measuring Learning
+
+Supporting Copy
+Traditional learning metrics often provide visibility into activity—not workforce capability.
+See why measurable workforce capability requires a different approach.
+
+Video Embed
+“Do Better With Proof”
+
+
+[8:05 PM]The 4th section: :large_blue_square: SECTION 4 — HOW IT WORKS
 Headline
 A System for Building Measurable Capability
 

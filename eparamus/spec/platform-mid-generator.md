@@ -25,6 +25,18 @@ Secondary:
 
 **Start with One Program**
 
+VIDEO BLOCK
+Headline
+See How the MID Generator Accelerates Measurable Learning Design
+
+Supporting Copy
+Watch how organizations transform existing content into structured measurable learning blueprints aligned to workforce capability outcomes.
+
+Video Embed
+MID Generator Video
+
+
+
 **🟩 SECTION 2 --- THE CHALLENGE**
 
 **Headline**
