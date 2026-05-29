@@ -76,12 +76,42 @@ add_action( 'wp_footer', function () { ?>
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) e.target.classList.add('is-visible');
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
   );
+
+  // Explicitly marked elements
   document.querySelectorAll('.ep-fade-up').forEach(function (el) {
+    observer.observe(el);
+  });
+
+  // Auto-animate key elements inside sections
+  var selectors = [
+    '.ep-section .ep-label',
+    '.ep-section h1, .ep-section h2, .ep-section h3',
+    '.ep-section > * > .wp-block-group > p',
+    '.ep-section .wp-block-columns > .wp-block-column',
+    '.ep-section .ep-card',
+    '.ep-section .ep-step',
+    '.ep-section .ep-contrast',
+    '.ep-section .wp-block-buttons',
+    '.ep-section .ep-ladder__item',
+  ].join(', ');
+
+  document.querySelectorAll(selectors).forEach(function (el, i) {
+    if (el.classList.contains('is-visible')) return;
+    el.classList.add('ep-fade-up');
+    // Stagger siblings
+    var siblings = el.parentElement ? el.parentElement.children : [];
+    var idx = Array.prototype.indexOf.call(siblings, el);
+    if (idx > 0 && idx < 4) {
+      el.style.transitionDelay = (idx * 0.1) + 's';
+    }
     observer.observe(el);
   });
 })();
