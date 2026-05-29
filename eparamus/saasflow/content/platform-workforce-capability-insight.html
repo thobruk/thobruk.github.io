@@ -1,10 +1,7 @@
-<!-- ============================================================
-   Platform: Workforce Capability Insight — post_content block markup
-   Source: spec/platform-workforce-capability-insight
-   ============================================================ -->
 
 
-<!-- ── Hero ─────────────────────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -37,9 +34,7 @@
     <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
     <div class="wp-block-buttons">
       <!-- wp:button {"backgroundColor":"primary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button">
-        <a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="font-size:16px;padding:16px 32px;">See Workforce Capability Insight</a>
-      </div>
+      <div class="wp-block-button has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">See Workforce Capability Insight</a></div>
       <!-- /wp:button -->
       <!-- wp:button {"className":"is-style-ghost"} -->
       <div class="wp-block-button is-style-ghost">
@@ -56,9 +51,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: The Problem ────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -68,7 +63,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">Most Learning Data Stops at Activity</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Most Learning Data Stops at Activity</h2>
       <!-- /wp:heading -->
 
     </div>
@@ -130,9 +125,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: From Learning Data to Workforce Insight ────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -143,7 +138,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Workforce Capability Starts with Measurable Skills
     </h2>
     <!-- /wp:heading -->
@@ -159,44 +154,56 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- Visual flow ladder -->
-  <!-- wp:html -->
-  <div style="max-width:560px;margin-inline:auto;display:flex;flex-direction:column;gap:0;">
+  
+  <!-- wp:group {"className":"ep-ladder"} -->
+  <div class="wp-block-group ep-ladder">
 
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Define Skills</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Identify job-relevant skills with precise, measurable definitions</p>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Define Skills</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Identify job-relevant skills with precise, measurable definitions</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Verify Learning</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Measure skill development before, during, and after training</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Verify Learning</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Measure skill development before, during, and after training</p>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Measure Application</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Confirm skill application and performance on the job</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">See Workforce Capability</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Gain visibility across teams, departments, and the enterprise</p>
+      <!-- /wp:paragraph -->
     </div>
-
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Measure Application</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Confirm skill application and performance on the job</p>
-    </div>
-
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
-    </div>
-
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">See Workforce Capability</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Gain visibility across teams, departments, and the enterprise</p>
-    </div>
+    <!-- /wp:group -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:group -->
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
   <div class="wp-block-group">
@@ -212,9 +219,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: Insight for Every Stakeholder ──────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark","backgroundColor":"dark-800","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark","backgroundColor":"dark-800","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -225,7 +232,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Actionable Insight Across the Organization
     </h2>
     <!-- /wp:heading -->
@@ -233,39 +240,63 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- wp:html -->
-  <div class="ep-grid-4">
+  <!-- wp:columns {"className":"ep-grid-4","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-4">
 
-    <div class="ep-card">
-      <h5>Employees</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Employees</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Gain visibility into current skill levels, strengths, development opportunities, and progress over time. Take greater ownership of professional development and workforce readiness.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Managers</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Managers</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Gain insight into skill strengths and gaps, application challenges, and opportunities to support team development. Remove barriers and reinforce learning application.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Learning Leaders</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Learning Leaders</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Gain measurable visibility into skill development, learning effectiveness, workforce capability trends, and organizational learning impact. Move beyond activity reporting.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Senior Leaders</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Senior Leaders</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Gain insight into workforce readiness, capability strengths, and organizational development opportunities. Support strategic planning, succession readiness, and capability development.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 5: Why It Matters ─────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -275,7 +306,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">Capability Visibility Changes the Role of Learning</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Capability Visibility Changes the Role of Learning</h2>
       <!-- /wp:heading -->
 
     </div>
@@ -323,9 +354,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 6: Continuous Improvement ─────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -336,7 +367,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       A Closed-Loop System for Workforce Capability Development
     </h2>
     <!-- /wp:heading -->
@@ -373,19 +404,19 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 7: Practical Adoption ─────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"className":"ep-contrast","isStackedOnMobile":true,"style":{"spacing":{"blockGap":"0"}}} -->
   <div class="wp-block-columns ep-contrast">
 
-    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side\u002d\u002dleft"} -->
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--left"} -->
     <div class="wp-block-column ep-contrast__side ep-contrast__side--left">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">Start Small. Build Capability Visibility Over Time.</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Start Small. Build Capability Visibility Over Time.</h2>
       <!-- /wp:heading -->
 
       <!-- wp:paragraph -->
@@ -399,9 +430,7 @@
       <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
       <div class="wp-block-buttons">
         <!-- wp:button {"backgroundColor":"primary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-        <div class="wp-block-button">
-          <a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="font-size:16px;padding:16px 32px;">Start with One Program</a>
-        </div>
+        <div class="wp-block-button has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
         <!-- /wp:button -->
       </div>
       <!-- /wp:buttons -->
@@ -409,16 +438,22 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side\u002d\u002dright"} -->
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--right"} -->
     <div class="wp-block-column ep-contrast__side ep-contrast__side--right">
 
-      <!-- wp:html -->
-      <ol style="list-style:decimal;padding-left:1.5em;margin:0;display:flex;flex-direction:column;gap:16px;">
-        <li style="font-size:17px;font-weight:600;color:#0f1f3d;line-height:1.5;">Identify one learning program to instrument</li>
-        <li style="font-size:17px;font-weight:600;color:#0f1f3d;line-height:1.5;">Define measurable skill outcomes for that program</li>
-        <li style="font-size:17px;font-weight:600;color:#0f1f3d;line-height:1.5;">Verify capability and expand measurable practices over time</li>
+      <!-- wp:list {"ordered":true} -->
+      <ol class="wp-block-list">
+        <!-- wp:list-item -->
+        <li>Identify one learning program to instrument</li>
+        <!-- /wp:list-item -->
+        <!-- wp:list-item -->
+        <li>Define measurable skill outcomes for that program</li>
+        <!-- /wp:list-item -->
+        <!-- wp:list-item -->
+        <li>Verify capability and expand measurable practices over time</li>
+        <!-- /wp:list-item -->
       </ol>
-      <!-- /wp:html -->
+      <!-- /wp:list -->
 
     </div>
     <!-- /wp:column -->
@@ -430,16 +465,16 @@
 <!-- /wp:group -->
 
 
-<!-- ── Final CTA ──────────────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Ready to See Workforce Capability More Clearly?
     </h2>
     <!-- /wp:heading -->
@@ -453,9 +488,7 @@
     <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
     <div class="wp-block-buttons">
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">See Workforce Capability Insight</a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">See Workforce Capability Insight</a></div>
       <!-- /wp:button -->
       <!-- wp:button {"className":"is-style-ghost"} -->
       <div class="wp-block-button is-style-ghost">

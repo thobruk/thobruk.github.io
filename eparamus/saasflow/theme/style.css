@@ -248,6 +248,83 @@ body {
   background: var(--ep-blue);
 }
 
+/* List variant of contrast items (core/list replaces ep-contrast__item divs) */
+.ep-contrast__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ep-contrast__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ep-contrast__list li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ep-radius-full);
+  flex-shrink: 0;
+  background: var(--ep-gray-200);
+}
+
+.ep-contrast__list--muted li { color: var(--ep-gray-300); }
+
+.ep-contrast__list--active li { color: var(--ep-dark-800); }
+
+.ep-contrast__list--active li::before { background: var(--ep-blue); }
+
+/* ── Ladder / flow diagram component ─────────────────────── */
+.ep-ladder {
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.ep-ladder__item {
+  background: #ffffff;
+  border: 1px solid var(--ep-gray-200);
+  border-radius: 16px;
+  padding: 24px 28px;
+  text-align: center;
+}
+
+.ep-ladder__item .ep-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ep-blue);
+  margin: 0 0 6px;
+}
+
+.ep-ladder__item p:last-child {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ep-dark-800);
+  margin: 0;
+}
+
+/* Connecting line between ladder items */
+.ep-ladder__item + .ep-ladder__item {
+  position: relative;
+}
+
+.ep-ladder__item + .ep-ladder__item::before {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 32px;
+  background: var(--ep-gray-200);
+  margin: 0 auto -4px;
+  transform: translateY(-32px);
+  pointer-events: none;
+}
+
 /* ── Steps component ──────────────────────────────────────── */
 .ep-steps {
   display: grid;

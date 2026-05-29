@@ -1,10 +1,7 @@
-<!-- ============================================================
-   Solutions: Instructional Design Teams — post_content block markup
-   Source: spec/solutions-instructional-design-teams
-   ============================================================ -->
 
 
-<!-- ── Section 1: Hero ───────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -38,13 +35,9 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"backgroundColor":"primary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button">
-        <a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
+      <div class="wp-block-button has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
            href="#"
-           style="font-size:16px;padding:16px 32px;">
-          See the MID Generator in Action
-        </a>
-      </div>
+           style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">See the MID Generator in Action</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-secondary"} -->
@@ -63,9 +56,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: The Challenge ──────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -75,7 +68,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         Instructional Designers Are Expected to Deliver More—Faster
       </h2>
       <!-- /wp:heading -->
@@ -119,9 +112,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: A More Structured Approach ─────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -132,7 +125,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Design Learning Around Measurable Skills
     </h2>
     <!-- /wp:heading -->
@@ -167,9 +160,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: What the MID Generator Enables ─────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark has-dark-800-background-color has-background","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark has-dark-800-background-color has-background","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
@@ -180,7 +173,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Build Stronger Learning in a Fraction of the Time
     </h2>
     <!-- /wp:heading -->
@@ -188,49 +181,91 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- wp:html -->
-  <div class="ep-grid-3">
+  <!-- wp:columns {"className":"ep-grid-3","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-3">
 
-    <div class="ep-card">
-      <h5>Accelerate Design</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Accelerate Design</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Generate structured measurable learning blueprints using existing learning materials and organizational content.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Improve Consistency</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Improve Consistency</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Standardize measurable design practices across instructional teams and learning programs.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Reduce SME Dependency</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Reduce SME Dependency</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Transform existing organizational knowledge into structured measurable learning frameworks.</p>
+      <!-- /wp:paragraph -->
     </div>
-
-    <div class="ep-card">
-      <h5>Strengthen Learning Effectiveness</h5>
-      <p>Align outcomes, evaluations, and instructional methods to measurable job-relevant skills.</p>
-    </div>
-
-    <div class="ep-card">
-      <h5>Verify Learning Impact</h5>
-      <p>Measure whether learning is successfully building and supporting workforce capability.</p>
-    </div>
-
-    <div class="ep-card">
-      <h5>Support Continuous Improvement</h5>
-      <p>Use measurable feedback to refine and improve learning effectiveness over time.</p>
-    </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
+
+  <!-- wp:columns {"className":"ep-grid-3","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-3">
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Strengthen Learning Effectiveness</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Align outcomes, evaluations, and instructional methods to measurable job-relevant skills.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Verify Learning Impact</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Measure whether learning is successfully building and supporting workforce capability.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Support Continuous Improvement</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Use measurable feedback to refine and improve learning effectiveness over time.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+  </div>
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 5: Elevate the Role ───────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -240,7 +275,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         Connect Learning Design to Workforce Capability
       </h2>
       <!-- /wp:heading -->
@@ -284,9 +319,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 6: Support for Design Teams ───────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -300,7 +335,7 @@
       <!-- /wp:paragraph -->
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         A Structured System Supported by Guided Implementation
       </h2>
       <!-- /wp:heading -->
@@ -329,70 +364,100 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 7: Start Small ─────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
-  <!-- wp:html -->
-  <div class="ep-contrast">
+  <!-- wp:columns {"className":"ep-contrast","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-contrast">
 
-    <div class="ep-contrast__side ep-contrast__side--left">
-
-      <h2>Start with One Program</h2>
-
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--left"} -->
+    <div class="wp-block-column ep-contrast__side ep-contrast__side--left">
+      <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Start with One Program</h2>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Many organizations begin by transforming a single learning program into a measurable capability initiative.</p>
-
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
       <p>This allows instructional design teams to:</p>
-
-      <ul>
+      <!-- /wp:paragraph -->
+      <!-- wp:list -->
+      <ul class="wp-block-list">
+        <!-- wp:list-item -->
         <li>Establish measurable design practices</li>
+        <!-- /wp:list-item -->
+        <!-- wp:list-item -->
         <li>Verify learning effectiveness</li>
+        <!-- /wp:list-item -->
+        <!-- wp:list-item -->
         <li>Demonstrate organizational impact before scaling further</li>
+        <!-- /wp:list-item -->
       </ul>
-
-      <a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="font-size:16px;padding:16px 32px;display:inline-block;margin-top:8px;">
-        Start with One Program
-      </a>
-
+      <!-- /wp:list -->
+      <!-- wp:buttons -->
+      <div class="wp-block-buttons">
+        <!-- wp:button {"backgroundColor":"primary"} -->
+        <div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background wp-element-button" href="#">Start with One Program</a></div>
+        <!-- /wp:button -->
+      </div>
+      <!-- /wp:buttons -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-contrast__side ep-contrast__side--right">
-
-      <ol class="ep-steps">
-        <li>
-          <span class="ep-steps__number">1</span>
-          <span class="ep-steps__text">Choose one existing learning program</span>
-        </li>
-        <li>
-          <span class="ep-steps__number">2</span>
-          <span class="ep-steps__text">Apply measurable design principles with MID Generator support</span>
-        </li>
-        <li>
-          <span class="ep-steps__number">3</span>
-          <span class="ep-steps__text">Verify effectiveness and scale measurable practices over time</span>
-        </li>
-      </ol>
-
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--right"} -->
+    <div class="wp-block-column ep-contrast__side ep-contrast__side--right">
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
+        <div class="ep-step__number">1</div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Choose one existing learning program</p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:group -->
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
+        <div class="ep-step__number">2</div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Apply measurable design principles with MID Generator support</p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:group -->
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
+        <div class="ep-step__number">3</div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Verify effectiveness and scale measurable practices over time</p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:group -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Final CTA ──────────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Ready to Build Learning That Proves Its Value?
     </h2>
     <!-- /wp:heading -->
@@ -407,11 +472,7 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">
-          See the MID Generator in Action
-        </a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">See the MID Generator in Action</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-ghost"} -->

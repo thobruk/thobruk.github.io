@@ -1,10 +1,7 @@
-<!-- ============================================================
-   How It Works — post_content block markup
-   Source: spec/how-it-works.md + spec/original-docs/output.md
-   ============================================================ -->
 
 
-<!-- ── Hero ─────────────────────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -33,9 +30,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 1: Why Measurable Design ─────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -45,7 +42,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">To verify whether learning is effective, organizations must first define:</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">To verify whether learning is effective, organizations must first define:</h2>
       <!-- /wp:heading -->
 
     </div>
@@ -86,9 +83,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: Visual Example Flow ───────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -99,7 +96,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       From Skill Definition to Workforce Insight
     </h2>
     <!-- /wp:heading -->
@@ -111,52 +108,64 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- Visual flow diagram -->
-  <!-- wp:html -->
-  <div style="max-width:560px;margin-inline:auto;display:flex;flex-direction:column;gap:0;">
+  
+  <!-- wp:group {"className":"ep-ladder"} -->
+  <div class="wp-block-group ep-ladder">
 
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Skill</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Conduct Effective Safety Inspection</p>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Skill</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Conduct Effective Safety Inspection</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Learning</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Structured measurable learning aligned to real job performance</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Learning</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Structured measurable learning aligned to real job performance</p>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Verification</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Measured before training, after training, and on the job</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:group -->
 
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
+    <!-- wp:group {"className":"ep-ladder__item"} -->
+    <div class="wp-block-group ep-ladder__item">
+      <!-- wp:paragraph {"className":"ep-label"} -->
+      <p class="ep-label">Insight</p>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
+      <p>Capability visibility across teams and locations</p>
+      <!-- /wp:paragraph -->
     </div>
-
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Verification</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Measured before training, after training, and on the job</p>
-    </div>
-
-    <div style="display:flex;justify-content:center;padding:4px 0;">
-      <div style="width:2px;height:32px;background:#e1e4eb;"></div>
-    </div>
-
-    <div style="background:#ffffff;border:1px solid #e1e4eb;border-radius:16px;padding:24px 28px;text-align:center;">
-      <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#145aff;margin:0 0 6px;">Insight</p>
-      <p style="font-size:17px;font-weight:600;color:#0f1f3d;margin:0;">Capability visibility across teams and locations</p>
-    </div>
+    <!-- /wp:group -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:group -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: The Process (4 steps) ─────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark","backgroundColor":"dark-800","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark","backgroundColor":"dark-800","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -167,7 +176,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Define. Build. Verify. Act.
     </h2>
     <!-- /wp:heading -->
@@ -175,58 +184,82 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- wp:html -->
-  <div class="ep-steps">
+  <!-- wp:columns {"className":"ep-steps","isStackedOnMobile":false} -->
+  <div class="wp-block-columns ep-steps is-not-stacked-on-mobile">
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">1</div>
-      <div class="ep-step__content">
-        <h5>Define the Skill</h5>
-        <p>Use the MID Generator to turn a role description or business goal into a precise, measurable skill definition. No more guessing what "good" looks like.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Define the Skill</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Use the MID Generator to turn a role description or business goal into a precise, measurable skill definition. No more guessing what "good" looks like.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">2</div>
-      <div class="ep-step__content">
-        <h5>Build Aligned Content</h5>
-        <p>Instructional designers use the MID as a design target—every module, activity, and assessment maps directly to a verified skill outcome.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Build Aligned Content</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Instructional designers use the MID as a design target—every module, activity, and assessment maps directly to a verified skill outcome.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">3</div>
-      <div class="ep-step__content">
-        <h5>Verify Capability</h5>
-        <p>Learners demonstrate skill through structured activities. eParamus tracks evidence against the definition—not just completion.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Verify Capability</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Learners demonstrate skill through structured activities. eParamus tracks evidence against the definition—not just completion.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">4</div>
-      <div class="ep-step__content">
-        <h5>Act on Insight</h5>
-        <p>Leaders see where capability is growing, where gaps persist, and where to direct the next round of investment—with data they can trust.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Act on Insight</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Leaders see where capability is growing, where gaps persist, and where to direct the next round of investment—with data they can trust.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: CTA ────────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Ready to See the Process in Action?
     </h2>
     <!-- /wp:heading -->
@@ -240,9 +273,7 @@
     <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
     <div class="wp-block-buttons">
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">Start with One Program</a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
       <!-- /wp:button -->
       <!-- wp:button {"className":"is-style-ghost"} -->
       <div class="wp-block-button is-style-ghost">

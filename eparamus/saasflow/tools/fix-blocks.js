@@ -1,190 +1,199 @@
 /**
  * fix-blocks.js
- * Reads content/*.html files, finds invalid blocks, and repairs them by:
- *  - Leaf blocks (heading, paragraph, button, buttons): replace innerHTML with
- *    what getSaveContent() generates from the stored block attributes.
- *  - Container blocks (group, columns, column): patch only the outer element's
- *    attributes (class + style) from save(), leaving inner content untouched.
+ * Applies targeted regex fixes to content/*.html block markup so Gutenberg
+ * does not show "unexpected or invalid content" errors.
+ *
+ * Fixes applied:
+ *   1. Remove plain HTML comments inside block HTML (cause container-block validation failures)
+ *   2. Groups with padding:{top:"0",bottom:"0"} — remove spacing attr from block comment
+ *      so getSaveContent() generates no inline style (CSS provides section padding instead)
+ *   3. ep-card groups — fix margin-bottom:8px → var(--wp--preset--spacing--4)
+ *   4. Buttons — move font-size + has-custom-font-size to outer <div>, expand padding shorthand
+ *   5. Headings — add has-text-color class, sort style properties alphabetically
  *
  * Usage (from tools/):
- *   node fix-blocks.js ../content > /dev/null 2>&1
+ *   node fix-blocks.js [../content]
  */
 
-const { JSDOM } = require('jsdom');
 const fs   = require('fs');
 const path = require('path');
 
-// --- Browser globals ---
-const dom = new JSDOM('<!DOCTYPE html>');
-global.window            = dom.window;
-global.document          = dom.window.document;
-global.MutationObserver  = dom.window.MutationObserver;
-global.requestAnimationFrame  = cb => setTimeout(cb, 0);
-global.cancelAnimationFrame   = clearTimeout;
-global.requestIdleCallback    = cb => setTimeout(cb, 0);
-global.cancelIdleCallback     = clearTimeout;
+const contentDir = process.argv[2] || '../content';
+const DRY_RUN    = process.argv.includes('--dry-run');
 
-// Suppress registration noise
-const noop = () => true;
-const origStdout = process.stdout.write.bind(process.stdout);
-const origStderr = process.stderr.write.bind(process.stderr);
-const origCL = { log: console.log, warn: console.warn, error: console.error, info: console.info };
-process.stdout.write = noop;
-process.stderr.write = noop;
-Object.assign(console, { log: noop, warn: noop, error: noop, info: noop });
+// ── Helpers ───────────────────────────────────────────────────
 
-const { registerCoreBlocks } = require('@wordpress/block-library');
-registerCoreBlocks();
+function sortStyleProps(styleStr) {
+  return styleStr
+    .split(';')
+    .map(p => p.trim())
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b))
+    .join(';');
+}
 
-process.stdout.write = origStdout;
-process.stderr.write = origStderr;
-Object.assign(console, origCL);
-
-const { parse, serialize, getBlockType, getSaveContent } = require('@wordpress/blocks');
-
-// Blocks where we replace the FULL html from save() (no inner blocks)
-const LEAF_BLOCKS = new Set([
-  'core/heading', 'core/paragraph', 'core/button', 'core/buttons',
-  'core/image', 'core/separator',
-]);
-
-// Blocks where we patch only the OUTER element attributes, not inner content
-const CONTAINER_BLOCKS = new Set([
-  'core/group', 'core/columns', 'core/column', 'core/cover',
-]);
+// ── Fix functions ─────────────────────────────────────────────
 
 /**
- * Parse outer tag attributes from an HTML string like:
- *   <div class="foo" style="bar">...</div>
- * Returns { tag, attrs: Map<string,string>, selfClosing }
+ * 1. Remove plain HTML comments (not block comments) from inside block HTML.
+ * Block comments look like:  <!-- wp:name ... --> or <!-- /wp:name -->
+ * Everything else is a code-organization comment that breaks container validation.
  */
-function parseOuterTag(html) {
-  const m = html.match(/^<(\w+)([^>]*)>/s);
-  if (!m) return null;
-  const tag   = m[1];
-  const attrs = new Map();
-  const attrStr = m[2];
-  for (const a of attrStr.matchAll(/(\w[\w-]*)(?:="([^"]*)")?/g)) {
-    attrs.set(a[1], a[2] ?? '');
-  }
-  return { tag, attrs };
+function removePlainHtmlComments(html) {
+  return html.replace(/<!--(?!\s*\/?wp:)[^>]*-->/g, '');
 }
 
 /**
- * Rebuild outer opening tag with attributes from save() output but keep
- * whatever is INSIDE the original innerHTML.
+ * 2. Remove "style":{"spacing":{"padding":{"top":"0","bottom":"0"}}} from
+ * group/columns block comment JSON when both top and bottom are "0".
+ * This prevents getSaveContent() from generating inline padding:0 which
+ * would override the CSS ep-section padding.
  */
-function patchOuterElement(originalHtml, saveHtml) {
-  const savedTag = parseOuterTag(saveHtml.trim());
-  if (!savedTag) return originalHtml;
+function removeZeroPaddingFromBlockComments(html) {
+  return html.replace(
+    /(<!-- wp:(?:group|columns|column)\s+)(\{.*?\})\s*(\/-->|-->)/gs,
+    (match, prefix, attrsJson, suffix) => {
+      let attrs;
+      try { attrs = JSON.parse(attrsJson); } catch { return match; }
 
-  // Build new attribute string from save() version
-  const attrParts = [];
-  for (const [k, v] of savedTag.attrs) {
-    attrParts.push(v ? `${k}="${v}"` : k);
-  }
-  const newOpen = `<${savedTag.tag}${attrParts.length ? ' ' + attrParts.join(' ') : ''}>`;
+      const padding = attrs?.style?.spacing?.padding;
+      if (padding && padding.top === '0' && padding.bottom === '0') {
+        delete attrs.style.spacing.padding;
+        if (!Object.keys(attrs.style.spacing).length) delete attrs.style.spacing;
+        if (!Object.keys(attrs.style).length)         delete attrs.style;
+      }
 
-  // Find the matching close tag in original and keep everything in between
-  const origMatch = originalHtml.match(/^<[^>]+>([\s\S]*)<\/\w+>\s*$/s);
-  const innerContent = origMatch ? origMatch[1] : '';
-
-  return `${newOpen}${innerContent}</${savedTag.tag}>`;
+      return `${prefix}${JSON.stringify(attrs)}${suffix === '/-->' ? ' /-->' : ' -->'}`;
+    }
+  );
 }
 
 /**
- * Walk a block tree and fix invalid blocks in-place.
- * Returns { html, fixed } where html is the corrected block HTML.
+ * 3. Fix ep-card group inline style: margin-bottom:8px → CSS custom property.
  */
-function fixBlock(block) {
-  if (!block.name) return { html: block.originalContent || '', fixed: 0 };
+function fixEpCardMargin(html) {
+  return html.replace(
+    /(<div class="wp-block-group ep-card" style=")margin-bottom:8px;?(")/g,
+    '$1margin-bottom:var(--wp--preset--spacing--4)$2'
+  );
+}
 
-  const blockType = getBlockType(block.name);
-  let fixed = 0;
-  let html  = block.originalContent || '';
+/**
+ * 4. Fix button blocks.
+ *
+ * Before (what we authored):
+ *   <div class="wp-block-button [style?]">
+ *     <a class="wp-block-button__link wp-element-button [color-classes]"
+ *        href="..."
+ *        style="font-size:16px;padding:16px 32px;">
+ *
+ * After (what WP 6.5 save() generates):
+ *   <div class="wp-block-button [style?] has-custom-font-size" style="font-size:16px">
+ *     <a class="wp-block-button__link [color-classes] wp-element-button"
+ *        href="..."
+ *        style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">
+ */
+function fixButtons(html) {
+  return html.replace(
+    /<div class="(wp-block-button(?!s)[^"]*)">([\s\S]*?)<\/div>/g,
+    (match, divClasses, inner) => {
+      // Only process buttons where the <a> has both font-size and a padding shorthand
+      if (!inner.includes('font-size') || !inner.includes('padding:')) return match;
 
-  // Fix inner blocks first (recurse)
-  if (block.innerBlocks && block.innerBlocks.length) {
-    for (const inner of block.innerBlocks) {
-      const { html: innerFixed, fixed: innerCount } = fixBlock(inner);
-      if (innerCount > 0) {
-        html = html.replace(inner.originalContent || '', innerFixed);
-        fixed += innerCount;
+      const aMatch = inner.match(/<a([\s\S]*?)style="([^"]*)"([\s\S]*?)>([\s\S]*?)<\/a>/);
+      if (!aMatch) return match;
+
+      const [, aPreStyle, aStyleStr, aPostStyle, aContent] = aMatch;
+
+      // Parse style props
+      const props = {};
+      aStyleStr.split(';').map(p => p.trim()).filter(Boolean).forEach(p => {
+        const i = p.indexOf(':');
+        if (i > 0) props[p.slice(0, i).trim()] = p.slice(i + 1).trim();
+      });
+
+      const fontSize = props['font-size'];
+      const padding  = props['padding'];
+      if (!fontSize && !padding) return match;
+
+      // Expand padding shorthand
+      let paddingStyle = '';
+      if (padding) {
+        const parts = padding.trim().split(/\s+/);
+        const t = parts[0], r = parts[1] ?? parts[0],
+              b = parts[2] ?? parts[0], l = parts[3] ?? r;
+        paddingStyle = `padding-top:${t};padding-right:${r};padding-bottom:${b};padding-left:${l}`;
       }
+
+      // Build new <a> style (padding only, no font-size)
+      const remainingProps = Object.entries(props)
+        .filter(([k]) => k !== 'font-size' && k !== 'padding')
+        .map(([k, v]) => `${k}:${v}`)
+        .join(';');
+      const newAStyle = [paddingStyle, remainingProps].filter(Boolean).join(';');
+
+      // Promote font-size to outer <div>
+      const newDivClasses = fontSize
+        ? divClasses.replace(/\s*has-custom-font-size\b/, '').trimEnd() + ' has-custom-font-size'
+        : divClasses;
+      const divStyleAttr = fontSize ? ` style="font-size:${fontSize}"` : '';
+      const aStyleAttr   = newAStyle ? ` style="${newAStyle}"` : '';
+
+      const newA = `<a${aPreStyle}style="${newAStyle}"${aPostStyle}>${aContent.trim()}</a>`;
+      return `<div class="${newDivClasses}"${divStyleAttr}>${newA}</div>`;
     }
-  }
+  );
+}
 
-  // Fix this block if invalid
-  if (block.isValid === false && blockType) {
-    try {
-      const saveHtml = getSaveContent(blockType, block.attributes).trim();
-
-      if (LEAF_BLOCKS.has(block.name)) {
-        // Replace entirely with save() output
-        html = saveHtml;
-        fixed++;
-      } else if (CONTAINER_BLOCKS.has(block.name)) {
-        // Patch only the outer element's attributes
-        html = patchOuterElement(html, saveHtml);
-        fixed++;
+/**
+ * 5. Fix heading elements:
+ *   - Add has-text-color class when style contains a color: property
+ *   - Sort style properties alphabetically, remove trailing semicolons
+ */
+function fixHeadings(html) {
+  return html.replace(
+    /<h([1-6])(\s+class=")(wp-block-heading[^"]*)(")\s+style="([^"]*)"/g,
+    (match, level, classOpen, classes, classClose, style) => {
+      let newClasses = classes;
+      if (style.includes('color:') && !classes.includes('has-text-color')) {
+        newClasses += ' has-text-color';
       }
-    } catch (e) {
-      // Can't fix — leave as-is
+      const sortedStyle = sortStyleProps(style);
+      return `<h${level}${classOpen}${newClasses}${classClose} style="${sortedStyle}"`;
     }
-  }
+  );
+}
 
-  return { html, fixed };
+// ── Pipeline ──────────────────────────────────────────────────
+
+function fixFile(html) {
+  let out = html;
+  out = removePlainHtmlComments(out);
+  out = removeZeroPaddingFromBlockComments(out);
+  out = fixEpCardMargin(out);
+  out = fixButtons(out);
+  out = fixHeadings(out);
+  return out;
 }
 
 // ── Main ──────────────────────────────────────────────────────
 
-const contentDir = process.argv[2] || '../content';
 const files = fs.readdirSync(contentDir).filter(f => f.endsWith('.html')).sort();
-const results = [];
 
 for (const file of files) {
   const filePath = path.join(contentDir, file);
   const original = fs.readFileSync(filePath, 'utf8');
-  const blocks   = parse(original);
+  const fixed    = fixFile(original);
 
-  let output    = original;
-  let totalFixed = 0;
-
-  for (const block of blocks) {
-    const { html: fixedHtml, fixed } = fixBlock(block);
-    if (fixed > 0) {
-      output = output.replace(block.originalContent || '', fixedHtml);
-      totalFixed += fixed;
-    }
+  if (fixed === original) {
+    console.log(`${file}: no changes`);
+    continue;
   }
 
-  if (totalFixed > 0) {
-    fs.writeFileSync(filePath, output);
-  }
-
-  results.push({ file, fixed: totalFixed });
-  console.log(`${file}: fixed ${totalFixed} block(s)`);
-}
-
-// Verify by re-parsing
-console.log('\n--- Verification ---');
-let totalRemaining = 0;
-for (const { file } of results) {
-  const html = fs.readFileSync(path.join(contentDir, file), 'utf8');
-  const blocks = parse(html);
-  const invalid = [];
-  function countInvalid(bs) {
-    for (const b of bs) {
-      if (b.name && b.isValid === false) invalid.push(b.name);
-      if (b.innerBlocks) countInvalid(b.innerBlocks);
-    }
-  }
-  countInvalid(blocks);
-  totalRemaining += invalid.length;
-  if (invalid.length) {
-    console.log(`${file}: ${invalid.length} still invalid — ${[...new Set(invalid)].join(', ')}`);
+  if (DRY_RUN) {
+    console.log(`${file}: would change (dry-run)`);
   } else {
-    console.log(`${file}: OK`);
+    fs.writeFileSync(filePath, fixed);
+    console.log(`${file}: updated`);
   }
 }
-console.log(`\nTotal remaining invalid: ${totalRemaining}`);

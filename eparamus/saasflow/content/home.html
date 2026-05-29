@@ -1,11 +1,7 @@
-<!-- ============================================================
-   Homepage — post_content block markup
-   Seeded via: bin/seed.sh
-   Source copy: spec/original-docs/output.md (Section 1–7)
-   ============================================================ -->
 
 
-<!-- ── Section 1: Hero ───────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -33,13 +29,9 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"backgroundColor":"primary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button">
-        <a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
+      <div class="wp-block-button has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
            href="#"
-           style="font-size:16px;padding:16px 32px;">
-          Start with One Program
-        </a>
-      </div>
+           style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-secondary"} -->
@@ -64,12 +56,12 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: The Problem ────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
-  <!-- Section header -->
+  
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
@@ -78,7 +70,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       You're Delivering Learning—But Can You See What Changed?
     </h2>
     <!-- /wp:heading -->
@@ -92,7 +84,7 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- 4 tension cards -->
+  
   <!-- wp:columns {"className":"ep-grid-4","isStackedOnMobile":true,"style":{"spacing":{"blockGap":"var:preset|spacing|4"}}} -->
   <div class="wp-block-columns ep-grid-4">
 
@@ -167,35 +159,39 @@
   </div>
   <!-- /wp:columns -->
 
-  <!-- Contrast block -->
+  
   <!-- wp:columns {"className":"ep-contrast","isStackedOnMobile":true,"style":{"spacing":{"blockGap":"0"}}} -->
   <div class="wp-block-columns ep-contrast">
 
-    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side\u002d\u002dleft"} -->
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--left"} -->
     <div class="wp-block-column ep-contrast__side ep-contrast__side--left">
       <!-- wp:heading {"level":6,"className":"ep-contrast__heading"} -->
       <h6 class="wp-block-heading ep-contrast__heading">Traditional Metrics</h6>
       <!-- /wp:heading -->
-      <!-- wp:html -->
-      <div class="ep-contrast__item ep-contrast__item--muted"><span class="ep-contrast__dot"></span>Completions</div>
-      <div class="ep-contrast__item ep-contrast__item--muted"><span class="ep-contrast__dot"></span>Attendance</div>
-      <div class="ep-contrast__item ep-contrast__item--muted"><span class="ep-contrast__dot"></span>Smile sheets</div>
-      <div class="ep-contrast__item ep-contrast__item--muted"><span class="ep-contrast__dot"></span>Activity reports</div>
-      <!-- /wp:html -->
+      <!-- wp:list {"className":"ep-contrast__list ep-contrast__list--muted"} -->
+      <ul class="wp-block-list ep-contrast__list ep-contrast__list--muted">
+        <li>Completions</li>
+        <li>Attendance</li>
+        <li>Smile sheets</li>
+        <li>Activity reports</li>
+      </ul>
+      <!-- /wp:list -->
     </div>
     <!-- /wp:column -->
 
-    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side\u002d\u002dright"} -->
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--right"} -->
     <div class="wp-block-column ep-contrast__side ep-contrast__side--right">
       <!-- wp:heading {"level":6,"className":"ep-contrast__heading"} -->
       <h6 class="wp-block-heading ep-contrast__heading">Capability Questions</h6>
       <!-- /wp:heading -->
-      <!-- wp:html -->
-      <div class="ep-contrast__item ep-contrast__item--active"><span class="ep-contrast__dot"></span>Skills built</div>
-      <div class="ep-contrast__item ep-contrast__item--active"><span class="ep-contrast__dot"></span>Application verified</div>
-      <div class="ep-contrast__item ep-contrast__item--active"><span class="ep-contrast__dot"></span>Gaps visible</div>
-      <div class="ep-contrast__item ep-contrast__item--active"><span class="ep-contrast__dot"></span>Learning effectiveness</div>
-      <!-- /wp:html -->
+      <!-- wp:list {"className":"ep-contrast__list ep-contrast__list--active"} -->
+      <ul class="wp-block-list ep-contrast__list ep-contrast__list--active">
+        <li>Skills built</li>
+        <li>Application verified</li>
+        <li>Gaps visible</li>
+        <li>Learning effectiveness</li>
+      </ul>
+      <!-- /wp:list -->
     </div>
     <!-- /wp:column -->
 
@@ -212,9 +208,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: The Shift ──────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -228,7 +224,7 @@
       <!-- /wp:paragraph -->
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         The Problem Isn't Measurement.<br>It's Design.
       </h2>
       <!-- /wp:heading -->
@@ -263,12 +259,12 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: How It Works ───────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark","backgroundColor":"dark-800","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark","backgroundColor":"dark-800","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
-  <!-- Section header -->
+  
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
@@ -277,7 +273,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       A System for Building Measurable Capability
     </h2>
     <!-- /wp:heading -->
@@ -291,44 +287,68 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- Steps -->
-  <!-- wp:html -->
-  <div class="ep-steps">
+  
+  <!-- wp:columns {"className":"ep-steps","isStackedOnMobile":false} -->
+  <div class="wp-block-columns ep-steps is-not-stacked-on-mobile">
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">1</div>
-      <div class="ep-step__content">
-        <h5>Define Skills</h5>
-        <p>Clearly define the job-relevant skills employees must perform—including the conditions and performance expectations required for success.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Define Skills</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Clearly define the job-relevant skills employees must perform—including the conditions and performance expectations required for success.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">2</div>
-      <div class="ep-step__content">
-        <h5>Build Learning</h5>
-        <p>Generate structured learning designs, aligned evaluations, and instructional methods focused on building measurable capability.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Build Learning</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Generate structured learning designs, aligned evaluations, and instructional methods focused on building measurable capability.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">3</div>
-      <div class="ep-step__content">
-        <h5>Verify Application</h5>
-        <p>Measure skill development before learning, after learning, and on the job to verify real-world application.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Verify Application</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Measure skill development before learning, after learning, and on the job to verify real-world application.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-step">
+    <!-- wp:column {"className":"ep-step"} -->
+    <div class="wp-block-column ep-step">
+      <!-- wp:html -->
       <div class="ep-step__number">4</div>
-      <div class="ep-step__content">
-        <h5>See Workforce Capability</h5>
-        <p>Transform learning data into actionable workforce insight that helps leaders identify strengths, gaps, and opportunities for improvement.</p>
-      </div>
+      <!-- /wp:html -->
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">See Workforce Capability</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Transform learning data into actionable workforce insight that helps leaders identify strengths, gaps, and opportunities for improvement.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
   <!-- wp:paragraph {"textAlign":"center","style":{"typography":{"fontSize":"15px"},"color":{"text":"rgba(255,255,255,0.45)"},"dimensions":{"maxWidth":"600px"}}} -->
   <p class="has-text-align-center" style="font-size:15px;color:rgba(255,255,255,0.45);max-width:600px;margin-inline:auto;">
@@ -340,12 +360,12 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 5: The IMPACT Platform ───────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
-  <!-- Section header -->
+  
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
@@ -354,7 +374,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Powered by the IMPACT Platform
     </h2>
     <!-- /wp:heading -->
@@ -368,11 +388,11 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- 4 capability cards -->
+  
   <!-- wp:columns {"className":"ep-grid-4","isStackedOnMobile":true,"style":{"spacing":{"blockGap":"var:preset|spacing|4"}}} -->
   <div class="wp-block-columns ep-grid-4">
 
-    <!-- MID Generator -->
+    
     <!-- wp:column -->
     <div class="wp-block-column">
       <!-- wp:group {"className":"ep-card","layout":{"type":"flex","orientation":"vertical"}} -->
@@ -396,7 +416,7 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- Skill Verification -->
+    
     <!-- wp:column -->
     <div class="wp-block-column">
       <!-- wp:group {"className":"ep-card","layout":{"type":"flex","orientation":"vertical"}} -->
@@ -420,7 +440,7 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- Performance Definition -->
+    
     <!-- wp:column -->
     <div class="wp-block-column">
       <!-- wp:group {"className":"ep-card","layout":{"type":"flex","orientation":"vertical"}} -->
@@ -444,7 +464,7 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- Workforce Capability Insight -->
+    
     <!-- wp:column -->
     <div class="wp-block-column">
       <!-- wp:group {"className":"ep-card","layout":{"type":"flex","orientation":"vertical"}} -->
@@ -475,15 +495,15 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 6: Support / Implementation ───────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
   <div class="wp-block-columns">
 
-    <!-- Left: headline + copy -->
+    
     <!-- wp:column {"verticalAlignment":"top"} -->
     <div class="wp-block-column is-vertically-aligned-top">
 
@@ -492,7 +512,7 @@
       <!-- /wp:paragraph -->
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">A System You Can Actually Implement</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">A System You Can Actually Implement</h2>
       <!-- /wp:heading -->
 
       <!-- wp:paragraph -->
@@ -508,12 +528,12 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- Right: stacked support cards -->
+    
     <!-- wp:column {"verticalAlignment":"top"} -->
     <div class="wp-block-column is-vertically-aligned-top">
 
       <!-- wp:group {"className":"ep-card","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|4"}}}} -->
-      <div class="wp-block-group ep-card" style="margin-bottom:8px;">
+      <div class="wp-block-group ep-card" style="margin-bottom:var(--wp--preset--spacing--4)">
         <!-- wp:heading {"level":5} -->
         <h5 class="wp-block-heading">Guided Onboarding</h5>
         <!-- /wp:heading -->
@@ -524,7 +544,7 @@
       <!-- /wp:group -->
 
       <!-- wp:group {"className":"ep-card","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|4"}}}} -->
-      <div class="wp-block-group ep-card" style="margin-bottom:8px;">
+      <div class="wp-block-group ep-card" style="margin-bottom:var(--wp--preset--spacing--4)">
         <!-- wp:heading {"level":5} -->
         <h5 class="wp-block-heading">Designer Education &amp; Certification</h5>
         <!-- /wp:heading -->
@@ -535,7 +555,7 @@
       <!-- /wp:group -->
 
       <!-- wp:group {"className":"ep-card","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|4"}}}} -->
-      <div class="wp-block-group ep-card" style="margin-bottom:8px;">
+      <div class="wp-block-group ep-card" style="margin-bottom:var(--wp--preset--spacing--4)">
         <!-- wp:heading {"level":5} -->
         <h5 class="wp-block-heading">Stakeholder Alignment</h5>
         <!-- /wp:heading -->
@@ -566,15 +586,15 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 7: Start Small / CTA ─────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
   <div class="wp-block-columns">
 
-    <!-- Left: headline + copy + buttons -->
+    
     <!-- wp:column {"verticalAlignment":"center"} -->
     <div class="wp-block-column is-vertically-aligned-center">
 
@@ -583,7 +603,7 @@
       <!-- /wp:paragraph -->
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;color:#ffffff;">Start with One Program</h2>
+      <h2 class="wp-block-heading has-text-color" style="color:#ffffff;letter-spacing:-0.8px">Start with One Program</h2>
       <!-- /wp:heading -->
 
       <!-- wp:paragraph {"style":{"typography":{"fontSize":"clamp(16px, 2vw, 20px)","lineHeight":"1.6"},"color":{"text":"rgba(255,255,255,0.75)"}}} -->
@@ -596,11 +616,7 @@
       <div class="wp-block-buttons">
 
         <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-        <div class="wp-block-button is-style-white">
-          <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">
-            Start with One Program
-          </a>
-        </div>
+        <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
         <!-- /wp:button -->
 
         <!-- wp:button {"className":"is-style-ghost"} -->
@@ -619,7 +635,7 @@
     </div>
     <!-- /wp:column -->
 
-    <!-- Right: 3-step panel -->
+    
     <!-- wp:column {"verticalAlignment":"center"} -->
     <div class="wp-block-column is-vertically-aligned-center">
 

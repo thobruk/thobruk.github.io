@@ -1,9 +1,7 @@
-<!-- ============================================================
-   About — post_content block markup
-   ============================================================ -->
 
 
-<!-- ── Section 1: Hero ───────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -40,9 +38,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: Mission ─────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -52,7 +50,7 @@
     <div class="wp-block-column is-vertically-aligned-top">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">Our Mission</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Our Mission</h2>
       <!-- /wp:heading -->
 
     </div>
@@ -83,9 +81,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: The Problem We Solve ───────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -96,7 +94,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Learning Has Needed a Measurable Foundation
     </h2>
     <!-- /wp:heading -->
@@ -120,9 +118,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: Our Values ──────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark","backgroundColor":"dark-800","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark","backgroundColor":"dark-800","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -133,7 +131,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       The Principles That Guide Our Work
     </h2>
     <!-- /wp:heading -->
@@ -141,39 +139,63 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- wp:html -->
-  <div class="ep-grid-4">
+  <!-- wp:columns {"className":"ep-grid-4","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-4">
 
-    <div class="ep-card">
-      <h5>Measurement Drives Improvement</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Measurement Drives Improvement</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>You can only improve what you can measure. Measurable skill definitions are the foundation of everything we build.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Practical Before Perfect</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Practical Before Perfect</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Capability visibility starts with one program, not enterprise-wide transformation. Progress over perfection.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Learning Should Prove Its Value</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Learning Should Prove Its Value</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Organizations that invest in learning deserve to see what that investment is producing. Visibility creates accountability and confidence.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Design Determines Outcomes</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Design Determines Outcomes</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>How learning is designed determines what it can prove. Measurable instructional design is the key to workforce capability visibility.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 5: Our Approach ────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -183,7 +205,7 @@
     <div class="wp-block-column is-vertically-aligned-top">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">Technology and Partnership</h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">Technology and Partnership</h2>
       <!-- /wp:heading -->
 
     </div>
@@ -214,16 +236,16 @@
 <!-- /wp:group -->
 
 
-<!-- ── Final CTA ──────────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Start Building Measurable Workforce Capability
     </h2>
     <!-- /wp:heading -->
@@ -237,9 +259,7 @@
     <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|8"}}} -->
     <div class="wp-block-buttons">
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">Start with One Program</a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
       <!-- /wp:button -->
       <!-- wp:button {"className":"is-style-ghost"} -->
       <div class="wp-block-button is-style-ghost">

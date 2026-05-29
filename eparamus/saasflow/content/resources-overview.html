@@ -1,9 +1,7 @@
-<!-- ============================================================
-   Resources Overview — post_content block markup
-   ============================================================ -->
 
 
-<!-- ── Section 1: Hero ───────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -34,9 +32,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: Resource Type Cards ────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -47,7 +45,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Find What You Need
     </h2>
     <!-- /wp:heading -->
@@ -55,50 +53,82 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- wp:html -->
-  <div class="ep-grid-4">
+  <!-- wp:columns {"className":"ep-grid-4","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-4">
 
-    <div class="ep-card">
-      <h5>Articles</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Articles</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Perspectives on measurable learning design, workforce capability, and L&amp;D effectiveness.</p>
-      <a href="/articles/" style="font-weight:600;color:#145aff;font-size:14px;">Browse Articles →</a>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph {"className":"ep-card__link"} -->
+      <p class="ep-card__link"><a href="/articles/">Browse Articles →</a></p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Case Studies</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Case Studies</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>See how organizations are building measurable workforce capability with IMPACT.</p>
-      <a href="/case-studies/" style="font-weight:600;color:#145aff;font-size:14px;">Browse Case Studies →</a>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph {"className":"ep-card__link"} -->
+      <p class="ep-card__link"><a href="/case-studies/">Browse Case Studies →</a></p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Videos</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Videos</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Demonstrations, walkthroughs, and explanations of IMPACT platform capabilities.</p>
-      <a href="/videos/" style="font-weight:600;color:#145aff;font-size:14px;">Browse Videos →</a>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph {"className":"ep-card__link"} -->
+      <p class="ep-card__link"><a href="/videos/">Browse Videos →</a></p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Guides</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Guides</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Practical frameworks and tools to help organizations adopt measurable learning practices.</p>
-      <a href="/guides/" style="font-weight:600;color:#145aff;font-size:14px;">Browse Guides →</a>
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph {"className":"ep-card__link"} -->
+      <p class="ep-card__link"><a href="/guides/">Browse Guides →</a></p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: CTA ─────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Ready to See IMPACT in Action?
     </h2>
     <!-- /wp:heading -->
@@ -113,11 +143,7 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">
-          Start with One Program
-        </a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-ghost"} -->

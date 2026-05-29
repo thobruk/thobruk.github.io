@@ -1,10 +1,7 @@
-<!-- ============================================================
-   Solutions: Business Leaders — post_content block markup
-   Source: spec/solutions-business-leaders
-   ============================================================ -->
 
 
-<!-- ── Section 1: Hero ───────────────────────────────────── -->
+
+
 
 <!-- wp:group {"align":"full","className":"ep-section ep-hero","style":{"spacing":{"padding":{"top":"clamp(64px, 10vw, 120px)","bottom":"clamp(56px, 8vw, 96px)"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-hero">
@@ -38,13 +35,9 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"backgroundColor":"primary","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button">
-        <a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
+      <div class="wp-block-button has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button has-primary-background-color has-background"
            href="#"
-           style="font-size:16px;padding:16px 32px;">
-          Start with One Program
-        </a>
-      </div>
+           style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Start with One Program</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-secondary"} -->
@@ -63,9 +56,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 2: The Challenge ──────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -75,7 +68,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         Workforce Capability Often Remains Invisible
       </h2>
       <!-- /wp:heading -->
@@ -119,9 +112,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 3: A More Measurable Approach ─────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
@@ -132,7 +125,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;">
+    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px">
       Build Workforce Capability Around Measurable Skills
     </h2>
     <!-- /wp:heading -->
@@ -167,12 +160,12 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 4: Actionable Workforce Insight ───────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002ddark","backgroundColor":"dark-800","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--dark","backgroundColor":"dark-800","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--dark has-dark-800-background-color has-background">
 
-  <!-- Section header -->
+  
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"680px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
@@ -181,7 +174,7 @@
     <!-- /wp:paragraph -->
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Insight That Supports Better Organizational Decisions
     </h2>
     <!-- /wp:heading -->
@@ -189,50 +182,92 @@
   </div>
   <!-- /wp:group -->
 
-  <!-- 6-card grid -->
-  <!-- wp:html -->
-  <div class="ep-grid-3">
+  
+  <!-- wp:columns {"className":"ep-grid-3","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-3">
 
-    <div class="ep-card">
-      <h5>Workforce Readiness</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Workforce Readiness</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Gain visibility into whether employees possess the skills required to support operational and strategic priorities.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Capability Gap Identification</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Capability Gap Identification</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Identify workforce strengths, gaps, and development opportunities across teams and departments.</p>
+      <!-- /wp:paragraph -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-card">
-      <h5>Succession &amp; Talent Readiness</h5>
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Succession &amp; Talent Readiness</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
       <p>Support succession planning and workforce development initiatives with measurable capability insight.</p>
+      <!-- /wp:paragraph -->
     </div>
-
-    <div class="ep-card">
-      <h5>Learning Effectiveness</h5>
-      <p>Verify whether workforce development initiatives are producing measurable capability improvements.</p>
-    </div>
-
-    <div class="ep-card">
-      <h5>Organizational Alignment</h5>
-      <p>Align workforce development efforts to operational expectations and organizational priorities.</p>
-    </div>
-
-    <div class="ep-card">
-      <h5>Continuous Workforce Development</h5>
-      <p>Use measurable capability insight to continuously strengthen workforce readiness over time.</p>
-    </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
+
+  <!-- wp:columns {"className":"ep-grid-3","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-grid-3">
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Learning Effectiveness</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Verify whether workforce development initiatives are producing measurable capability improvements.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Organizational Alignment</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Align workforce development efforts to operational expectations and organizational priorities.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+    <!-- wp:column {"className":"ep-card"} -->
+    <div class="wp-block-column ep-card">
+      <!-- wp:heading {"level":5} -->
+      <h5 class="wp-block-heading">Continuous Workforce Development</h5>
+      <!-- /wp:heading -->
+      <!-- wp:paragraph -->
+      <p>Use measurable capability insight to continuously strengthen workforce readiness over time.</p>
+      <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+  </div>
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Section 5: Why It Matters ─────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -242,7 +277,7 @@
     <div class="wp-block-column is-vertically-aligned-center">
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         Workforce Capability Visibility Strengthens Organizational Agility
       </h2>
       <!-- /wp:heading -->
@@ -286,9 +321,9 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 6: A Practical Starting Point ─────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dgray","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--gray","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--gray">
 
   <!-- wp:columns {"isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|32"}}}} -->
@@ -302,7 +337,7 @@
       <!-- /wp:paragraph -->
 
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">
         Start Small. Build Organizational Visibility Over Time.
       </h2>
       <!-- /wp:heading -->
@@ -339,74 +374,87 @@
 <!-- /wp:group -->
 
 
-<!-- ── Section 7: Guided Implementation ──────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section">
 
-  <!-- wp:html -->
-  <div class="ep-contrast">
+  <!-- wp:columns {"className":"ep-contrast","isStackedOnMobile":true} -->
+  <div class="wp-block-columns ep-contrast">
 
-    <div class="ep-contrast__side ep-contrast__side--left">
-
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--left"} -->
+    <div class="wp-block-column ep-contrast__side ep-contrast__side--left">
       <!-- wp:heading {"level":2,"style":{"typography":{"letterSpacing":"-0.8px"}}} -->
-      <h2 class="wp-block-heading" style="letter-spacing:-0.8px;">
-        A Structured System Supported by Guided Implementation
-      </h2>
+      <h2 class="wp-block-heading" style="letter-spacing:-0.8px">A Structured System Supported by Guided Implementation</h2>
       <!-- /wp:heading -->
-
+      <!-- wp:paragraph -->
       <p>eParamus provides organizations with both the platform and implementation support needed to successfully adopt measurable workforce capability practices.</p>
-
+      <!-- /wp:paragraph -->
+      <!-- wp:paragraph -->
       <p>From onboarding and stakeholder alignment to education and ongoing support, the process is designed to be practical, achievable, and scalable over time.</p>
-
-      <a class="wp-block-button__link wp-element-button has-primary-background-color has-background" href="#" style="display:inline-block;margin-top:8px;">
-        Start with One Program
-      </a>
-
+      <!-- /wp:paragraph -->
+      <!-- wp:buttons -->
+      <div class="wp-block-buttons">
+        <!-- wp:button {"backgroundColor":"primary"} -->
+        <div class="wp-block-button"><a class="wp-block-button__link has-primary-background-color has-background wp-element-button" href="#">Start with One Program</a></div>
+        <!-- /wp:button -->
+      </div>
+      <!-- /wp:buttons -->
     </div>
+    <!-- /wp:column -->
 
-    <div class="ep-contrast__side ep-contrast__side--right">
-
-      <div class="ep-step">
+    <!-- wp:column {"className":"ep-contrast__side ep-contrast__side--right"} -->
+    <div class="wp-block-column ep-contrast__side ep-contrast__side--right">
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
         <div class="ep-step__number">1</div>
-        <div class="ep-step__content">
-          <p>Align stakeholders on measurable capability expectations</p>
-        </div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Align stakeholders on measurable capability expectations</p>
+        <!-- /wp:paragraph -->
       </div>
-
-      <div class="ep-step">
+      <!-- /wp:group -->
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
         <div class="ep-step__number">2</div>
-        <div class="ep-step__content">
-          <p>Instrument one learning program with measurable skill outcomes</p>
-        </div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Instrument one learning program with measurable skill outcomes</p>
+        <!-- /wp:paragraph -->
       </div>
-
-      <div class="ep-step">
+      <!-- /wp:group -->
+      <!-- wp:group {"className":"ep-step"} -->
+      <div class="wp-block-group ep-step">
+        <!-- wp:html -->
         <div class="ep-step__number">3</div>
-        <div class="ep-step__content">
-          <p>Verify capability and expand visibility across the organization</p>
-        </div>
+        <!-- /wp:html -->
+        <!-- wp:paragraph -->
+        <p>Verify capability and expand visibility across the organization</p>
+        <!-- /wp:paragraph -->
       </div>
-
+      <!-- /wp:group -->
     </div>
+    <!-- /wp:column -->
 
   </div>
-  <!-- /wp:html -->
+  <!-- /wp:columns -->
 
 </div>
 <!-- /wp:group -->
 
 
-<!-- ── Final CTA ──────────────────────────────────────────── -->
 
-<!-- wp:group {"align":"full","className":"ep-section ep-section\u002d\u002dblue","backgroundColor":"primary","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+
+<!-- wp:group {"align":"full","className":"ep-section ep-section--blue","backgroundColor":"primary","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ep-section ep-section--blue has-primary-background-color has-background">
 
   <!-- wp:group {"layout":{"type":"constrained","contentSize":"640px","justifyContent":"center"}} -->
   <div class="wp-block-group">
 
     <!-- wp:heading {"level":2,"textAlign":"center","style":{"typography":{"letterSpacing":"-0.8px"},"color":{"text":"#ffffff"}}} -->
-    <h2 class="wp-block-heading has-text-align-center" style="letter-spacing:-0.8px;color:#ffffff;">
+    <h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;letter-spacing:-0.8px">
       Ready to Make Workforce Capability More Visible?
     </h2>
     <!-- /wp:heading -->
@@ -421,11 +469,7 @@
     <div class="wp-block-buttons">
 
       <!-- wp:button {"className":"is-style-white","style":{"typography":{"fontSize":"16px"},"spacing":{"padding":{"top":"16px","bottom":"16px","left":"32px","right":"32px"}}}} -->
-      <div class="wp-block-button is-style-white">
-        <a class="wp-block-button__link wp-element-button" href="#" style="font-size:16px;padding:16px 32px;">
-          Schedule a Conversation
-        </a>
-      </div>
+      <div class="wp-block-button is-style-white has-custom-font-size" style="font-size:16px"><a class="wp-block-button__link wp-element-button" href="#" style="padding-top:16px;padding-right:32px;padding-bottom:16px;padding-left:32px">Schedule a Conversation</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"className":"is-style-ghost"} -->
