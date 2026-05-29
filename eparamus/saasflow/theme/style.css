@@ -55,6 +55,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Override WP layout system (body .is-layout-flex has specificity 0,1,1) ── */
+/* Our grid classes need at least 0,1,1 to win over WP's flex-layout injection */
+body .ep-grid-4,
+body .ep-grid-3  { display: grid !important; }
+body .ep-contrast { display: grid !important; }
+body .ep-steps    { display: grid !important; }
+
+/* WP resets borders to 0 on blocks when border support is enabled in theme.json.
+   Re-apply our card and contrast borders with !important. */
+body .ep-card { border: 1px solid #e1e4eb !important; }
+body .ep-contrast { border: 1px solid #e1e4eb !important; }
+
+/* Contrast side backgrounds also need !important due to WP specificity */
+body .ep-contrast__side--left  { background: #f1f3f6 !important; }
+body .ep-contrast__side--right { background: #ffffff !important; }
+
 /* ── Section spacing and variants ────────────────────────── */
 
 /* Standard content sections */
@@ -127,8 +143,9 @@ body {
 }
 
 /* ── Section label (eyebrow text) ────────────────────────── */
+/* display:block so text-align:center on the element itself is respected */
 .ep-label {
-  display: inline-block;
+  display: block;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -268,16 +285,16 @@ body {
   content: '';
   width: 8px;
   height: 8px;
-  border-radius: var(--ep-radius-full);
+  border-radius: 9999px;
   flex-shrink: 0;
-  background: var(--ep-gray-200);
+  background: #e1e4eb;
 }
 
-.ep-contrast__list--muted li { color: var(--ep-gray-300); }
+.ep-contrast__list--muted li { color: #c7cad1; }
 
-.ep-contrast__list--active li { color: var(--ep-dark-800); }
+.ep-contrast__list--active li { color: #0f1f3d; }
 
-.ep-contrast__list--active li::before { background: var(--ep-blue); }
+.ep-contrast__list--active li::before { background: #145aff; }
 
 /* ── Ladder / flow diagram component ─────────────────────── */
 .ep-ladder {
