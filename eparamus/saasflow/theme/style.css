@@ -534,7 +534,7 @@ body .ep-contrast__side--right { background: #ffffff !important; }
 .wp-block-button.is-style-white .wp-block-button__link {
   background: #ffffff !important;
   color: #145aff !important;
-  border: 2px solid transparent !important;
+  border: 2px solid rgba(255,255,255,0.35) !important;
   box-shadow: none;
 }
 
