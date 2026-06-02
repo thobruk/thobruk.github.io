@@ -111,6 +111,21 @@ body .ep-contrast__side--right { background: #ffffff !important; }
   color: #ffffff;
 }
 
+/* Cards on dark sections — reset text to dark so white cards are readable */
+.ep-section--dark .ep-card h1,
+.ep-section--dark .ep-card h2,
+.ep-section--dark .ep-card h3,
+.ep-section--dark .ep-card h4,
+.ep-section--dark .ep-card h5,
+.has-dark-800-background-color .ep-card h1,
+.has-dark-800-background-color .ep-card h2,
+.has-dark-800-background-color .ep-card h3,
+.has-dark-800-background-color .ep-card h4,
+.has-dark-800-background-color .ep-card h5 { color: #0f1f3d; }
+
+.ep-section--dark .ep-card p,
+.has-dark-800-background-color .ep-card p { color: #40454f; }
+
 /* Blue CTA section */
 .ep-section--blue,
 .has-primary-background-color.ep-section {
