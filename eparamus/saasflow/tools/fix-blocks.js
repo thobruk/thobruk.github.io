@@ -164,12 +164,66 @@ function fixHeadings(html) {
   );
 }
 
+/**
+ * 6. Restore layout:constrained on alignfull ep-section group blocks.
+ * WP 6.9 drops the layout attribute on save, causing is-layout-flow
+ * instead of is-layout-constrained, which leaves content at x=0.
+ */
+function restoreConstrainedLayout(html) {
+  return html.replace(
+    /(<!-- wp:group\s+)(\{.*?\})\s*(\/-->|-->)/gs,
+    (match, prefix, attrsJson, suffix) => {
+      let attrs;
+      try { attrs = JSON.parse(attrsJson); } catch { return match; }
+
+      // Only fix alignfull ep-section groups missing layout
+      if (
+        attrs.align === 'full' &&
+        typeof attrs.className === 'string' &&
+        attrs.className.includes('ep-section') &&
+        !attrs.layout
+      ) {
+        attrs.layout = { type: 'constrained' };
+        const end = suffix.trim().startsWith('/') ? ' /-->' : ' -->';
+        return `${prefix}${JSON.stringify(attrs)}${end}`;
+      }
+      return match;
+    }
+  );
+}
+
+/**
+ * 7. Remove dimensions.maxWidth from paragraph block comments.
+ * In WP 6.9, this attribute causes a double <p> wrapper every time
+ * the page is saved. The max-width is kept in the HTML inline style.
+ */
+function removeParagraphMaxWidth(html) {
+  return html.replace(
+    /(<!-- wp:paragraph\s+)(\{.*?\})\s*(\/-->|-->)/gs,
+    (match, prefix, attrsJson, suffix) => {
+      let attrs;
+      try { attrs = JSON.parse(attrsJson); } catch { return match; }
+
+      if (!attrs?.style?.dimensions?.maxWidth) return match;
+
+      delete attrs.style.dimensions.maxWidth;
+      if (!Object.keys(attrs.style.dimensions).length) delete attrs.style.dimensions;
+      if (!Object.keys(attrs.style).length)            delete attrs.style;
+
+      const end = suffix.trim() === '/->' || suffix.trim() === '/-->' ? ' /-->' : ' -->';
+      return `${prefix}${JSON.stringify(attrs)}${end}`;
+    }
+  );
+}
+
 // ── Pipeline ──────────────────────────────────────────────────
 
 function fixFile(html) {
   let out = html;
   out = removePlainHtmlComments(out);
   out = removeZeroPaddingFromBlockComments(out);
+  out = restoreConstrainedLayout(out);
+  out = removeParagraphMaxWidth(out);
   out = fixEpCardMargin(out);
   out = fixButtons(out);
   out = fixHeadings(out);

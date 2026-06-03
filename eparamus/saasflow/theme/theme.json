@@ -4,6 +4,8 @@
 
   "settings": {
 
+    "useRootPaddingAwareAlignments": true,
+
     "layout": {
       "contentSize": "1200px",
       "wideSize": "1400px"
@@ -161,7 +163,13 @@
     },
 
     "spacing": {
-      "blockGap": "var(--wp--preset--spacing--12)"
+      "blockGap": "var(--wp--preset--spacing--12)",
+      "padding": {
+        "top": "0",
+        "bottom": "0",
+        "left": "clamp(24px, 5vw, 80px)",
+        "right": "clamp(24px, 5vw, 80px)"
+      }
     },
 
     "elements": {
