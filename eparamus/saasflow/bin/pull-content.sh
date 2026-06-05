@@ -37,6 +37,7 @@ trap cleanup EXIT
 WP="wp --path=$WP_PATH --allow-root"
 
 declare -A SLUG_FILE=(
+  [getting-started]="getting-started"
   [home]="home"
   [how-it-works]="how-it-works"
   [about]="about"
