@@ -220,7 +220,7 @@ function removeParagraphMaxWidth(html) {
  * 8. Collapse double <p> tags inside paragraph blocks.
  * WP 6.9 wraps <p> content with another <p> from block typography styles,
  * producing <p style="..."><p style="...;max-width:...">text</p></p>.
- * Merge both style attributes into one <p>.
+ * Merge style and class attributes from both <p> tags into one.
  */
 function collapseDoubleParagraph(html) {
   const parseStyle = s => {
@@ -231,22 +231,52 @@ function collapseDoubleParagraph(html) {
     });
     return obj;
   };
+  const getAttr  = (attrs, name) => (attrs.match(new RegExp(`${name}="([^"]*)"`) ) || [])[1] || '';
+  const dropAttr = (attrs, name) => attrs.replace(new RegExp(`\\s*${name}="[^"]*"`), '').trim();
 
   return html.replace(
     /<p([^>]*)><p([^>]*)>([\s\S]*?)<\/p><\/p>/g,
     (match, outerAttrs, innerAttrs, content) => {
-      const outerStyle = (outerAttrs.match(/style="([^"]*)"/) || [])[1] || '';
-      const innerStyle = (innerAttrs.match(/style="([^"]*)"/) || [])[1] || '';
-      const merged = { ...parseStyle(outerStyle), ...parseStyle(innerStyle) };
+      // Merge styles — inner wins on conflict
+      const merged = { ...parseStyle(getAttr(outerAttrs, 'style')), ...parseStyle(getAttr(innerAttrs, 'style')) };
       const mergedStyle = Object.entries(merged).map(([k, v]) => `${k}:${v}`).join(';');
 
-      const outerNoStyle = outerAttrs.replace(/\s*style="[^"]*"/, '').trim();
-      const innerNoStyle = innerAttrs.replace(/\s*style="[^"]*"/, '').trim();
-      const otherAttrs = [outerNoStyle, innerNoStyle].filter(Boolean).join(' ');
+      // Merge classes — deduplicate
+      const classes = [...new Set([
+        ...getAttr(outerAttrs, 'class').split(/\s+/),
+        ...getAttr(innerAttrs, 'class').split(/\s+/),
+      ].filter(Boolean))].join(' ');
 
+      // Remaining attributes (drop style + class from both, join)
+      const rest = [
+        dropAttr(dropAttr(outerAttrs, 'style'), 'class'),
+        dropAttr(dropAttr(innerAttrs, 'style'), 'class'),
+      ].filter(Boolean).join(' ').trim();
+
+      const classAttr = classes    ? ` class="${classes}"`   : '';
       const styleAttr = mergedStyle ? ` style="${mergedStyle}"` : '';
-      const attrsStr  = otherAttrs  ? ` ${otherAttrs}` : '';
-      return `<p${attrsStr}${styleAttr}>${content}</p>`;
+      const restStr   = rest        ? ` ${rest}`               : '';
+      return `<p${classAttr}${styleAttr}${restStr}>${content}</p>`;
+    }
+  );
+}
+
+/**
+ * 9. Collapse duplicate class="..." attributes on the same element.
+ * A prior buggy merge produced <p class="a" class="b"> — merge into one.
+ */
+function fixDuplicateClassAttrs(html) {
+  return html.replace(
+    /<(\w+)(\s[^>]*?)>/g,
+    (match, tag, attrs) => {
+      const classes = [];
+      const stripped = attrs.replace(/\s*class="([^"]*)"/g, (_, c) => {
+        classes.push(...c.split(/\s+/).filter(Boolean));
+        return '';
+      });
+      if (classes.length === 0) return match;
+      const merged = [...new Set(classes)].join(' ');
+      return `<${tag} class="${merged}"${stripped}>`;
     }
   );
 }
@@ -260,6 +290,7 @@ function fixFile(html) {
   out = restoreConstrainedLayout(out);
   out = removeParagraphMaxWidth(out);
   out = collapseDoubleParagraph(out);
+  out = fixDuplicateClassAttrs(out);
   out = fixEpCardMargin(out);
   out = fixButtons(out);
   out = fixHeadings(out);
