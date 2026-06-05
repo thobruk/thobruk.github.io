@@ -177,6 +177,9 @@ echo -e "${BOLD}Pages${RESET_C}"
 HOME_ID=$(upsert_page \
   "Home"         "home"         "home.html"         0)
 
+upsert_page \
+  "Getting Started" "getting-started" "getting-started.html" 0 > /dev/null
+
 HIWORKS_ID=$(upsert_page \
   "How It Works" "how-it-works" "how-it-works.html" 0)
 

@@ -20,17 +20,18 @@ Text Domain: eparamus
 
 /* ── Supplementary custom properties ─────────────────────── */
 :root {
-  /* Shorthand aliases for wp preset tokens */
-  --ep-blue:        var(--wp--preset--color--primary);
-  --ep-blue-dark:   var(--wp--preset--color--primary-dark);
-  --ep-blue-light:  var(--wp--preset--color--primary-light);
-  --ep-dark-900:    var(--wp--preset--color--dark-900);
-  --ep-dark-800:    var(--wp--preset--color--dark-800);
-  --ep-dark-600:    var(--wp--preset--color--dark-600);
-  --ep-gray-300:    var(--wp--preset--color--gray-300);
-  --ep-gray-200:    var(--wp--preset--color--gray-200);
-  --ep-gray-100:    var(--wp--preset--color--gray-100);
-  --ep-white:       var(--wp--preset--color--white);
+  /* Literal values — WP preset color vars are on body not :root,
+     so var() chaining from :root silently fails */
+  --ep-blue:        #145aff;
+  --ep-blue-dark:   #0d47d9;
+  --ep-blue-light:  #e8efff;
+  --ep-dark-900:    #0d0e10;
+  --ep-dark-800:    #0f1f3d;
+  --ep-dark-600:    #40454f;
+  --ep-gray-300:    #c7cad1;
+  --ep-gray-200:    #e1e4eb;
+  --ep-gray-100:    #f1f3f6;
+  --ep-white:       #ffffff;
 
   /* Not in theme.json — structural/behavioral values */
   --ep-radius-sm:   6px;
@@ -125,6 +126,21 @@ body .ep-contrast__side--right { background: #ffffff !important; }
 
 .ep-section--dark .ep-card p,
 .has-dark-800-background-color .ep-card p { color: #40454f; }
+
+/* Cards on blue sections — same reset */
+.ep-section--blue .ep-card h1,
+.ep-section--blue .ep-card h2,
+.ep-section--blue .ep-card h3,
+.ep-section--blue .ep-card h4,
+.ep-section--blue .ep-card h5,
+.has-primary-background-color .ep-card h1,
+.has-primary-background-color .ep-card h2,
+.has-primary-background-color .ep-card h3,
+.has-primary-background-color .ep-card h4,
+.has-primary-background-color .ep-card h5 { color: #0f1f3d; }
+
+.ep-section--blue .ep-card p,
+.has-primary-background-color .ep-card p { color: #40454f; }
 
 /* Blue CTA section */
 .ep-section--blue,
@@ -411,8 +427,8 @@ body .ep-contrast__side--right { background: #ffffff !important; }
 .ep-step__number {
   width: 44px;
   height: 44px;
-  border-radius: var(--ep-radius-full);
-  background: var(--ep-blue);
+  border-radius: 9999px;
+  background: #145aff;
   color: #ffffff;
   font-size: 15px;
   font-weight: 700;
@@ -433,12 +449,33 @@ body .ep-contrast__side--right { background: #ffffff !important; }
   .ep-step__number { margin-bottom: 0; }
 }
 
-.ep-step__content h5 {
+.ep-step__content h5,
+.ep-steps .ep-step h5 {
   margin-bottom: 4px;
 }
 
-.ep-step__content p {
+.ep-step__content p,
+.ep-steps .ep-step p {
   font-size: 14px;
+}
+
+/* Subgrid row alignment — each step spans 3 rows so step numbers,
+   headings, and descriptions align across all columns */
+@supports (grid-template-rows: subgrid) {
+  .ep-steps {
+    grid-template-rows: auto auto auto;
+  }
+  .ep-steps .ep-step {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    justify-items: center;
+  }
+  @media (max-width: 768px) {
+    .ep-steps .ep-step {
+      display: flex;
+    }
+  }
 }
 
 /* ── Card component ───────────────────────────────────────── */
@@ -499,12 +536,26 @@ body .ep-contrast__side--right { background: #ffffff !important; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
+  align-items: stretch;
 }
 
 .ep-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  align-items: stretch;
+}
+
+/* Cards inside grids: make the column a flex column so the inner ep-card fills it */
+.ep-grid-4 > .wp-block-column,
+.ep-grid-3 > .wp-block-column {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.ep-grid-4 > .wp-block-column > .ep-card,
+.ep-grid-3 > .wp-block-column > .ep-card {
+  flex: 1;
 }
 
 @media (max-width: 960px) {
@@ -523,7 +574,7 @@ body .ep-contrast__side--right { background: #ffffff !important; }
 .wp-block-button.is-style-secondary .wp-block-button__link {
   background: transparent;
   color: var(--ep-dark-800);
-  border: 2px solid var(--ep-gray-200);
+  border: 2px solid #adb5bd;
   box-shadow: none;
 }
 
