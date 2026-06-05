@@ -216,6 +216,41 @@ function removeParagraphMaxWidth(html) {
   );
 }
 
+/**
+ * 8. Collapse double <p> tags inside paragraph blocks.
+ * WP 6.9 wraps <p> content with another <p> from block typography styles,
+ * producing <p style="..."><p style="...;max-width:...">text</p></p>.
+ * Merge both style attributes into one <p>.
+ */
+function collapseDoubleParagraph(html) {
+  const parseStyle = s => {
+    const obj = {};
+    s.split(';').map(p => p.trim()).filter(Boolean).forEach(p => {
+      const i = p.indexOf(':');
+      if (i > 0) obj[p.slice(0, i).trim()] = p.slice(i + 1).trim();
+    });
+    return obj;
+  };
+
+  return html.replace(
+    /<p([^>]*)><p([^>]*)>([\s\S]*?)<\/p><\/p>/g,
+    (match, outerAttrs, innerAttrs, content) => {
+      const outerStyle = (outerAttrs.match(/style="([^"]*)"/) || [])[1] || '';
+      const innerStyle = (innerAttrs.match(/style="([^"]*)"/) || [])[1] || '';
+      const merged = { ...parseStyle(outerStyle), ...parseStyle(innerStyle) };
+      const mergedStyle = Object.entries(merged).map(([k, v]) => `${k}:${v}`).join(';');
+
+      const outerNoStyle = outerAttrs.replace(/\s*style="[^"]*"/, '').trim();
+      const innerNoStyle = innerAttrs.replace(/\s*style="[^"]*"/, '').trim();
+      const otherAttrs = [outerNoStyle, innerNoStyle].filter(Boolean).join(' ');
+
+      const styleAttr = mergedStyle ? ` style="${mergedStyle}"` : '';
+      const attrsStr  = otherAttrs  ? ` ${otherAttrs}` : '';
+      return `<p${attrsStr}${styleAttr}>${content}</p>`;
+    }
+  );
+}
+
 // ── Pipeline ──────────────────────────────────────────────────
 
 function fixFile(html) {
@@ -224,6 +259,7 @@ function fixFile(html) {
   out = removeZeroPaddingFromBlockComments(out);
   out = restoreConstrainedLayout(out);
   out = removeParagraphMaxWidth(out);
+  out = collapseDoubleParagraph(out);
   out = fixEpCardMargin(out);
   out = fixButtons(out);
   out = fixHeadings(out);
