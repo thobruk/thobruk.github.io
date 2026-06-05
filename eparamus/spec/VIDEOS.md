@@ -53,6 +53,6 @@
 >
 > **Video:** Current eParamus homepage video
 
-- [ ] Confirm embed URL (already on site)
-- [ ] Add section to `content/solutions-learning-leaders.html`
+- [x] Confirm embed URL: https://www.youtube.com/watch?v=flAw8vdhOKA
+- [x] Add section to `content/solutions-learning-leaders.html`
 - [ ] Seed to production
